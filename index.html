@@ -2,1166 +2,1277 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marilu Family Finance</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Marilu Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1a2e;
-    --paper: #faf8f3;
-    --accent: #c8813a;
-    --accent2: #4a7c59;
-    --soft: #e8e3d9;
-    --muted: #8a8070;
-    --danger: #c84a4a;
-    --card: #ffffff;
-    --border: rgba(26,26,46,0.1);
-    --shadow: 0 2px 20px rgba(26,26,46,0.08);
-  }
+/* ═══ RESET & BASE ═══════════════════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --ink:#0f0e17;
+  --paper:#faf9f6;
+  --card:#ffffff;
+  --gold:#c8813a;
+  --gold-lt:#fff3e0;
+  --gold-dk:#a0622b;
+  --green:#3d7a5a;
+  --green-lt:#e8f5ee;
+  --red:#c0392b;
+  --red-lt:#fdecea;
+  --muted:#8a8a9a;
+  --border:#e8e6e0;
+  --soft:#f5f3ef;
+  --sidebar-w:230px;
+  --bottomnav-h:62px;
+}
+html{height:100%}
+body{
+  height:100%;font-family:'Outfit',sans-serif;
+  background:var(--paper);color:var(--ink);
+  font-size:15px;-webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══ LAYOUT SHELL ═══════════════════════════════════════════════════ */
+.shell{display:flex;height:100vh;height:100dvh;overflow:hidden}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    font-size: 14px;
-  }
+/* ═══ SIDEBAR (desktop only) ════════════════════════════════════════ */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--ink);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  transition:width .25s ease;
+}
+.sidebar::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 15% 85%,rgba(200,129,58,.2) 0%,transparent 55%);
+}
+.brand{padding:26px 22px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand-name{
+  font-family:'Playfair Display',serif;font-size:20px;
+  color:#fff;line-height:1.2;
+}
+.brand-name em{color:var(--gold);font-style:italic}
+.brand-sub{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+nav{padding:12px 0;flex:1;overflow-y:auto}
+.nav-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 22px;cursor:pointer;
+  color:rgba(255,255,255,.45);font-size:13.5px;font-weight:500;
+  border-left:3px solid transparent;transition:all .16s;
+}
+.nav-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.04)}
+.nav-item.active{color:#fff;border-left-color:var(--gold);background:rgba(200,129,58,.11)}
+.nav-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0}
+.nav-badge{
+  margin-left:auto;background:var(--gold);color:#fff;
+  font-size:10px;font-weight:700;padding:1px 6px;border-radius:99px;
+}
+.sidebar-foot{
+  padding:14px 22px;border-top:1px solid rgba(255,255,255,.08);
+}
+.sync-row{display:flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.38);margin-bottom:4px}
+.dot{width:7px;height:7px;border-radius:50%;background:#444;flex-shrink:0}
+.dot.on{background:#4ade80;box-shadow:0 0 5px #4ade8066}
+.sync-file{font-size:10px;color:rgba(255,255,255,.22);word-break:break-all}
 
-  /* LAYOUT */
-  .app { display: flex; height: 100vh; overflow: hidden; }
+/* ═══ MAIN AREA ══════════════════════════════════════════════════════ */
+.main{
+  flex:1;display:flex;flex-direction:column;
+  overflow:hidden;min-width:0;
+}
 
-  /* SIDEBAR */
-  .sidebar {
-    width: 240px;
-    background: var(--ink);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    padding: 28px 0;
-  }
+/* ── top bar ── */
+.topbar{
+  padding:13px 24px;background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+  z-index:10;
+}
+.page-title{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:500;flex:1;
+}
+.topbar-right{display:flex;align-items:center;gap:9px;flex-wrap:nowrap}
 
-  .brand {
-    padding: 0 24px 28px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .brand-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    letter-spacing: 0.5px;
-    line-height: 1.1;
-  }
-  .brand-sub { color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+/* ── scrollable content ── */
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:22px 24px 32px}
+.content::-webkit-scrollbar{width:4px}
+.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
 
-  nav { margin-top: 20px; flex: 1; }
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 24px;
-    cursor: pointer;
-    color: rgba(255,255,255,0.5);
-    font-size: 13.5px;
-    transition: all 0.15s;
-    border-left: 3px solid transparent;
-  }
-  .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
-  .nav-item.active { color: white; border-left-color: var(--accent); background: rgba(200,129,58,0.12); }
-  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+/* ═══ BOTTOM NAV (mobile only) ═══════════════════════════════════════ */
+.bottomnav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:var(--bottomnav-h);
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,.08);
+  z-index:100;
+}
+.bottomnav-items{
+  display:flex;height:100%;
+}
+.bn-item{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  cursor:pointer;color:rgba(255,255,255,.38);
+  font-size:10.5px;font-weight:500;
+  transition:color .15s;position:relative;
+}
+.bn-item.active{color:var(--gold)}
+.bn-icon{font-size:19px;line-height:1}
+.bn-badge{
+  position:absolute;top:6px;right:calc(50% - 18px);
+  background:var(--gold);color:#fff;
+  font-size:9px;font-weight:700;
+  padding:0 4px;border-radius:99px;min-width:15px;text-align:center;
+}
 
-  .sidebar-footer {
-    padding: 20px 24px 0;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.3);
-    font-size: 11px;
-  }
-  .gdrive-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 8px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: #aaa; }
-  .dot.connected { background: #4ade80; }
+/* ═══ PANELS ════════════════════════════════════════════════════════ */
+.panel{display:none;animation:fadeUp .22s ease}
+.panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-  /* MAIN */
-  .main {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
+/* ═══ BUTTONS ═══════════════════════════════════════════════════════ */
+.btn{
+  padding:9px 18px;border-radius:8px;font-family:'Outfit',sans-serif;
+  font-size:13.5px;font-weight:500;cursor:pointer;border:none;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:all .15s;white-space:nowrap;
+}
+.btn-primary{background:var(--gold);color:#fff}
+.btn-primary:hover{background:var(--gold-dk)}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--ink)}
+.btn-ghost:hover{background:var(--soft)}
+.btn-sm{padding:7px 14px;font-size:12.5px}
+.btn-red{background:var(--red);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
 
-  /* TOPBAR */
-  .topbar {
-    padding: 18px 32px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .page-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
-  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+/* ═══ MONTH CHIPS ════════════════════════════════════════════════════ */
+.chips{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:1px}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  padding:5px 13px;border-radius:99px;font-size:12px;font-weight:500;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-family:'Outfit',sans-serif;transition:all .14s;flex-shrink:0;
+}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-  .btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-  }
-  .btn-primary { background: var(--accent); color: white; }
-  .btn-primary:hover { background: #b5722e; }
-  .btn-secondary { background: var(--soft); color: var(--ink); }
-  .btn-secondary:hover { background: #ddd8ce; }
-  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--ink); }
-  .btn-outline:hover { background: var(--soft); }
-  .btn-danger { background: var(--danger); color: white; }
-  .btn-sm { padding: 5px 12px; font-size: 12px; }
+/* ═══ STAT CARDS ════════════════════════════════════════════════════ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
+.stat{
+  background:var(--card);border-radius:13px;padding:17px 18px;
+  border:1px solid var(--border);box-shadow:0 1px 10px rgba(0,0,0,.04);
+}
+.stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:6px}
+.stat-val{font-family:'Playfair Display',serif;font-size:22px;line-height:1;letter-spacing:-.3px}
+.pos{color:var(--green)}.neg{color:var(--red)}.gold{color:var(--gold)}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:4px}
 
-  /* CONTENT */
-  .content { padding: 28px 32px; flex: 1; }
+/* ═══ TWO-COL ════════════════════════════════════════════════════════ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 
-  /* PANELS */
-  .panel { display: none; }
-  .panel.active { display: block; }
+/* ═══ CARDS ══════════════════════════════════════════════════════════ */
+.card{
+  background:var(--card);border-radius:13px;border:1px solid var(--border);
+  padding:19px 21px;box-shadow:0 1px 10px rgba(0,0,0,.04);
+}
+.card-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);font-weight:600;margin-bottom:14px}
 
-  /* STATS ROW */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .stat-card {
-    background: var(--card);
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-  }
-  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
-  .stat-value { font-family: 'DM Serif Display', serif; font-size: 26px; }
-  .stat-value.income { color: var(--accent2); }
-  .stat-value.expense { color: var(--danger); }
-  .stat-value.balance { color: var(--ink); }
-  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+/* ── bar chart ── */
+.bar-chart{display:flex;align-items:flex-end;gap:9px;height:120px;margin-bottom:10px}
+.bg{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.bp{display:flex;gap:3px;align-items:flex-end;height:100px}
+.b{border-radius:4px 4px 0 0;min-height:3px;cursor:default;transition:opacity .15s}
+.b:hover{opacity:.75}
+.b.gi{background:var(--green);width:13px}
+.b.ge{background:var(--red);width:13px}
+.bl{font-size:10px;color:var(--muted)}
+.leg{display:flex;gap:14px;margin-top:4px}
+.lg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.ld{width:8px;height:8px;border-radius:2px}
 
-  /* SECTION */
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  .section-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+/* ── category bars ── */
+.cat-list{display:flex;flex-direction:column;gap:9px}
+.cat-r{display:flex;align-items:center;gap:9px}
+.cat-n{font-size:12px;width:120px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cat-tr{flex:1;background:var(--soft);border-radius:99px;height:6px}
+.cat-fl{height:100%;border-radius:99px;background:var(--gold)}
+.cat-a{font-size:12px;font-weight:600;color:var(--muted);min-width:70px;text-align:right}
 
-  /* TABLE */
-  .table-wrap {
-    background: var(--card);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    text-align: left;
-    padding: 12px 16px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--muted);
-    background: var(--soft);
-    font-weight: 600;
-  }
-  td {
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    font-size: 13.5px;
-  }
-  tr:hover td { background: #fafafa; }
-  .type-badge {
-    display: inline-block;
-    padding: 2px 9px;
-    border-radius: 99px;
-    font-size: 11px;
-    font-weight: 500;
-  }
-  .type-income { background: #dcfce7; color: #166534; }
-  .type-expense { background: #fee2e2; color: #991b1b; }
-  .amount-income { color: var(--accent2); font-weight: 600; }
-  .amount-expense { color: var(--danger); font-weight: 600; }
+/* ── section header ── */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.sec-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:500}
 
-  /* FORM */
-  .form-card {
-    background: var(--card);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    padding: 28px;
-    box-shadow: var(--shadow);
-    max-width: 560px;
-  }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group.full { grid-column: 1 / -1; }
-  label { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; }
-  input, select, textarea {
-    padding: 10px 12px;
-    border: 1.5px solid var(--border);
-    border-radius: 7px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--ink);
-    background: var(--paper);
-    transition: border-color 0.15s;
-    outline: none;
-  }
-  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
-  textarea { resize: vertical; min-height: 72px; }
+/* ═══ TABLE ══════════════════════════════════════════════════════════ */
+.tbl-wrap{
+  background:var(--card);border-radius:13px;border:1px solid var(--border);
+  overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.04);
+}
+table{width:100%;border-collapse:collapse}
+th{
+  padding:11px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.9px;
+  color:var(--muted);background:var(--soft);font-weight:600;text-align:left;
+  white-space:nowrap;
+}
+td{padding:11px 14px;border-top:1px solid var(--border);font-size:13px;vertical-align:middle}
+tr:hover td{background:#faf9f4}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600}
+.b-income{background:var(--green-lt);color:var(--green)}
+.b-expense{background:var(--red-lt);color:var(--red)}
+.b-savings{background:#e3f2fd;color:#1565c0}
+.b-transfer{background:#f3e5f5;color:#6a1b9a}
+.amt-p{color:var(--green);font-weight:600}
+.amt-n{color:var(--red);font-weight:600}
+.empty-r{text-align:center;padding:36px;color:var(--muted);font-style:italic}
 
-  .ai-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #fff8f0, #f0f9ff);
-    border: 1.5px solid #e8d5c0;
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .ai-row .form-group { flex: 1; }
-  .ai-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .ai-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+/* ═══ FORM ════════════════════════════════════════════════════════════ */
+.form-wrap{max-width:560px}
+.ai-box{
+  background:linear-gradient(135deg,#fffbf4,#f0f9f4);
+  border:1.5px solid #e8d5b8;border-radius:12px;
+  padding:17px;margin-bottom:20px;
+}
+.ai-top{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.ai-row{display:flex;gap:8px}
+.ai-inp{
+  flex:1;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Outfit',sans-serif;font-size:14px;background:#fff;color:var(--ink);
+  outline:none;transition:border-color .15s;min-width:0;
+}
+.ai-inp:focus{border-color:var(--gold)}
+.ai-hint{font-size:11px;color:var(--muted);margin-top:6px}
+.divider{
+  text-align:center;color:var(--muted);font-size:11.5px;
+  margin:14px 0;position:relative;
+}
+.divider::before,.divider::after{
+  content:'';position:absolute;top:50%;height:1px;background:var(--border);width:42%;
+}
+.divider::before{left:0}.divider::after{right:0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg.full{grid-column:1/-1}
+label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
+input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{
+  padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Outfit',sans-serif;font-size:14px;color:var(--ink);
+  background:var(--paper);outline:none;transition:border-color .15s;width:100%;
+  -webkit-appearance:none;appearance:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{resize:vertical;min-height:60px}
+.form-actions{margin-top:16px;display:flex;gap:9px}
+.api-card{
+  margin-top:20px;background:var(--card);border-radius:11px;
+  border:1px solid var(--border);padding:17px;
+}
+.api-row{display:flex;gap:8px;margin-top:7px}
+.api-row input{flex:1}
 
-  .spinner {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ═══ LEDGER FILTERS ═════════════════════════════════════════════════ */
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.filters select,.filters input{font-size:13px;padding:8px 11px}
+.f-count{margin-left:auto;font-size:11.5px;color:var(--muted);font-style:italic}
 
-  /* ALERT */
-  .alert {
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .alert-info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-  .alert-success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
-  .alert-warning { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+/* ═══ BUDGET ═════════════════════════════════════════════════════════ */
+.bud-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.bud-head select{font-size:13px;padding:8px 12px}
+.bud-hint{font-size:12px;color:var(--muted)}
 
-  /* GDRIVE SETUP */
-  .setup-card {
-    background: var(--card);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    padding: 32px;
-    max-width: 600px;
-    box-shadow: var(--shadow);
-  }
-  .setup-steps { counter-reset: step; }
-  .setup-step {
-    counter-increment: step;
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .setup-step:last-child { border: none; margin-bottom: 0; }
-  .step-num {
-    width: 32px; height: 32px;
-    background: var(--accent);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .step-content h4 { font-weight: 600; font-size: 14px; margin-bottom: 5px; }
-  .step-content p { color: var(--muted); font-size: 13px; line-height: 1.5; }
-  .step-content code {
-    background: var(--soft);
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--ink);
-  }
-  .input-row { display: flex; gap: 8px; margin-top: 10px; }
-  .input-row input { flex: 1; }
+/* ═══ DRIVE PANEL ════════════════════════════════════════════════════ */
+.setup-card{
+  max-width:580px;background:var(--card);border-radius:13px;
+  border:1px solid var(--border);padding:26px;
+  box-shadow:0 1px 10px rgba(0,0,0,.04);
+}
+.alert{
+  padding:11px 14px;border-radius:8px;font-size:12.5px;
+  display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;
+}
+.alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.step{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border:none;padding-bottom:0}
+.step-n{
+  width:29px;height:29px;border-radius:50%;background:var(--gold);
+  color:#fff;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.step h4{font-size:13.5px;font-weight:600;margin-bottom:4px}
+.step p{font-size:12.5px;color:var(--muted);line-height:1.5}
+.step a{color:var(--gold)}
+code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monospace;font-size:12px}
+.step-ins{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.step-ins input{font-size:13px;padding:9px 12px}
+.da{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.exp-row{
+  display:flex;gap:8px;flex-wrap:wrap;
+  padding-top:14px;border-top:1px solid var(--border);margin-top:14px;
+  align-items:center;
+}
 
-  /* CHART BARS */
-  .chart-wrap {
-    background: var(--card);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    margin-bottom: 20px;
-  }
-  .chart-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 20px; }
-  .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 140px; }
-  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-  .bar-pair { display: flex; gap: 3px; align-items: flex-end; height: 120px; }
-  .bar {
-    width: 18px;
-    border-radius: 4px 4px 0 0;
-    min-height: 4px;
-    transition: height 0.4s ease;
-  }
-  .bar.income { background: var(--accent2); }
-  .bar.expense { background: var(--danger); }
-  .bar-label { font-size: 10px; color: var(--muted); }
+/* ═══ MODAL ══════════════════════════════════════════════════════════ */
+.modal-bg{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);z-index:500;
+  align-items:flex-end;justify-content:center;
+}
+.modal-bg.open{display:flex}
+.modal{
+  background:var(--card);border-radius:16px 16px 0 0;padding:24px;
+  width:100%;max-width:480px;
+  box-shadow:0 -8px 40px rgba(0,0,0,.18);
+  animation:slideUp .22s ease;
+}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px}
+.modal p{font-size:13px;color:var(--muted);margin-bottom:18px}
+.modal-btns{display:flex;gap:9px}
 
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* ═══ TOAST ══════════════════════════════════════════════════════════ */
+.toast{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;padding:11px 20px;border-radius:99px;
+  font-size:13.5px;white-space:nowrap;
+  box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:999;
+  opacity:0;transition:all .25s ease;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-left:4px solid #4ade80}
+.toast.err{border-left:4px solid var(--red)}
 
-  /* CATEGORY PILLS */
-  .cat-list { display: flex; flex-direction: column; gap: 8px; }
-  .cat-row { display: flex; align-items: center; gap: 10px; }
-  .cat-name { flex: 1; font-size: 13px; }
-  .cat-bar-wrap { flex: 2; background: var(--soft); border-radius: 99px; height: 7px; }
-  .cat-bar-fill { height: 100%; border-radius: 99px; background: var(--accent); }
-  .cat-amt { font-size: 13px; font-weight: 600; color: var(--muted); min-width: 70px; text-align: right; }
+/* ═══ SPINNER ════════════════════════════════════════════════════════ */
+.spin{
+  display:inline-block;width:13px;height:13px;
+  border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
+  border-radius:50%;animation:sp .6s linear infinite;
+}
+@keyframes sp{to{transform:rotate(360deg)}}
 
-  /* EMPTY */
-  .empty { text-align: center; padding: 48px 16px; color: var(--muted); }
-  .empty-icon { font-size: 36px; margin-bottom: 10px; }
+/* ═══ DELETE BTN ═════════════════════════════════════════════════════ */
+.del-btn{
+  background:none;border:none;cursor:pointer;color:#ccc;
+  font-size:18px;line-height:1;padding:3px 7px;
+  transition:color .12s;
+}
+.del-btn:hover{color:var(--red)}
 
-  /* MODAL */
-  .modal-bg {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-  }
-  .modal-bg.open { display: flex; }
-  .modal {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 28px;
-    max-width: 480px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-  .modal h3 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 16px; }
+/* ═══ RESPONSIVE: MOBILE ════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  /* hide desktop sidebar */
+  .sidebar{display:none}
 
-  /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 24px; right: 24px;
-    background: var(--ink);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 13.5px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    z-index: 999;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s ease;
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.success { border-left: 4px solid #4ade80; }
-  .toast.error { border-left: 4px solid var(--danger); }
+  /* show bottom nav */
+  .bottomnav{display:block}
 
-  .filter-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filter-bar select, .filter-bar input { font-size: 13px; padding: 7px 11px; }
+  /* add padding at bottom so content doesn't hide behind nav */
+  .content{padding-bottom:calc(var(--bottomnav-h) + 20px)}
 
-  .month-selector { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .month-chip {
-    padding: 5px 14px;
-    border-radius: 99px;
-    font-size: 12px;
-    cursor: pointer;
-    border: 1.5px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
-  .month-chip.active { background: var(--ink); color: white; border-color: var(--ink); }
-  .month-chip:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+  /* toast above bottom nav */
+  .toast{bottom:calc(var(--bottomnav-h) + 14px)}
 
-  /* scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--soft); border-radius: 99px; }
+  /* full-width topbar, no chips */
+  .topbar{padding:12px 16px}
+  .topbar .chips{display:none} /* hide month chips in topbar on mobile */
+
+  /* stats: 2 columns on mobile */
+  .stats{grid-template-columns:1fr 1fr;gap:10px}
+  .stat{padding:14px 15px}
+  .stat-val{font-size:18px}
+
+  /* charts stack */
+  .two-col{grid-template-columns:1fr;gap:12px}
+
+  /* content padding */
+  .content{padding:16px 14px}
+
+  /* form full width */
+  .form-wrap{max-width:100%}
+  .form-grid{grid-template-columns:1fr}
+  .fg.full{grid-column:1}
+
+  /* month chips on mobile — shown inside panel only */
+  .mobile-chips{display:flex;overflow-x:auto;padding:0 0 10px;gap:6px;margin-bottom:14px}
+  .mobile-chips::-webkit-scrollbar{display:none}
+
+  /* filters stack */
+  .filters{flex-direction:column;align-items:stretch}
+  .filters select,.filters input{width:100%}
+  .f-count{margin-left:0}
+
+  /* table: scroll horizontally */
+  .tbl-wrap{overflow-x:auto}
+  table{min-width:500px}
+
+  /* budget table scroll */
+  .bud-tbl-wrap{overflow-x:auto}
+  .bud-tbl-wrap table{min-width:520px}
+
+  /* modal full-width sheet */
+  .modal{border-radius:16px 16px 0 0;max-width:100%}
+
+  /* page title smaller */
+  .page-title{font-size:17px}
+
+  /* drive setup */
+  .setup-card{padding:18px}
+  .bud-head{flex-direction:column;align-items:flex-start;gap:8px}
+
+  .api-row{flex-direction:column}
+  .ai-row .btn{flex-shrink:0}
+}
+
+/* ═══ RESPONSIVE: TABLET ════════════════════════════════════════════ */
+@media (min-width:701px) and (max-width:1024px) {
+  .stats{grid-template-columns:1fr 1fr;gap:12px}
+  .sidebar{width:200px}
+  .content{padding:18px 20px 28px}
+  .mobile-chips{display:none}
+}
+
+@media (min-width:1025px) {
+  .mobile-chips{display:none}
+}
 </style>
 </head>
 <body>
+<div class="shell">
 
-<div class="app">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="brand-name">Marilu<br>Family</div>
-      <div class="brand-sub">Finance Tracker</div>
+<!-- ══════════════ SIDEBAR (desktop) ══════════════════ -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-name">Marilu<br><em>Family</em></div>
+    <div class="brand-sub">Finance · 2025</div>
+  </div>
+  <nav>
+    <div class="nav-item active" onclick="go('dashboard')">
+      <span class="nav-icon">◈</span>Dashboard
     </div>
-    <nav>
-      <div class="nav-item active" onclick="showPanel('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
-      <div class="nav-item" onclick="showPanel('add')"><span class="nav-icon">➕</span> Add Transaction</div>
-      <div class="nav-item" onclick="showPanel('ledger')"><span class="nav-icon">📋</span> Ledger</div>
-      <div class="nav-item" onclick="showPanel('gdrive')"><span class="nav-icon">☁️</span> Google Drive</div>
-    </nav>
-    <div class="sidebar-footer">
-      <div class="gdrive-status">
-        <div class="dot" id="gdriveStatusDot"></div>
-        <span id="gdriveStatusText">Not connected</span>
-      </div>
-      <div id="gdriveFileName" style="font-size:11px;word-break:break-all;"></div>
+    <div class="nav-item" onclick="go('add')">
+      <span class="nav-icon">＋</span>Add Transaction
     </div>
-  </aside>
-
-  <!-- MAIN -->
-  <div class="main">
-    <div class="topbar">
-      <div class="page-title" id="pageTitle">Dashboard</div>
-      <div class="topbar-actions">
-        <div class="month-selector" id="monthSelector"></div>
-        <button class="btn btn-primary" onclick="showPanel('add')">+ Add Transaction</button>
-      </div>
+    <div class="nav-item" onclick="go('ledger')">
+      <span class="nav-icon">≡</span>Ledger
+      <span class="nav-badge" id="nb">0</span>
     </div>
+    <div class="nav-item" onclick="go('budget')">
+      <span class="nav-icon">◎</span>Budget
+    </div>
+    <div class="nav-item" onclick="go('drive')">
+      <span class="nav-icon">☁</span>Google Drive
+    </div>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="sync-row">
+      <div class="dot" id="syncDot"></div>
+      <span id="syncLbl">Not connected</span>
+    </div>
+    <div class="sync-file" id="syncFile"></div>
+  </div>
+</aside>
 
-    <div class="content">
+<!-- ══════════════ MAIN ════════════════════════════════ -->
+<div class="main">
 
-      <!-- DASHBOARD -->
-      <div class="panel active" id="panel-dashboard">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">Current Balance</div>
-            <div class="stat-value balance" id="statBalance">KSh 0</div>
-            <div class="stat-sub">All time</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Total Income</div>
-            <div class="stat-value income" id="statIncome">KSh 0</div>
-            <div class="stat-sub" id="statIncomePeriod">This month</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Total Expenses</div>
-            <div class="stat-value expense" id="statExpense">KSh 0</div>
-            <div class="stat-sub" id="statExpensePeriod">This month</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Net Flow</div>
-            <div class="stat-value" id="statNet" style="color:var(--ink)">KSh 0</div>
-            <div class="stat-sub">Income − Expenses</div>
-          </div>
-        </div>
-
-        <div class="two-col" style="margin-bottom:20px">
-          <div class="chart-wrap">
-            <div class="chart-title">Monthly Overview</div>
-            <div class="bar-chart" id="barChart"></div>
-          </div>
-          <div class="chart-wrap">
-            <div class="chart-title">Top Expense Categories</div>
-            <div class="cat-list" id="catChart"></div>
-          </div>
-        </div>
-
-        <div class="section-header">
-          <div class="section-title">Recent Transactions</div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr>
-              <th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Amount (KSh)</th>
-            </tr></thead>
-            <tbody id="recentTable"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ADD TRANSACTION -->
-      <div class="panel" id="panel-add">
-        <div class="alert alert-info" id="apiKeyAlert" style="display:none">
-          ⚠️ Enter your Claude API key in the field below to use AI auto-fill.
-        </div>
-
-        <div class="form-card">
-          <div class="ai-row">
-            <div class="form-group" style="flex:2">
-              <div class="ai-label">✨ AI Auto-fill</div>
-              <input type="text" id="aiPrompt" placeholder='e.g. "Paid 2500 for electricity" or "Got salary 45000"'>
-              <div class="ai-hint">Describe your transaction in plain language and Claude will fill the form.</div>
-            </div>
-            <div>
-              <button class="btn btn-primary" id="aiFillBtn" onclick="aiAutoFill()">
-                <span id="aiBtnText">Auto-fill</span>
-              </button>
-            </div>
-          </div>
-
-          <div style="font-size:12px;color:var(--muted);text-align:center;margin:-8px 0 20px;position:relative">
-            <span style="background:white;padding:0 10px;position:relative;z-index:1">or fill manually</span>
-            <hr style="position:absolute;top:50%;left:0;right:0;border:none;border-top:1px solid var(--border)">
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Date *</label>
-              <input type="date" id="fDate">
-            </div>
-            <div class="form-group">
-              <label>Type *</label>
-              <select id="fType" onchange="updateCategories()">
-                <option value="">Select…</option>
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Category *</label>
-              <select id="fCategory"></select>
-            </div>
-            <div class="form-group">
-              <label>Amount (KSh) *</label>
-              <input type="number" id="fAmount" placeholder="0">
-            </div>
-            <div class="form-group">
-              <label>Tag</label>
-              <select id="fTag">
-                <option value="">None</option>
-                <option>ImpulseBuy</option>
-                <option>Unplanned</option>
-                <option>Birthday</option>
-                <option>Gift</option>
-                <option>Repair</option>
-                <option>OddJob</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Description</label>
-              <input type="text" id="fDesc" placeholder="Optional note">
-            </div>
-          </div>
-
-          <div style="margin-top:20px;display:flex;gap:10px">
-            <button class="btn btn-primary" onclick="saveTransaction()">Save Transaction</button>
-            <button class="btn btn-secondary" onclick="clearForm()">Clear</button>
-          </div>
-        </div>
-
-        <div style="margin-top:24px">
-          <div class="section-header">
-            <div class="section-title" style="font-size:15px">Claude API Key</div>
-          </div>
-          <div class="form-card" style="padding:20px">
-            <div class="form-group">
-              <label>API Key (stored in browser only)</label>
-              <div style="display:flex;gap:8px">
-                <input type="password" id="apiKeyInput" placeholder="sk-ant-…" style="flex:1">
-                <button class="btn btn-outline" onclick="saveApiKey()">Save</button>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-top:5px">Your key is never sent anywhere except Anthropic's API.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LEDGER -->
-      <div class="panel" id="panel-ledger">
-        <div class="filter-bar">
-          <select id="filterType" onchange="renderLedger()">
-            <option value="">All Types</option>
-            <option>Income</option>
-            <option>Expense</option>
-          </select>
-          <select id="filterCategory" onchange="renderLedger()">
-            <option value="">All Categories</option>
-          </select>
-          <input type="text" id="filterSearch" placeholder="Search description…" oninput="renderLedger()" style="min-width:180px">
-          <span style="margin-left:auto;font-size:12px;color:var(--muted)" id="ledgerCount"></span>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr>
-              <th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Tag</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th><th></th>
-            </tr></thead>
-            <tbody id="ledgerTable"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- GDRIVE -->
-      <div class="panel" id="panel-gdrive">
-        <div class="setup-card">
-          <h3 style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Google Drive Sync</h3>
-          <p style="color:var(--muted);font-size:13px;margin-bottom:24px">Connect your Google Drive to save and load your finance data as a JSON file, accessible from anywhere.</p>
-
-          <div class="alert alert-warning">
-            ⚠️ Google Drive integration requires a Google API key with Drive access. Follow the steps below.
-          </div>
-
-          <div class="setup-steps" style="margin-top:20px">
-            <div class="setup-step">
-              <div class="step-num">1</div>
-              <div class="step-content">
-                <h4>Create a Google Cloud Project</h4>
-                <p>Go to <a href="https://console.cloud.google.com" target="_blank" style="color:var(--accent)">console.cloud.google.com</a>, create a project, enable the <strong>Google Drive API</strong> and <strong>Google Picker API</strong>.</p>
-              </div>
-            </div>
-            <div class="setup-step">
-              <div class="step-num">2</div>
-              <div class="step-content">
-                <h4>Get your API credentials</h4>
-                <p>Create an <strong>OAuth 2.0 Client ID</strong> (Web Application) and an <strong>API Key</strong>. Add <code>this page's URL</code> as an authorized JavaScript origin.</p>
-              </div>
-            </div>
-            <div class="setup-step">
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <h4>Enter credentials below</h4>
-                <div class="form-group" style="margin-top:10px">
-                  <label>Google API Key</label>
-                  <input type="text" id="gApiKey" placeholder="AIza…">
-                </div>
-                <div class="form-group" style="margin-top:10px">
-                  <label>OAuth Client ID</label>
-                  <input type="text" id="gClientId" placeholder="…apps.googleusercontent.com">
-                </div>
-                <button class="btn btn-primary" style="margin-top:12px" onclick="initGDrive()">Connect to Google Drive</button>
-              </div>
-            </div>
-            <div class="setup-step">
-              <div class="step-num">4</div>
-              <div class="step-content">
-                <h4>Save & Load your data</h4>
-                <p>Once connected, use the buttons below to sync your finance data.</p>
-                <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-                  <button class="btn btn-secondary" onclick="saveToGDrive()">💾 Save to Drive</button>
-                  <button class="btn btn-secondary" onclick="loadFromGDrive()">📂 Load from Drive</button>
-                </div>
-                <div style="margin-top:10px;font-size:12px;color:var(--muted)" id="gdriveLog"></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">
-            <div style="font-weight:600;margin-bottom:10px;font-size:13px">Quick Export / Import</div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn btn-outline btn-sm" onclick="exportJSON()">⬇ Export JSON</button>
-              <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
-              <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <!-- top bar -->
+  <div class="topbar">
+    <div class="page-title" id="pageTitle">Dashboard</div>
+    <div class="topbar-right">
+      <div class="chips" id="desktopChips"></div>
+      <button class="btn btn-primary btn-sm" onclick="go('add')">+ Add</button>
     </div>
   </div>
-</div>
+
+  <!-- content -->
+  <div class="content">
+
+    <!-- ══ DASHBOARD ══════════════════════════════════ -->
+    <div class="panel active" id="panel-dashboard">
+      <!-- mobile month chips -->
+      <div class="mobile-chips" id="mobileChips"></div>
+
+      <div class="stats" id="statsRow"></div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Monthly Overview</div>
+          <div class="bar-chart" id="barChart"></div>
+          <div class="leg">
+            <div class="lg"><div class="ld" style="background:var(--green)"></div>Income</div>
+            <div class="lg"><div class="ld" style="background:var(--red)"></div>Expenses</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Top Expense Categories</div>
+          <div class="cat-list" id="catChart"></div>
+        </div>
+      </div>
+
+      <div class="sec-hdr">
+        <div class="sec-title">Recent Transactions</div>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr>
+          <th>Date</th><th>Type</th><th>Category</th><th>Description</th>
+          <th style="text-align:right">Amount</th>
+        </tr></thead>
+        <tbody id="recentTbody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ══ ADD TRANSACTION ════════════════════════════ -->
+    <div class="panel" id="panel-add">
+      <div class="form-wrap">
+        <div class="ai-box">
+          <div class="ai-top">✦ AI Auto-fill</div>
+          <div class="ai-row">
+            <input class="ai-inp" id="aiInp"
+              placeholder='e.g. "paid 4500 electricity" or "salary 205000"'
+              onkeydown="if(event.key==='Enter')aiGo()">
+            <button class="btn btn-primary btn-sm" id="aiBtn" onclick="aiGo()">
+              <span id="aiBtnTxt">Fill</span>
+            </button>
+          </div>
+          <div class="ai-hint">Claude reads your note and fills the form. Needs API key below.</div>
+        </div>
+
+        <div class="divider">or fill manually</div>
+
+        <div class="form-grid">
+          <div class="fg">
+            <label>Date *</label>
+            <input type="date" id="fDate">
+          </div>
+          <div class="fg">
+            <label>Type *</label>
+            <select id="fType" onchange="refreshCats()">
+              <option value="">Select…</option>
+              <option>Income</option>
+              <option>Expense</option>
+              <option>Savings</option>
+              <option>Transfer</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Category *</label>
+            <select id="fCat"><option value="">Select type first…</option></select>
+          </div>
+          <div class="fg">
+            <label>Amount (KSh) *</label>
+            <input type="number" id="fAmt" placeholder="0" min="0" inputmode="decimal">
+          </div>
+          <div class="fg">
+            <label>Tag</label>
+            <select id="fTag">
+              <option value="">None</option>
+              <option>ImpulseBuy</option><option>Unplanned</option>
+              <option>Birthday</option><option>Gift</option>
+              <option>Repair</option><option>OddJob</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Description</label>
+            <input type="text" id="fDesc" placeholder="Optional note">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="saveTx()">Save Transaction</button>
+          <button class="btn btn-ghost" onclick="clearForm()">Clear</button>
+        </div>
+
+        <div class="api-card">
+          <div style="font-weight:600;font-size:13.5px;margin-bottom:3px">Claude API Key</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">
+            Stored in your browser only. Get yours at <span style="color:var(--gold)">console.anthropic.com</span>
+          </div>
+          <div class="api-row">
+            <input type="password" id="apiKeyInp" placeholder="sk-ant-…">
+            <button class="btn btn-ghost btn-sm" onclick="saveKey()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ LEDGER ══════════════════════════════════════ -->
+    <div class="panel" id="panel-ledger">
+      <div class="filters">
+        <select id="fltType" onchange="renderLedger()">
+          <option value="">All Types</option>
+          <option>Income</option><option>Expense</option>
+          <option>Savings</option><option>Transfer</option>
+        </select>
+        <select id="fltCat" onchange="renderLedger()">
+          <option value="">All Categories</option>
+        </select>
+        <input type="text" id="fltSearch" placeholder="Search…" oninput="renderLedger()">
+        <span class="f-count" id="fltCount"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table><thead><tr>
+          <th>Date</th><th>Type</th><th>Category</th>
+          <th>Description</th><th>Tag</th>
+          <th style="text-align:right">Amount</th>
+          <th style="text-align:right">Balance</th>
+          <th></th>
+        </tr></thead>
+        <tbody id="ledgerTbody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ══ BUDGET ══════════════════════════════════════ -->
+    <div class="panel" id="panel-budget">
+      <div class="bud-head">
+        <div style="font-size:13.5px;font-weight:500">Month:</div>
+        <select id="budMonth" onchange="renderBudget()" style="min-width:140px">
+          <option value="">All time</option>
+        </select>
+        <div class="bud-hint">Set targets in blue. Actuals pull from Ledger automatically.</div>
+      </div>
+      <div class="bud-tbl-wrap tbl-wrap">
+        <table><thead><tr>
+          <th>Category</th>
+          <th style="text-align:right">Budget (KSh)</th>
+          <th style="text-align:right">Actual (KSh)</th>
+          <th style="text-align:right">Variance</th>
+          <th>% Used</th>
+          <th style="text-align:center">Status</th>
+        </tr></thead>
+        <tbody id="budgetTbody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- ══ GOOGLE DRIVE ════════════════════════════════ -->
+    <div class="panel" id="panel-drive">
+      <div class="setup-card">
+        <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:5px">Google Drive Sync</h2>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">
+          Connect once. Save & load from any device — phone, tablet, laptop.
+        </p>
+        <div class="alert alert-warn">
+          ⚠ Requires a Google Cloud project with Drive API enabled. Follow the steps below.
+        </div>
+
+        <div class="step">
+          <div class="step-n">1</div>
+          <div>
+            <h4>Create a Google Cloud project</h4>
+            <p>Go to <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> → New Project → enable <strong>Google Drive API</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div>
+            <h4>Create credentials</h4>
+            <p>APIs & Services → Credentials → <strong>OAuth 2.0 Client ID</strong> (Web Application) + an <strong>API Key</strong>. Add your hosted URL as an authorised JavaScript origin.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div>
+            <h4>Paste & connect</h4>
+            <div class="step-ins">
+              <input id="gApiKey" placeholder="Google API Key  (AIza…)" type="text">
+              <input id="gClientId" placeholder="OAuth Client ID  (….apps.googleusercontent.com)" type="text">
+            </div>
+            <div class="da">
+              <button class="btn btn-primary btn-sm" onclick="initDrive()">Connect Google Drive</button>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div>
+            <h4>Save & load</h4>
+            <div class="da">
+              <button class="btn btn-ghost btn-sm" onclick="driveSave()">💾 Save to Drive</button>
+              <button class="btn btn-ghost btn-sm" onclick="driveLoad()">📂 Load from Drive</button>
+            </div>
+            <div id="driveLog" style="font-size:11.5px;color:var(--muted);margin-top:8px"></div>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <span style="font-size:12px;font-weight:600;color:var(--muted);flex:1">Quick backup</span>
+          <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇ Export JSON</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ══════════════ BOTTOM NAV (mobile) ═══════════════ -->
+<nav class="bottomnav">
+  <div class="bottomnav-items">
+    <div class="bn-item active" id="bn-dashboard" onclick="go('dashboard')">
+      <div class="bn-icon">◈</div><div>Home</div>
+    </div>
+    <div class="bn-item" id="bn-add" onclick="go('add')">
+      <div class="bn-icon">＋</div><div>Add</div>
+    </div>
+    <div class="bn-item" id="bn-ledger" onclick="go('ledger')">
+      <div class="bn-icon">≡</div><div>Ledger</div>
+      <div class="bn-badge" id="bnb">0</div>
+    </div>
+    <div class="bn-item" id="bn-budget" onclick="go('budget')">
+      <div class="bn-icon">◎</div><div>Budget</div>
+    </div>
+    <div class="bn-item" id="bn-drive" onclick="go('drive')">
+      <div class="bn-icon">☁</div><div>Drive</div>
+    </div>
+  </div>
+</nav>
 
 <!-- DELETE MODAL -->
-<div class="modal-bg" id="deleteModal">
+<div class="modal-bg" id="delModal">
   <div class="modal">
-    <h3>Delete Transaction?</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">This action cannot be undone.</p>
-    <div style="display:flex;gap:10px">
-      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    <h3>Delete this entry?</h3>
+    <p>This action cannot be undone. Your balance will update automatically.</p>
+    <div class="modal-btns">
+      <button class="btn btn-red" onclick="confirmDel()">Delete</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-// DATA
-// ============================================================
-const CATEGORIES = {
-  Income: ['Salary','Side Hustle','Gifts / Friends','Bonus'],
-  Expense: ['Rent','Bills','» Water','» Electricity (KPLC)','» Internet / WiFi','» TV Subscription','» Gym','Groceries','Personal Care','Entertainment','Transport','Fun and Vacation','Shopping','Giving / Donation','Unplanned / Impulse/','» Shopping','» Entertainment','» Dining Out','Car Maintenance','Emergency Repair','Stocks','Money Market funds','Emergency Funds','Auto Loan','Student Loan','Credit Card']
+/* ═══════════════════════════════════════════════════════
+   DATA & CONSTANTS
+═══════════════════════════════════════════════════════ */
+const CATS = {
+  Income:   ['Salary','Side Hustle','Gifts / Friends','Bonus','Dividends','Other'],
+  Expense:  ['Rent','Bills','» Water','» Electricity (KPLC)','» Internet / WiFi',
+             '» TV Subscription','» Gym','Groceries','Personal Care','Entertainment',
+             'Transport','Fun and Vacation','Shopping','Giving / Donation',
+             'Unplanned / Impulse/','» Shopping','» Entertainment','» Dining Out',
+             'Car Maintenance','Emergency Repair','Stocks','Money Market funds',
+             'Emergency Funds','Auto Loan','Student Loan','Credit Card','Other'],
+  Savings:  ['SACCO','Money Market Fund','Emergency Fund','Fixed Deposit','Shares','Other'],
+  Transfer: ['Transfer']
 };
 
-let transactions = JSON.parse(localStorage.getItem('mariluTx') || '[]');
-let deleteIdx = null;
-let gDriveReady = false;
-let gFileId = null;
-let selectedMonth = null;
+const SEED = [
+  {date:'2025-09-02',type:'Income', cat:'Salary',              tag:'',desc:'',                amt:205611},
+  {date:'2025-09-02',type:'Expense',cat:'Giving / Donation',   tag:'',desc:'',                amt:20500},
+  {date:'2025-09-02',type:'Expense',cat:'Rent',                tag:'',desc:'',                amt:30000},
+  {date:'2025-09-02',type:'Expense',cat:'» Internet / WiFi',   tag:'',desc:'',                amt:3000},
+  {date:'2025-09-02',type:'Expense',cat:'» Electricity (KPLC)',tag:'',desc:'',                amt:4000},
+  {date:'2025-09-02',type:'Expense',cat:'» Water',             tag:'',desc:'',                amt:800},
+  {date:'2025-09-02',type:'Expense',cat:'Bills',               tag:'',desc:'Maureen',         amt:15000},
+  {date:'2025-09-02',type:'Expense',cat:'Giving / Donation',   tag:'',desc:'Glory Sanctuary', amt:1000},
+  {date:'2025-09-02',type:'Expense',cat:'Shopping',            tag:'',desc:'Weekly',          amt:10000},
+  {date:'2025-09-02',type:'Expense',cat:'» Shopping',          tag:'',desc:'Monthly',         amt:10000},
+  {date:'2025-09-02',type:'Expense',cat:'Credit Card',         tag:'',desc:'',                amt:24000},
+];
 
-// Pre-load from the Excel data
-if (transactions.length === 0) {
-  transactions = [
-    { date:'2025-09-02', type:'Income',  category:'Salary',            tag:'', desc:'',               amount:205611 },
-    { date:'2025-09-02', type:'Expense', category:'Giving / Donation', tag:'', desc:'',               amount:20500  },
-    { date:'2025-09-02', type:'Expense', category:'Rent',              tag:'', desc:'',               amount:30000  },
-    { date:'2025-09-02', type:'Expense', category:'» Internet / WiFi', tag:'', desc:'',               amount:3000   },
-    { date:'2025-09-02', type:'Expense', category:'» Electricity (KPLC)', tag:'', desc:'',            amount:4000   },
-    { date:'2025-09-02', type:'Expense', category:'» Water',           tag:'', desc:'',               amount:800    },
-    { date:'2025-09-02', type:'Expense', category:'Bills',             tag:'', desc:'Maureen',        amount:15000  },
-    { date:'2025-09-02', type:'Expense', category:'Giving / Donation', tag:'', desc:'Glory Sanctuary',amount:1000   },
-    { date:'2025-09-02', type:'Expense', category:'Shopping',          tag:'', desc:'Weekly',         amount:10000  },
-    { date:'2025-09-02', type:'Expense', category:'» Shopping',        tag:'', desc:'Monthly',        amount:10000  },
-    { date:'2025-09-02', type:'Expense', category:'Credit Card',       tag:'', desc:'',               amount:24000  },
-  ];
-  save();
-}
+let txs     = JSON.parse(localStorage.getItem('mf_txs') || 'null') || SEED;
+let budgets = JSON.parse(localStorage.getItem('mf_budgets') || '{}');
+let selMonth = null;
+let delIdx = null;
+let gReady = false, gFileId = null;
 
-function save() {
-  localStorage.setItem('mariluTx', JSON.stringify(transactions));
-}
+const save = () => localStorage.setItem('mf_txs', JSON.stringify(txs));
+const saveBudgets = () => localStorage.setItem('mf_budgets', JSON.stringify(budgets));
 
-// ============================================================
-// HELPERS
-// ============================================================
-function fmt(n) {
-  return 'KSh ' + Math.abs(n).toLocaleString('en-KE', {maximumFractionDigits:0});
-}
-function fmtDate(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'});
-}
-function toast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type} show`;
-  setTimeout(() => t.className='toast', 3000);
+/* ═══════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════ */
+const ksh = n => 'KSh ' + Math.abs(n).toLocaleString('en-KE',{maximumFractionDigits:0});
+const fmtD = d => { if(!d) return ''; return new Date(d).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); };
+const mk = d => d ? d.slice(0,7) : '';
+const mlbl = k => { if(!k) return ''; const [y,m]=k.split('-'); return new Date(y,+m-1).toLocaleString('en',{month:'short'})+' '+y; };
+const runBal = () => { let b=0; return txs.map(t=>{b+=t.type==='Income'?t.amt:-t.amt;return b;}); };
+const getFilt = () => selMonth ? txs.filter(t=>mk(t.date)===selMonth) : txs;
+
+function toast(msg, type='ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = `toast ${type} show`;
+  clearTimeout(el._t); el._t = setTimeout(()=>el.className='toast',3000);
 }
 
-// ============================================================
-// NAVIGATION
-// ============================================================
-function showPanel(id) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => {
-    if (n.textContent.toLowerCase().includes(id === 'add' ? 'add' : id === 'gdrive' ? 'google' : id)) n.classList.add('active');
-  });
-  const titles = { dashboard:'Dashboard', add:'Add Transaction', ledger:'Ledger', gdrive:'Google Drive' };
-  document.getElementById('pageTitle').textContent = titles[id] || id;
-  if (id === 'dashboard') renderDashboard();
-  if (id === 'ledger') { renderLedger(); populateFilterCats(); }
-  if (id === 'add') {
-    const today = new Date().toISOString().slice(0,10);
-    document.getElementById('fDate').value = today;
-    updateCategories();
-    const key = localStorage.getItem('claudeApiKey');
-    document.getElementById('apiKeyAlert').style.display = key ? 'none' : 'flex';
-    if (key) document.getElementById('apiKeyInput').value = key;
-  }
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════ */
+const TITLES = {dashboard:'Dashboard',add:'Add Transaction',ledger:'Ledger',budget:'Budget',drive:'Google Drive'};
+
+function go(id) {
+  // panels
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  // desktop sidebar
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const items = document.querySelectorAll('.nav-item');
+  const map = {dashboard:0,add:1,ledger:2,budget:3,drive:4};
+  if(map[id]!==undefined) items[map[id]].classList.add('active');
+  // mobile bottom nav
+  document.querySelectorAll('.bn-item').forEach(n=>n.classList.remove('active'));
+  const bn = document.getElementById('bn-'+id);
+  if(bn) bn.classList.add('active');
+  // title
+  document.getElementById('pageTitle').textContent = TITLES[id]||id;
+  // render
+  if(id==='dashboard') renderDashboard();
+  if(id==='add') initAdd();
+  if(id==='ledger') { fillLedgerFilters(); renderLedger(); }
+  if(id==='budget') { fillBudgetMonths(); renderBudget(); }
 }
 
-// ============================================================
-// MONTH SELECTOR
-// ============================================================
-function buildMonthSelector() {
-  const months = {};
-  transactions.forEach(t => {
-    const m = t.date.slice(0,7);
-    months[m] = true;
-  });
-  const sorted = Object.keys(months).sort().reverse().slice(0,6);
-  const sel = document.getElementById('monthSelector');
-  sel.innerHTML = `<button class="month-chip ${!selectedMonth?'active':''}" onclick="setMonth(null)">All</button>` +
-    sorted.map(m => {
-      const [y,mo] = m.split('-');
-      const label = new Date(y, mo-1).toLocaleString('en',{month:'short'}) + ' ' + y;
-      return `<button class="month-chip ${selectedMonth===m?'active':''}" onclick="setMonth('${m}')">${label}</button>`;
-    }).join('');
+/* ═══════════════════════════════════════════════════════
+   MONTH CHIPS (shared for desktop & mobile)
+═══════════════════════════════════════════════════════ */
+function buildChips() {
+  const ms = [...new Set(txs.map(t=>mk(t.date)).filter(Boolean))].sort().reverse().slice(0,6);
+  const html = `<button class="chip ${!selMonth?'active':''}" onclick="setMonth(null)">All</button>`
+    + ms.map(m=>`<button class="chip ${selMonth===m?'active':''}" onclick="setMonth('${m}')">${mlbl(m)}</button>`).join('');
+  document.getElementById('desktopChips').innerHTML = html;
+  document.getElementById('mobileChips').innerHTML  = html;
 }
+
 function setMonth(m) {
-  selectedMonth = m;
-  buildMonthSelector();
+  selMonth = m;
+  buildChips();
   renderDashboard();
 }
 
-// ============================================================
-// DASHBOARD
-// ============================================================
-function getFiltered() {
-  if (!selectedMonth) return transactions;
-  return transactions.filter(t => t.date.startsWith(selectedMonth));
-}
-
+/* ═══════════════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════════════ */
 function renderDashboard() {
-  buildMonthSelector();
-  const filtered = getFiltered();
-  const income = filtered.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amount,0);
-  const expense = filtered.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amount,0);
-  const balance = transactions.reduce((s,t)=>t.type==='Income'?s+t.amount:s-t.amount, 0);
-  const net = income - expense;
+  buildChips();
+  const ft = getFilt();
+  const inc  = ft.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amt,0);
+  const exp  = ft.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amt,0);
+  const net  = inc - exp;
+  const bals = runBal();
+  const bal  = bals.length ? bals[bals.length-1] : 0;
+  const per  = selMonth ? mlbl(selMonth) : 'All time';
 
-  document.getElementById('statBalance').textContent = fmt(balance);
-  document.getElementById('statIncome').textContent = fmt(income);
-  document.getElementById('statExpense').textContent = fmt(expense);
-  document.getElementById('statNet').textContent = (net >= 0 ? '' : '-') + fmt(net);
-  document.getElementById('statNet').style.color = net >= 0 ? 'var(--accent2)' : 'var(--danger)';
-
-  // Recent
-  const recent = [...transactions].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
-  document.getElementById('recentTable').innerHTML = recent.map(t => `
-    <tr>
-      <td>${fmtDate(t.date)}</td>
-      <td><span class="type-badge type-${t.type.toLowerCase()}">${t.type}</span></td>
-      <td>${t.category}</td>
-      <td style="color:var(--muted)">${t.desc||'—'}</td>
-      <td class="amount-${t.type.toLowerCase()}">${t.type==='Income'?'+':'-'} ${fmt(t.amount)}</td>
-    </tr>`).join('') || '<tr><td colspan="5" class="empty">No transactions yet</td></tr>';
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat">
+      <div class="stat-lbl">Income</div>
+      <div class="stat-val pos">${ksh(inc)}</div>
+      <div class="stat-sub">${per}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-lbl">Expenses</div>
+      <div class="stat-val neg">${ksh(exp)}</div>
+      <div class="stat-sub">${per}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-lbl">Balance</div>
+      <div class="stat-val gold">${ksh(bal)}</div>
+      <div class="stat-sub">Running total</div>
+    </div>
+    <div class="stat">
+      <div class="stat-lbl">Net Flow</div>
+      <div class="stat-val ${net>=0?'pos':'neg'}">${net<0?'-':''}${ksh(net)}</div>
+      <div class="stat-sub">Income − Expenses</div>
+    </div>`;
 
   renderBarChart();
-  renderCatChart(filtered);
+  renderCatChart(ft);
+  renderRecent();
+
+  // update badges
+  document.getElementById('nb').textContent  = txs.length;
+  document.getElementById('bnb').textContent = txs.length;
 }
 
 function renderBarChart() {
-  const months = {};
-  transactions.forEach(t => {
-    const m = t.date.slice(0,7);
-    if (!months[m]) months[m] = {income:0, expense:0};
-    if (t.type==='Income') months[m].income += t.amount;
-    else months[m].expense += t.amount;
+  const mo = {};
+  txs.forEach(t=>{
+    const m=mk(t.date); if(!mo[m]) mo[m]={i:0,e:0};
+    if(t.type==='Income') mo[m].i+=t.amt;
+    else if(t.type==='Expense') mo[m].e+=t.amt;
   });
-  const sorted = Object.keys(months).sort().slice(-5);
-  if (!sorted.length) { document.getElementById('barChart').innerHTML='<div class="empty" style="flex:1">No data</div>'; return; }
-  const max = Math.max(...sorted.map(m=>Math.max(months[m].income, months[m].expense)));
-  document.getElementById('barChart').innerHTML = sorted.map(m => {
-    const [y,mo] = m.split('-');
-    const label = new Date(y, mo-1).toLocaleString('en',{month:'short'});
-    const ih = max ? Math.round((months[m].income/max)*110) : 4;
-    const eh = max ? Math.round((months[m].expense/max)*110) : 4;
-    return `<div class="bar-group">
-      <div class="bar-pair">
-        <div class="bar income" style="height:${ih}px" title="Income: ${fmt(months[m].income)}"></div>
-        <div class="bar expense" style="height:${eh}px" title="Expense: ${fmt(months[m].expense)}"></div>
+  const sorted = Object.keys(mo).sort().slice(-6);
+  if(!sorted.length){
+    document.getElementById('barChart').innerHTML='<div style="color:var(--muted);padding-top:30px;font-size:13px">No data yet</div>';
+    return;
+  }
+  const mx = Math.max(...sorted.flatMap(m=>[mo[m].i,mo[m].e]),1);
+  document.getElementById('barChart').innerHTML = sorted.map(m=>{
+    const lbl = mlbl(m).split(' ')[0];
+    const ih = Math.max(3,Math.round(mo[m].i/mx*92));
+    const eh = Math.max(3,Math.round(mo[m].e/mx*92));
+    return `<div class="bg">
+      <div class="bp">
+        <div class="b gi" style="height:${ih}px" title="Income: ${ksh(mo[m].i)}"></div>
+        <div class="b ge" style="height:${eh}px" title="Exp: ${ksh(mo[m].e)}"></div>
       </div>
-      <div class="bar-label">${label}</div>
+      <div class="bl">${lbl}</div>
     </div>`;
-  }).join('') + `<div style="display:flex;flex-direction:column;gap:6px;justify-content:flex-end;padding-bottom:22px;margin-left:8px">
-    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><div style="width:10px;height:10px;background:var(--accent2);border-radius:2px"></div>Income</div>
-    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><div style="width:10px;height:10px;background:var(--danger);border-radius:2px"></div>Expense</div>
-  </div>`;
+  }).join('');
 }
 
-function renderCatChart(filtered) {
-  const cats = {};
-  filtered.filter(t=>t.type==='Expense').forEach(t => {
-    cats[t.category] = (cats[t.category]||0) + t.amount;
-  });
-  const sorted = Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  if (!sorted.length) { document.getElementById('catChart').innerHTML='<div class="empty" style="flex:1;padding:20px 0">No expenses</div>'; return; }
-  const max = sorted[0][1];
-  document.getElementById('catChart').innerHTML = sorted.map(([cat,amt]) => `
-    <div class="cat-row">
-      <div class="cat-name">${cat}</div>
-      <div class="cat-bar-wrap"><div class="cat-bar-fill" style="width:${Math.round(amt/max*100)}%"></div></div>
-      <div class="cat-amt">${fmt(amt)}</div>
+function renderCatChart(ft) {
+  const cats={};
+  ft.filter(t=>t.type==='Expense').forEach(t=>{cats[t.cat]=(cats[t.cat]||0)+t.amt;});
+  const sorted=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,7);
+  if(!sorted.length){
+    document.getElementById('catChart').innerHTML='<div style="color:var(--muted);padding:16px 0;font-size:13px">No expenses recorded</div>';
+    return;
+  }
+  const mx=sorted[0][1];
+  document.getElementById('catChart').innerHTML=sorted.map(([c,a])=>`
+    <div class="cat-r">
+      <div class="cat-n" title="${c}">${c}</div>
+      <div class="cat-tr"><div class="cat-fl" style="width:${Math.round(a/mx*100)}%"></div></div>
+      <div class="cat-a">${ksh(a)}</div>
     </div>`).join('');
 }
 
-// ============================================================
-// FORM
-// ============================================================
-function updateCategories() {
+function renderRecent() {
+  const recent=[...txs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+  document.getElementById('recentTbody').innerHTML = recent.length ?
+    recent.map(t=>`<tr>
+      <td style="white-space:nowrap">${fmtD(t.date)}</td>
+      <td><span class="badge b-${t.type.toLowerCase()}">${t.type}</span></td>
+      <td>${t.cat}</td>
+      <td style="color:var(--muted)">${t.desc||'—'}</td>
+      <td style="text-align:right" class="${t.type==='Income'?'amt-p':'amt-n'}">
+        ${t.type==='Income'?'+':'-'} ${ksh(t.amt)}
+      </td></tr>`).join('') :
+    `<tr><td colspan="5" class="empty-r">No transactions yet. Tap Add to start!</td></tr>`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   ADD FORM
+═══════════════════════════════════════════════════════ */
+function initAdd() {
+  if(!document.getElementById('fDate').value)
+    document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
+  refreshCats();
+  const k = localStorage.getItem('mf_key');
+  if(k) document.getElementById('apiKeyInp').value = k;
+}
+
+function refreshCats() {
   const type = document.getElementById('fType').value;
-  const cats = CATEGORIES[type] || [];
-  const sel = document.getElementById('fCategory');
-  sel.innerHTML = '<option value="">Select…</option>' + cats.map(c=>`<option>${c}</option>`).join('');
+  const cats = CATS[type]||[];
+  document.getElementById('fCat').innerHTML =
+    '<option value="">Select…</option>'+cats.map(c=>`<option>${c}</option>`).join('');
 }
 
 function clearForm() {
-  ['fDate','fType','fCategory','fAmount','fTag','fDesc','aiPrompt'].forEach(id=>{
-    const el = document.getElementById(id);
-    if (el) el.value = '';
+  ['fType','fCat','fAmt','fTag','fDesc','aiInp'].forEach(id=>{
+    const e=document.getElementById(id); if(e) e.value='';
   });
-  document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
-  updateCategories();
+  document.getElementById('fDate').value=new Date().toISOString().slice(0,10);
+  refreshCats();
 }
 
-function saveTransaction() {
-  const date = document.getElementById('fDate').value;
-  const type = document.getElementById('fType').value;
-  const category = document.getElementById('fCategory').value;
-  const amount = parseFloat(document.getElementById('fAmount').value);
-  const tag = document.getElementById('fTag').value;
-  const desc = document.getElementById('fDesc').value;
-
-  if (!date || !type || !category || !amount) {
-    toast('Please fill in Date, Type, Category and Amount', 'error'); return;
-  }
-
-  transactions.unshift({ date, type, category, amount, tag, desc });
-  save();
-  toast('Transaction saved!');
-  clearForm();
-  buildMonthSelector();
+function saveTx() {
+  const date=document.getElementById('fDate').value;
+  const type=document.getElementById('fType').value;
+  const cat =document.getElementById('fCat').value;
+  const amt =parseFloat(document.getElementById('fAmt').value);
+  const tag =document.getElementById('fTag').value;
+  const desc=document.getElementById('fDesc').value.trim();
+  if(!date||!type||!cat||!amt){toast('Fill in Date, Type, Category & Amount','err');return;}
+  txs.unshift({date,type,cat,tag,desc,amt});
+  save(); toast('Saved ✓'); clearForm();
+  document.getElementById('nb').textContent=txs.length;
+  document.getElementById('bnb').textContent=txs.length;
 }
 
-// ============================================================
-// AI AUTO-FILL
-// ============================================================
-async function aiAutoFill() {
-  const apiKey = localStorage.getItem('claudeApiKey');
-  if (!apiKey) { toast('Please enter your Claude API key first', 'error'); return; }
+function saveKey() {
+  const k=document.getElementById('apiKeyInp').value.trim();
+  if(!k){toast('Paste your key first','err');return;}
+  localStorage.setItem('mf_key',k); toast('Key saved ✓');
+}
 
-  const prompt = document.getElementById('aiPrompt').value.trim();
-  if (!prompt) { toast('Describe your transaction first', 'error'); return; }
+/* ═══════════════════════════════════════════════════════
+   AI AUTO-FILL
+═══════════════════════════════════════════════════════ */
+async function aiGo() {
+  const key=localStorage.getItem('mf_key');
+  if(!key){toast('Save your Claude API key below first','err');return;}
+  const prompt=document.getElementById('aiInp').value.trim();
+  if(!prompt){toast('Type a description first','err');return;}
 
-  const btn = document.getElementById('aiFillBtn');
-  const btnText = document.getElementById('aiBtnText');
-  btnText.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
+  const btn=document.getElementById('aiBtn');
+  document.getElementById('aiBtnTxt').innerHTML='<span class="spin"></span>';
+  btn.disabled=true;
 
-  const today = new Date().toISOString().slice(0,10);
-  const allCats = [...CATEGORIES.Income, ...CATEGORIES.Expense];
+  const today=new Date().toISOString().slice(0,10);
+  const allCats=Object.values(CATS).flat();
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        system: `You are a finance assistant. Parse transaction descriptions and return ONLY valid JSON, no markdown.
-Categories available: ${allCats.join(', ')}.
-Tags: ImpulseBuy, Unplanned, Birthday, Gift, Repair, OddJob, or empty.
-Return: {"date":"YYYY-MM-DD","type":"Income|Expense","category":"<from list>","amount":<number>,"tag":"","desc":"<brief note>"}
-Today's date: ${today}. Amounts in KSh. If date not mentioned, use today.`,
-        messages: [{ role: 'user', content: prompt }]
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:400,
+        system:`You parse transaction descriptions for a Kenyan family finance app. Return ONLY valid JSON, no markdown.
+Categories: ${allCats.join(', ')}.
+Types: Income, Expense, Savings, Transfer.
+Tags (optional): ImpulseBuy, Unplanned, Birthday, Gift, Repair, OddJob.
+Return: {"date":"YYYY-MM-DD","type":"...","cat":"exact category from list","amt":number,"tag":"","desc":"brief note"}
+Today: ${today}. All amounts in KSh. If no date mentioned, use today.`,
+        messages:[{role:'user',content:prompt}]
       })
     });
-    const data = await res.json();
-    const text = data.content?.[0]?.text || '';
-    const cleaned = text.replace(/```json|```/g,'').trim();
-    const parsed = JSON.parse(cleaned);
-
-    if (parsed.date) document.getElementById('fDate').value = parsed.date;
-    if (parsed.type) { document.getElementById('fType').value = parsed.type; updateCategories(); }
-    if (parsed.category) document.getElementById('fCategory').value = parsed.category;
-    if (parsed.amount) document.getElementById('fAmount').value = parsed.amount;
-    if (parsed.tag) document.getElementById('fTag').value = parsed.tag;
-    if (parsed.desc) document.getElementById('fDesc').value = parsed.desc;
-
+    const data=await res.json();
+    const text=(data.content?.[0]?.text||'').replace(/```json|```/g,'').trim();
+    const p=JSON.parse(text);
+    if(p.date) document.getElementById('fDate').value=p.date;
+    if(p.type){document.getElementById('fType').value=p.type;refreshCats();}
+    setTimeout(()=>{if(p.cat) document.getElementById('fCat').value=p.cat;},60);
+    if(p.amt) document.getElementById('fAmt').value=p.amt;
+    if(p.tag) document.getElementById('fTag').value=p.tag;
+    if(p.desc) document.getElementById('fDesc').value=p.desc;
     toast('Form filled by AI ✨');
   } catch(e) {
-    toast('AI fill failed: ' + e.message, 'error');
+    toast('AI fill failed: '+e.message,'err');
   } finally {
-    btnText.textContent = 'Auto-fill';
-    btn.disabled = false;
+    document.getElementById('aiBtnTxt').textContent='Fill';
+    btn.disabled=false;
   }
 }
 
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key) { toast('Enter a valid key', 'error'); return; }
-  localStorage.setItem('claudeApiKey', key);
-  document.getElementById('apiKeyAlert').style.display = 'none';
-  toast('API key saved!');
-}
-
-// ============================================================
-// LEDGER
-// ============================================================
-function populateFilterCats() {
-  const cats = [...new Set(transactions.map(t=>t.category))].sort();
-  document.getElementById('filterCategory').innerHTML = '<option value="">All Categories</option>' + cats.map(c=>`<option>${c}</option>`).join('');
+/* ═══════════════════════════════════════════════════════
+   LEDGER
+═══════════════════════════════════════════════════════ */
+function fillLedgerFilters() {
+  const cats=[...new Set(txs.map(t=>t.cat))].sort();
+  document.getElementById('fltCat').innerHTML=
+    '<option value="">All Categories</option>'+cats.map(c=>`<option>${c}</option>`).join('');
 }
 
 function renderLedger() {
-  const typeF = document.getElementById('filterType').value;
-  const catF = document.getElementById('filterCategory').value;
-  const search = document.getElementById('filterSearch').value.toLowerCase();
-
-  let filtered = [...transactions].sort((a,b)=>b.date.localeCompare(a.date));
-  if (typeF) filtered = filtered.filter(t=>t.type===typeF);
-  if (catF) filtered = filtered.filter(t=>t.category===catF);
-  if (search) filtered = filtered.filter(t=>(t.desc||'').toLowerCase().includes(search)||(t.category||'').toLowerCase().includes(search));
-
-  document.getElementById('ledgerCount').textContent = `${filtered.length} transaction${filtered.length!==1?'s':''}`;
-
-  // running balance
-  let running = transactions.reduce((s,t)=>t.type==='Income'?s+t.amount:s-t.amount,0);
-  // recompute from all sorted
-  const allSorted = [...transactions].sort((a,b)=>b.date.localeCompare(a.date));
-
-  document.getElementById('ledgerTable').innerHTML = filtered.map(t => {
-    const origIdx = transactions.indexOf(t);
-    const sign = t.type==='Income';
-    return `<tr>
-      <td>${fmtDate(t.date)}</td>
-      <td><span class="type-badge type-${t.type.toLowerCase()}">${t.type}</span></td>
-      <td>${t.category}</td>
-      <td style="color:var(--muted)">${t.desc||'—'}</td>
-      <td style="color:var(--muted);font-size:12px">${t.tag||''}</td>
-      <td style="text-align:right" class="amount-${t.type.toLowerCase()}">${sign?'+':'-'} ${fmt(t.amount)}</td>
-      <td style="text-align:right;font-weight:600">${fmt(0)}</td>
-      <td><button class="btn btn-sm" style="background:transparent;color:var(--danger);padding:4px 8px" onclick="deleteRow(${origIdx})">✕</button></td>
-    </tr>`;
-  }).join('') || '<tr><td colspan="8" class="empty">No transactions match filters</td></tr>';
+  const tf=document.getElementById('fltType').value;
+  const cf=document.getElementById('fltCat').value;
+  const sf=document.getElementById('fltSearch').value.toLowerCase();
+  const bals=runBal();
+  let rows=txs.map((t,i)=>({...t,bal:bals[i],oi:i}))
+    .sort((a,b)=>b.date.localeCompare(a.date));
+  if(tf) rows=rows.filter(r=>r.type===tf);
+  if(cf) rows=rows.filter(r=>r.cat===cf);
+  if(sf) rows=rows.filter(r=>(r.desc||'').toLowerCase().includes(sf)||(r.cat||'').toLowerCase().includes(sf));
+  document.getElementById('fltCount').textContent=`${rows.length} entr${rows.length===1?'y':'ies'}`;
+  document.getElementById('ledgerTbody').innerHTML=rows.length?
+    rows.map(r=>`<tr>
+      <td style="white-space:nowrap">${fmtD(r.date)}</td>
+      <td><span class="badge b-${r.type.toLowerCase()}">${r.type}</span></td>
+      <td>${r.cat}</td>
+      <td style="color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.desc||'—'}</td>
+      <td>${r.tag?`<span style="background:var(--gold-lt);color:var(--gold-dk);padding:1px 7px;border-radius:99px;font-size:11px">${r.tag}</span>`:'—'}</td>
+      <td class="${r.type==='Income'?'amt-p':'amt-n'}" style="text-align:right;white-space:nowrap">
+        ${r.type==='Income'?'+':'-'} ${ksh(r.amt)}
+      </td>
+      <td style="text-align:right;font-weight:600;white-space:nowrap;color:${r.bal>=0?'var(--green)':'var(--red)'}">
+        ${r.bal<0?'-':''}${ksh(r.bal)}
+      </td>
+      <td><button class="del-btn" onclick="delRow(${r.oi})">×</button></td>
+    </tr>`).join(''):
+    `<tr><td colspan="8" class="empty-r">No entries match your filters</td></tr>`;
 }
 
-function deleteRow(idx) {
-  deleteIdx = idx;
-  document.getElementById('deleteModal').classList.add('open');
-}
-function closeModal() {
-  document.getElementById('deleteModal').classList.remove('open');
-  deleteIdx = null;
-}
-function confirmDelete() {
-  if (deleteIdx !== null) {
-    transactions.splice(deleteIdx, 1);
-    save();
-    renderLedger();
-    closeModal();
-    toast('Transaction deleted');
+function delRow(i){delIdx=i;document.getElementById('delModal').classList.add('open');}
+function closeModal(){document.getElementById('delModal').classList.remove('open');delIdx=null;}
+function confirmDel(){
+  if(delIdx!==null){
+    txs.splice(delIdx,1);save();
+    fillLedgerFilters();renderLedger();
+    document.getElementById('nb').textContent=txs.length;
+    document.getElementById('bnb').textContent=txs.length;
+    closeModal();toast('Deleted');
   }
 }
 
-// ============================================================
-// EXPORT / IMPORT
-// ============================================================
-function exportJSON() {
-  const blob = new Blob([JSON.stringify({transactions, exportedAt: new Date().toISOString()}, null, 2)], {type:'application/json'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'marilu_finance.json'; a.click();
-  toast('Exported!');
+/* ═══════════════════════════════════════════════════════
+   BUDGET
+═══════════════════════════════════════════════════════ */
+function fillBudgetMonths() {
+  const ms=[...new Set(txs.map(t=>mk(t.date)).filter(Boolean))].sort().reverse();
+  const sel=document.getElementById('budMonth');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">All time</option>'+ms.map(m=>`<option value="${m}">${mlbl(m)}</option>`).join('');
+  if(cur) sel.value=cur;
 }
 
-function importJSON(e) {
-  const file = e.target.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const data = JSON.parse(ev.target.result);
-      if (data.transactions) { transactions = data.transactions; save(); toast('Imported ' + transactions.length + ' transactions!'); renderDashboard(); }
-      else throw new Error('Invalid format');
-    } catch(err) { toast('Import failed: ' + err.message, 'error'); }
+function renderBudget() {
+  const mo=document.getElementById('budMonth').value;
+  const ft=mo?txs.filter(t=>mk(t.date)===mo):txs;
+  const bkey=mo||'alltime';
+  const actuals={};
+  ft.filter(t=>t.type==='Expense').forEach(t=>{actuals[t.cat]=(actuals[t.cat]||0)+t.amt;});
+
+  document.getElementById('budgetTbody').innerHTML=CATS.Expense.map(cat=>{
+    const actual=actuals[cat]||0;
+    const bk=`${bkey}_${cat}`;
+    const budget=budgets[bk]||0;
+    const variance=budget?budget-actual:null;
+    const pct=budget?Math.min(actual/budget*100,999):null;
+    const over=budget&&actual>budget;
+    return `<tr>
+      <td style="font-size:13px">${cat}</td>
+      <td style="text-align:right">
+        <input type="number" value="${budget||''}" placeholder="—"
+          style="width:96px;text-align:right;border:1.5px solid #b3d4f0;background:#e8f4fc;border-radius:6px;padding:5px 8px;font-size:12.5px;font-weight:600;color:#0d47a1;font-family:Outfit,sans-serif"
+          onchange="setBudget('${bk}',this.value)">
+      </td>
+      <td style="text-align:right;font-weight:600">${actual?ksh(actual):'—'}</td>
+      <td style="text-align:right;color:${variance!==null?(variance<0?'var(--red)':'var(--green)'):'var(--muted)'}">
+        ${variance!==null?(variance<0?'− ':'+ ')+ksh(Math.abs(variance)):'—'}
+      </td>
+      <td>
+        ${pct!==null?`<div style="display:flex;align-items:center;gap:6px">
+          <div style="flex:1;height:6px;background:var(--soft);border-radius:99px;min-width:50px">
+            <div style="height:100%;border-radius:99px;background:${pct>100?'var(--red)':'var(--gold)'};width:${Math.min(pct,100)}%"></div>
+          </div>
+          <span style="font-size:11px;font-weight:700;color:${pct>100?'var(--red)':'var(--muted)'}">${pct.toFixed(0)}%</span>
+        </div>`:'—'}
+      </td>
+      <td style="text-align:center;font-weight:700;color:${over?'var(--red)':actual&&budget?'var(--green)':'var(--muted)'}">
+        ${budget?(over?'⚠ Over':'✅ OK'):'—'}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function setBudget(key,val){
+  const n=parseFloat(val);
+  if(n>0) budgets[key]=n; else delete budgets[key];
+  saveBudgets(); renderBudget();
+}
+
+/* ═══════════════════════════════════════════════════════
+   EXPORT / IMPORT
+═══════════════════════════════════════════════════════ */
+function exportJSON(){
+  const blob=new Blob([JSON.stringify({txs,budgets,at:new Date().toISOString()},null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='marilu_finance_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); toast('Exported ✓');
+}
+function importJSON(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      if(d.txs){txs=d.txs;save();}
+      if(d.budgets){budgets=d.budgets;saveBudgets();}
+      toast('Imported '+txs.length+' transactions ✓');
+      renderDashboard();
+      document.getElementById('nb').textContent=txs.length;
+      document.getElementById('bnb').textContent=txs.length;
+    }catch(err){toast('Import failed: '+err.message,'err');}
   };
-  reader.readAsText(file);
+  r.readAsText(f);
 }
 
-// ============================================================
-// GOOGLE DRIVE (stub — needs real OAuth tokens)
-// ============================================================
-function initGDrive() {
-  const apiKey = document.getElementById('gApiKey').value.trim();
-  const clientId = document.getElementById('gClientId').value.trim();
-  if (!apiKey || !clientId) { toast('Enter both API Key and Client ID', 'error'); return; }
-  localStorage.setItem('gApiKey', apiKey);
-  localStorage.setItem('gClientId', clientId);
-
-  // Load GIS + GAPI
-  const s1 = document.createElement('script'); s1.src = 'https://accounts.google.com/gsi/client'; document.head.appendChild(s1);
-  const s2 = document.createElement('script'); s2.src = 'https://apis.google.com/js/api.js'; document.head.appendChild(s2);
-
-  s2.onload = () => {
-    gapi.load('client', async () => {
-      await gapi.client.init({ apiKey, discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
-      window._gClientId = clientId;
-      toast('Google Drive SDK loaded — click Save to Drive to authenticate');
-      gDriveReady = true;
+/* ═══════════════════════════════════════════════════════
+   GOOGLE DRIVE
+═══════════════════════════════════════════════════════ */
+function initDrive(){
+  const ak=document.getElementById('gApiKey').value.trim();
+  const ck=document.getElementById('gClientId').value.trim();
+  if(!ak||!ck){toast('Enter both keys first','err');return;}
+  localStorage.setItem('mf_gak',ak);localStorage.setItem('mf_gck',ck);
+  const load=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};
+  load('https://accounts.google.com/gsi/client',()=>{
+    load('https://apis.google.com/js/api.js',()=>{
+      gapi.load('client',async()=>{
+        await gapi.client.init({apiKey:ak,discoveryDocs:['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']});
+        window._gck=ck; gReady=true;
+        toast('Drive SDK loaded — click Save to Drive ✓');
+        document.getElementById('driveLog').textContent='Connected. Ready to sync.';
+      });
     });
-  };
-}
-
-function getGToken(callback) {
-  const client = google.accounts.oauth2.initTokenClient({
-    client_id: window._gClientId || localStorage.getItem('gClientId'),
-    scope: 'https://www.googleapis.com/auth/drive.file',
-    callback
-  });
-  client.requestAccessToken();
-}
-
-async function saveToGDrive() {
-  if (!gDriveReady) { toast('Connect Google Drive first', 'error'); return; }
-  getGToken(async (token) => {
-    if (token.error) { toast('Auth failed', 'error'); return; }
-    const content = JSON.stringify({transactions, savedAt: new Date().toISOString()}, null, 2);
-    const boundary = 'foo_bar_baz';
-    const meta = JSON.stringify({name: 'marilu_finance.json', mimeType: 'application/json'});
-    const body = `--${boundary}\r\nContent-Type: application/json\r\n\r\n${meta}\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n${content}\r\n--${boundary}--`;
-    const url = gFileId
-      ? `https://www.googleapis.com/upload/drive/v3/files/${gFileId}?uploadType=multipart`
-      : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
-    const method = gFileId ? 'PATCH' : 'POST';
-    const res = await fetch(url, {
-      method, headers: { 'Authorization': 'Bearer '+token.access_token, 'Content-Type': `multipart/related; boundary=${boundary}` },
-      body
-    });
-    const data = await res.json();
-    if (data.id) { gFileId = data.id; document.getElementById('gdriveStatusDot').className='dot connected'; document.getElementById('gdriveStatusText').textContent='Connected'; document.getElementById('gdriveFileName').textContent='marilu_finance.json'; document.getElementById('gdriveLog').textContent='Saved at '+new Date().toLocaleTimeString(); toast('Saved to Google Drive!'); }
-    else toast('Save failed: '+JSON.stringify(data), 'error');
   });
 }
-
-async function loadFromGDrive() {
-  if (!gDriveReady) { toast('Connect Google Drive first', 'error'); return; }
-  getGToken(async (token) => {
-    if (token.error) { toast('Auth failed', 'error'); return; }
-    const listRes = await fetch("https://www.googleapis.com/drive/v3/files?q=name='marilu_finance.json'&fields=files(id,name,modifiedTime)", {
-      headers: { 'Authorization': 'Bearer '+token.access_token }
-    });
-    const list = await listRes.json();
-    if (!list.files?.length) { toast('No file found in Drive', 'error'); return; }
-    gFileId = list.files[0].id;
-    const fileRes = await fetch(`https://www.googleapis.com/drive/v3/files/${gFileId}?alt=media`, {
-      headers: { 'Authorization': 'Bearer '+token.access_token }
-    });
-    const data = await fileRes.json();
-    if (data.transactions) {
-      transactions = data.transactions; save(); renderDashboard();
-      document.getElementById('gdriveStatusDot').className='dot connected';
-      document.getElementById('gdriveStatusText').textContent='Connected';
-      document.getElementById('gdriveFileName').textContent='marilu_finance.json';
-      document.getElementById('gdriveLog').textContent='Loaded '+transactions.length+' transactions';
-      toast('Loaded from Google Drive!');
-    }
+function getToken(cb){
+  google.accounts.oauth2.initTokenClient({
+    client_id:window._gck||localStorage.getItem('mf_gck'),
+    scope:'https://www.googleapis.com/auth/drive.file',
+    callback:cb
+  }).requestAccessToken();
+}
+async function driveSave(){
+  if(!gReady){toast('Connect Drive first','err');return;}
+  getToken(async tok=>{
+    if(tok.error){toast('Auth failed','err');return;}
+    const content=JSON.stringify({txs,budgets,savedAt:new Date().toISOString()},null,2);
+    const b='mf_bnd';
+    const meta=JSON.stringify({name:'marilu_finance.json',mimeType:'application/json'});
+    const body=`--${b}\r\nContent-Type:application/json\r\n\r\n${meta}\r\n--${b}\r\nContent-Type:application/json\r\n\r\n${content}\r\n--${b}--`;
+    const url=gFileId
+      ?`https://www.googleapis.com/upload/drive/v3/files/${gFileId}?uploadType=multipart`
+      :'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
+    const res=await fetch(url,{method:gFileId?'PATCH':'POST',
+      headers:{'Authorization':'Bearer '+tok.access_token,'Content-Type':`multipart/related; boundary=${b}`},body});
+    const d=await res.json();
+    if(d.id){
+      gFileId=d.id;
+      document.getElementById('syncDot').className='dot on';
+      document.getElementById('syncLbl').textContent='Drive connected';
+      document.getElementById('syncFile').textContent='marilu_finance.json';
+      document.getElementById('driveLog').textContent='✓ Saved '+new Date().toLocaleTimeString();
+      toast('Saved to Google Drive ✓');
+    } else toast('Error: '+JSON.stringify(d),'err');
+  });
+}
+async function driveLoad(){
+  if(!gReady){toast('Connect Drive first','err');return;}
+  getToken(async tok=>{
+    if(tok.error){toast('Auth failed','err');return;}
+    const lr=await fetch("https://www.googleapis.com/drive/v3/files?q=name='marilu_finance.json'&fields=files(id)",
+      {headers:{'Authorization':'Bearer '+tok.access_token}});
+    const list=await lr.json();
+    if(!list.files?.length){toast('No file found in Drive','err');return;}
+    gFileId=list.files[0].id;
+    const fr=await fetch(`https://www.googleapis.com/drive/v3/files/${gFileId}?alt=media`,
+      {headers:{'Authorization':'Bearer '+tok.access_token}});
+    const d=await fr.json();
+    if(d.txs){txs=d.txs;save();}
+    if(d.budgets){budgets=d.budgets;saveBudgets();}
+    document.getElementById('syncDot').className='dot on';
+    document.getElementById('syncLbl').textContent='Drive connected';
+    document.getElementById('syncFile').textContent='marilu_finance.json';
+    document.getElementById('driveLog').textContent='✓ Loaded '+txs.length+' transactions';
+    toast('Loaded from Drive ✓');
+    renderDashboard();
+    document.getElementById('nb').textContent=txs.length;
+    document.getElementById('bnb').textContent=txs.length;
   });
 }
 
-// ============================================================
-// INIT
-// ============================================================
-window.onload = () => {
+/* ═══════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════ */
+window.onload=()=>{
   renderDashboard();
-  // Restore GDrive creds
-  const ak = localStorage.getItem('gApiKey');
-  const ck = localStorage.getItem('gClientId');
-  if (ak) document.getElementById('gApiKey').value = ak;
-  if (ck) document.getElementById('gClientId').value = ck;
+  document.getElementById('nb').textContent=txs.length;
+  document.getElementById('bnb').textContent=txs.length;
+  const ak=localStorage.getItem('mf_gak');
+  const ck=localStorage.getItem('mf_gck');
+  if(ak) document.getElementById('gApiKey').value=ak;
+  if(ck) document.getElementById('gClientId').value=ck;
+  if(localStorage.getItem('mf_key'))
+    document.getElementById('apiKeyInp').value=localStorage.getItem('mf_key');
 };
 </script>
 </body>
