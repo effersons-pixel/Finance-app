@@ -158,6 +158,65 @@ textarea{resize:vertical;min-height:60px}
 .bud-head select{font-size:13px;padding:8px 12px}
 .bud-hint{font-size:12px;color:var(--muted)}
 
+/* ══ WEALTH / LOANS / INVESTMENTS ══════════════════ */
+.nw-hero{background:linear-gradient(135deg,var(--ink) 0%,#1e2d40 100%);border-radius:16px;padding:26px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden}
+.nw-hero::before{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(200,129,58,.12)}
+.nw-hero-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.45);margin-bottom:6px}
+.nw-hero-val{font-family:'Playfair Display',serif;font-size:36px;color:#fff;line-height:1;margin-bottom:4px}
+.nw-hero-sub{font-size:12px;color:rgba(255,255,255,.45)}
+.nw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:20px}
+.nw-card{background:var(--card);border-radius:13px;padding:16px 18px;border:1px solid var(--border);box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.nw-card-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:5px}
+.nw-card-val{font-family:'Playfair Display',serif;font-size:20px;line-height:1;margin-bottom:3px}
+.nw-card-sub{font-size:11px;color:var(--muted)}
+.view-toggle{display:flex;gap:0;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;background:var(--soft);margin-bottom:20px;width:fit-content}
+.vt-btn{padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;font-family:'Outfit',sans-serif;transition:all .15s;color:var(--muted)}
+.vt-btn.active{background:var(--ink);color:#fff}
+.loan-card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.loan-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.loan-name{font-size:15px;font-weight:600}
+.loan-type-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.7px}
+.loan-amounts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.loan-amt{display:flex;flex-direction:column;gap:2px}
+.loan-amt-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:600}
+.loan-amt-val{font-size:15px;font-weight:700}
+.loan-progress{background:var(--soft);border-radius:99px;height:8px;margin-bottom:6px;overflow:hidden}
+.loan-progress-fill{height:100%;border-radius:99px;background:var(--green);transition:width .4s ease}
+.loan-progress-fill.warn{background:var(--gold)}.loan-progress-fill.danger{background:var(--red)}
+.loan-meta{display:flex;gap:16px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.loan-actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.pay-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.pay-item:last-child{border:none}
+.add-loan-form,.add-inv-form{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.pay-form,.dep-form{background:var(--soft);border-radius:9px;padding:12px 14px;margin-top:10px;display:none}
+.pay-form.open,.dep-form.open{display:block}
+.pay-form-row,.dep-form-row{display:flex;gap:9px;align-items:flex-end;flex-wrap:wrap}
+.pay-form-row .fg,.dep-form-row .fg{flex:1;min-width:100px}
+.inv-card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.inv-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.inv-name{font-size:15px;font-weight:600}.inv-institution{font-size:12px;color:var(--muted);margin-top:1px}
+.inv-amounts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.inv-amt{display:flex;flex-direction:column;gap:2px}
+.inv-amt-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:600}
+.inv-amt-val{font-size:15px;font-weight:700}
+.inv-log-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.inv-log-item:last-child{border:none}
+.inv-actions{display:flex;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.pulse-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.pulse-card{background:var(--card);border-radius:12px;padding:14px 16px;border:1px solid var(--border);box-shadow:0 1px 8px rgba(0,0,0,.04);text-align:center}
+.pulse-val{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:2px}
+.pulse-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.week-bars{display:flex;gap:5px;align-items:flex-end;height:60px;margin:10px 0 5px}
+.week-bar{flex:1;border-radius:4px 4px 0 0;min-height:2px;transition:height .3s ease}
+.week-day{font-size:9px;color:var(--muted);text-align:center;margin-top:3px}
+@media(max-width:700px){
+  .nw-grid{grid-template-columns:1fr 1fr}
+  .nw-hero-val{font-size:26px}
+  .loan-amounts,.inv-amounts{grid-template-columns:1fr 1fr}
+  .pulse-row{grid-template-columns:1fr 1fr}
+  .view-toggle{width:100%}.vt-btn{flex:1;text-align:center}
+}
+
 /* DRIVE */
 .setup-card{max-width:580px;background:var(--card);border-radius:13px;border:1px solid var(--border);padding:26px;box-shadow:0 1px 10px rgba(0,0,0,.04)}
 .alert{padding:11px 14px;border-radius:8px;font-size:12.5px;display:flex;align-items:flex-start;gap:8px;margin-bottom:16px}
@@ -302,6 +361,10 @@ code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monosp
     <div class="nav-item" onclick="go('add')"><span class="nav-icon">＋</span>Add Transaction</div>
     <div class="nav-item" onclick="go('ledger')"><span class="nav-icon">≡</span>Ledger<span class="nav-badge" id="nb">0</span></div>
     <div class="nav-item" onclick="go('budget')"><span class="nav-icon">◎</span>Budget</div>
+    <div class="nav-sec">Wealth</div>
+    <div class="nav-item" onclick="go('wealth')"><span class="nav-icon">🌐</span>Big Picture</div>
+    <div class="nav-item" onclick="go('loans')"><span class="nav-icon">🏦</span>Loans</div>
+    <div class="nav-item" onclick="go('invest')"><span class="nav-icon">📈</span>Investments</div>
     <div class="nav-sec">Children</div>
     <div class="nav-item nav-kids" onclick="go('kids')"><span class="nav-icon">👨‍👩‍👧‍👦</span>Kids Tracker</div>
     <div class="nav-sec">System</div>
@@ -486,6 +549,157 @@ code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monosp
       </div>
     </div>
 
+    <!-- WEALTH OVERVIEW (Big + Small Picture) -->
+    <div class="panel" id="panel-wealth">
+      <div class="view-toggle">
+        <button class="vt-btn active" onclick="setWealthView('big',this)">🌐 Big Picture</button>
+        <button class="vt-btn" onclick="setWealthView('month',this)">📅 Monthly</button>
+        <button class="vt-btn" onclick="setWealthView('week',this)">📆 This Week</button>
+        <button class="vt-btn" onclick="setWealthView('today',this)">🕐 Today</button>
+      </div>
+
+      <!-- BIG PICTURE VIEW -->
+      <div id="wv-big">
+        <div class="nw-hero">
+          <div class="nw-hero-lbl">Net Worth — Assets minus Liabilities</div>
+          <div class="nw-hero-val" id="nwHeroVal">KSh 0</div>
+          <div class="nw-hero-sub" id="nwHeroSub">Calculating…</div>
+        </div>
+        <div class="nw-grid" id="nwGrid"></div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-title">Assets Breakdown</div>
+            <div class="cat-list" id="nwAssetBars"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Liabilities Breakdown</div>
+            <div class="cat-list" id="nwLiabBars"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">12-Month Savings Trend</div>
+          <div class="bar-chart" id="nwTrendChart"></div>
+          <div class="leg"><div class="lg"><div class="ld" style="background:var(--green)"></div>Income</div><div class="lg"><div class="ld" style="background:var(--red)"></div>Expenses</div><div class="lg"><div class="ld" style="background:var(--gold)"></div>Savings Rate</div></div>
+        </div>
+      </div>
+
+      <!-- MONTHLY VIEW -->
+      <div id="wv-month" style="display:none">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+          <select id="wMonthSel" onchange="renderWealthMonth()" style="font-size:13px;padding:8px 12px;min-width:140px"><option value="">This month</option></select>
+          <span style="font-size:12px;color:var(--muted)">Detailed monthly breakdown</span>
+        </div>
+        <div class="pulse-row" id="monthPulse"></div>
+        <div class="two-col">
+          <div class="card"><div class="card-title">Income by Source</div><div class="cat-list" id="mIncomeBreak"></div></div>
+          <div class="card"><div class="card-title">Expenses by Category</div><div class="cat-list" id="mExpBreak"></div></div>
+        </div>
+        <div class="card"><div class="card-title">Day-by-Day Spending</div><div class="bar-chart" id="mDayChart"></div></div>
+      </div>
+
+      <!-- WEEKLY VIEW -->
+      <div id="wv-week" style="display:none">
+        <div class="pulse-row" id="weekPulse"></div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">This Week — Daily Spend</div>
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px" id="weekDayBars"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">This Week's Transactions</div>
+          <div class="tbl-wrap" style="box-shadow:none;border:none"><table><thead><tr><th>Date</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th></tr></thead><tbody id="weekTxTbody"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- TODAY VIEW -->
+      <div id="wv-today" style="display:none">
+        <div class="pulse-row" id="todayPulse"></div>
+        <div class="card">
+          <div class="card-title">Today's Transactions</div>
+          <div class="tbl-wrap" style="box-shadow:none;border:none"><table><thead><tr><th>Type</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th></tr></thead><tbody id="todayTxTbody"></tbody></table></div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Quick Add for Today</div>
+          <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">Tap <strong>+ Add</strong> in the nav to log a transaction — it will appear here instantly.</div>
+          <button class="btn btn-primary btn-sm" onclick="go('add')">➕ Add Transaction</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOANS TRACKER -->
+    <div class="panel" id="panel-loans">
+      <!-- summary row -->
+      <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px" id="loanStats"></div>
+
+      <!-- add loan form -->
+      <div class="add-loan-form">
+        <div class="card-title" style="margin-bottom:12px">➕ Add / Edit Loan</div>
+        <div class="form-grid">
+          <div class="fg"><label>Loan Name *</label><input type="text" id="lName" placeholder="e.g. Kimisitu SACCO Loan"></div>
+          <div class="fg"><label>Lender / Type</label>
+            <select id="lType">
+              <option value="">Select…</option>
+              <option>SACCO Loan</option><option>Bank Loan</option>
+              <option>Mortgage</option><option>Car Loan</option>
+              <option>Credit Card</option><option>Personal Loan</option>
+              <option>Family / Friend</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>Original Amount (KSh) *</label><input type="number" id="lOriginal" placeholder="0" inputmode="decimal"></div>
+          <div class="fg"><label>Current Balance (KSh) *</label><input type="number" id="lBalance" placeholder="0" inputmode="decimal"></div>
+          <div class="fg"><label>Monthly Payment (KSh)</label><input type="number" id="lMonthly" placeholder="0" inputmode="decimal"></div>
+          <div class="fg"><label>Interest Rate (% p.a.)</label><input type="number" id="lRate" placeholder="0" inputmode="decimal" step="0.1"></div>
+          <div class="fg"><label>Start Date</label><input type="date" id="lStart"></div>
+          <div class="fg"><label>Due Date / End Date</label><input type="date" id="lDue"></div>
+          <div class="fg full"><label>Notes</label><input type="text" id="lNotes" placeholder="e.g. From Kimisitu SACCO, car loan ref #123"></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:9px">
+          <button class="btn btn-primary" onclick="saveLoan()">Save Loan</button>
+          <button class="btn btn-ghost" onclick="clearLoanForm()">Clear</button>
+        </div>
+      </div>
+
+      <!-- loan cards rendered here -->
+      <div id="loanCards"></div>
+    </div>
+
+    <!-- INVESTMENTS TRACKER -->
+    <div class="panel" id="panel-invest">
+      <!-- summary -->
+      <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px" id="invStats"></div>
+
+      <!-- add investment form -->
+      <div class="add-inv-form">
+        <div class="card-title" style="margin-bottom:12px">➕ Add / Edit Investment Account</div>
+        <div class="form-grid">
+          <div class="fg"><label>Account Name *</label><input type="text" id="iName" placeholder="e.g. Kimisitu Savings"></div>
+          <div class="fg"><label>Type *</label>
+            <select id="iType">
+              <option value="">Select…</option>
+              <option>SACCO Savings</option><option>SACCO Shares</option>
+              <option>Money Market Fund</option><option>Bonds</option>
+              <option>Stocks / Shares</option><option>Fixed Deposit</option>
+              <option>T-Bills</option><option>Unit Trust</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>Institution</label><input type="text" id="iInstitution" placeholder="e.g. Kimisitu SACCO, Britam"></div>
+          <div class="fg"><label>Current Balance (KSh) *</label><input type="number" id="iBalance" placeholder="0" inputmode="decimal"></div>
+          <div class="fg"><label>Total Deposited (KSh)</label><input type="number" id="iDeposited" placeholder="0" inputmode="decimal"></div>
+          <div class="fg"><label>Expected Return (% p.a.)</label><input type="number" id="iRate" placeholder="0" inputmode="decimal" step="0.1"></div>
+          <div class="fg"><label>Account Number / Ref</label><input type="text" id="iRef" placeholder="Optional"></div>
+          <div class="fg"><label>Notes</label><input type="text" id="iNotes" placeholder="e.g. Britam MMF, auto-debit 5k/month"></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:9px">
+          <button class="btn btn-primary" onclick="saveInv()">Save Account</button>
+          <button class="btn btn-ghost" onclick="clearInvForm()">Clear</button>
+        </div>
+      </div>
+
+      <!-- investment cards rendered here -->
+      <div id="invCards"></div>
+    </div>
+
     <!-- GOOGLE DRIVE -->
     <div class="panel" id="panel-drive">
       <div class="setup-card">
@@ -513,9 +727,9 @@ code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monosp
   <div class="bn-items">
     <div class="bn-item active" id="bn-dashboard" onclick="go('dashboard')"><div class="bn-icon">◈</div><div>Home</div></div>
     <div class="bn-item" id="bn-add" onclick="go('add')"><div class="bn-icon">＋</div><div>Add</div></div>
-    <div class="bn-item" id="bn-ledger" onclick="go('ledger')"><div class="bn-icon">≡</div><div>Ledger</div><div class="bn-badge" id="bnb">0</div></div>
+    <div class="bn-item" id="bn-wealth" onclick="go('wealth')"><div class="bn-icon">🌐</div><div>Wealth</div></div>
     <div class="bn-item kids-nav" id="bn-kids" onclick="go('kids')"><div class="bn-icon">👨‍👩‍👧</div><div>Kids</div></div>
-    <div class="bn-item" id="bn-drive" onclick="go('drive')"><div class="bn-icon">☁</div><div>Drive</div></div>
+    <div class="bn-item" id="bn-ledger" onclick="go('ledger')"><div class="bn-icon">≡</div><div>Ledger</div><div class="bn-badge" id="bnb">0</div></div>
   </div>
 </nav>
 
@@ -535,10 +749,21 @@ const SEED=[{date:'2025-09-02',type:'Income',cat:'Salary',tag:'',desc:'',amt:205
 let txs=JSON.parse(localStorage.getItem('mf_txs')||'null')||SEED;
 let budgets=JSON.parse(localStorage.getItem('mf_budgets')||'{}');
 let kidsData=JSON.parse(localStorage.getItem('mf_kids')||'null')||[{name:'Child 1',expenses:[],goal:{name:'',target:0,saved:0},birthdays:[],notes:[]},{name:'Child 2',expenses:[],goal:{name:'',target:0,saved:0},birthdays:[],notes:[]}];
+let loans=JSON.parse(localStorage.getItem('mf_loans')||'null')||[
+  {id:'l1',name:'Kimisitu SACCO Loan',type:'SACCO Loan',original:0,balance:0,monthly:0,rate:0,start:'',due:'',notes:'From Kimisitu SACCO',payments:[]},
+];
+let investments=JSON.parse(localStorage.getItem('mf_invest')||'null')||[
+  {id:'i1',name:'Kimisitu Savings',type:'SACCO Savings',institution:'Kimisitu SACCO',balance:0,deposited:0,rate:0,ref:'',notes:'',logs:[]},
+  {id:'i2',name:'Kimisitu Shares',type:'SACCO Shares',institution:'Kimisitu SACCO',balance:0,deposited:0,rate:0,ref:'',notes:'',logs:[]},
+  {id:'i3',name:'Britam Money Market',type:'Money Market Fund',institution:'Britam',balance:0,deposited:0,rate:9.5,ref:'',notes:'',logs:[]},
+  {id:'i4',name:'Britam Bonds',type:'Bonds',institution:'Britam',balance:0,deposited:0,rate:12,ref:'',notes:'',logs:[]},
+];
 let selMonth=null,delIdx=null,activeKid=0,gReady=false,gFileId=null;
 const save=()=>localStorage.setItem('mf_txs',JSON.stringify(txs));
 const saveBudgets=()=>localStorage.setItem('mf_budgets',JSON.stringify(budgets));
 const saveKids=()=>localStorage.setItem('mf_kids',JSON.stringify(kidsData));
+const saveLoans=()=>localStorage.setItem('mf_loans',JSON.stringify(loans));
+const saveInvests=()=>localStorage.setItem('mf_invest',JSON.stringify(investments));
 const kid=()=>kidsData[activeKid];
 const ksh=n=>'KSh '+Math.abs(n).toLocaleString('en-KE',{maximumFractionDigits:0});
 const fmtD=d=>{if(!d)return'';return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})};
@@ -548,7 +773,7 @@ const runBal=()=>{let b=0;return txs.map(t=>{b+=t.type==='Income'?t.amt:-t.amt;r
 const getFilt=()=>selMonth?txs.filter(t=>mk(t.date)===selMonth):txs;
 function toast(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.className='toast',3000)}
 
-const NAV_ORDER=['dashboard','add','ledger','budget','kids','drive'];
+const NAV_ORDER=['dashboard','add','ledger','budget','wealth','loans','invest','kids','drive'];
 function go(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
@@ -564,6 +789,9 @@ function go(id){
   if(id==='add')initAdd();
   if(id==='ledger'){fillLedgerFilters();renderLedger();}
   if(id==='budget'){fillBudgetMonths();renderBudget();}
+  if(id==='wealth')renderWealth();
+  if(id==='loans')renderLoans();
+  if(id==='invest')renderInvest();
   if(id==='kids')renderKids();
 }
 
@@ -742,8 +970,490 @@ function renderNotes(){
 }
 function delNote(i){kid().notes.splice(i,1);saveKids();renderNotes();toast('Removed');}
 
-function exportJSON(){const blob=new Blob([JSON.stringify({txs,budgets,kidsData,at:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marilu_finance_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Exported ✓');}
-function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.txs){txs=d.txs;save();}if(d.budgets){budgets=d.budgets;saveBudgets();}if(d.kidsData){kidsData=d.kidsData;saveKids();}toast('Imported '+txs.length+' transactions ✓');renderDashboard();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;}catch(err){toast('Import failed: '+err.message,'err');}};r.readAsText(f);}
+function exportJSON(){const blob=new Blob([JSON.stringify({txs,budgets,kidsData,loans,investments,at:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marilu_finance_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Exported ✓');}
+function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.txs){txs=d.txs;save();}if(d.budgets){budgets=d.budgets;saveBudgets();}if(d.kidsData){kidsData=d.kidsData;saveKids();}if(d.loans){loans=d.loans;saveLoans();}if(d.investments){investments=d.investments;saveInvests();}toast('Imported '+txs.length+' transactions ✓');renderDashboard();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;}catch(err){toast('Import failed: '+err.message,'err');}};r.readAsText(f);}
+
+/* ════ WEALTH OVERVIEW ════ */
+let wealthView = 'big';
+
+function setWealthView(view, btn) {
+  wealthView = view;
+  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['big','month','week','today'].forEach(v => {
+    document.getElementById('wv-'+v).style.display = v===view ? '' : 'none';
+  });
+  if(view==='big') renderWealthBig();
+  if(view==='month') { fillWealthMonths(); renderWealthMonth(); }
+  if(view==='week') renderWealthWeek();
+  if(view==='today') renderWealthToday();
+}
+
+function renderWealth() {
+  setWealthView('big', document.querySelectorAll('.vt-btn')[0]);
+}
+
+function renderWealthBig() {
+  const totalInv = investments.reduce((s,i)=>s+i.balance,0);
+  const totalLoans = loans.reduce((s,l)=>s+l.balance,0);
+  const totalSaved = txs.filter(t=>t.type==='Savings').reduce((s,t)=>s+t.amt,0);
+  const cashBalance = (() => { const b=runBal(); return b.length?b[b.length-1]:0; })();
+  const totalAssets = totalInv + Math.max(0,cashBalance);
+  const netWorth = totalAssets - totalLoans;
+  const nwEl = document.getElementById('nwHeroVal');
+  nwEl.textContent = ksh(netWorth);
+  nwEl.style.color = netWorth>=0?'#fff':'#fca5a5';
+  document.getElementById('nwHeroSub').textContent =
+    `Assets: ${ksh(totalAssets)}  ·  Liabilities: ${ksh(totalLoans)}`;
+
+  document.getElementById('nwGrid').innerHTML = `
+    <div class="nw-card">
+      <div class="nw-card-lbl">Investments</div>
+      <div class="nw-card-val pos">${ksh(totalInv)}</div>
+      <div class="nw-card-sub">${investments.length} account${investments.length!==1?'s':''}</div>
+    </div>
+    <div class="nw-card">
+      <div class="nw-card-lbl">Cash Balance</div>
+      <div class="nw-card-val gold">${ksh(cashBalance)}</div>
+      <div class="nw-card-sub">Running ledger</div>
+    </div>
+    <div class="nw-card">
+      <div class="nw-card-lbl">Total Debt</div>
+      <div class="nw-card-val neg">${ksh(totalLoans)}</div>
+      <div class="nw-card-sub">${loans.filter(l=>l.balance>0).length} active loan${loans.filter(l=>l.balance>0).length!==1?'s':''}</div>
+    </div>`;
+
+  // Asset bars
+  const assetItems = [
+    ...investments.map(i=>({name:i.name,val:i.balance,col:'var(--green)'})),
+    {name:'Cash (Ledger)',val:Math.max(0,cashBalance),col:'var(--gold)'},
+  ].filter(a=>a.val>0).sort((a,b)=>b.val-a.val);
+  const assetMax = Math.max(...assetItems.map(a=>a.val),1);
+  document.getElementById('nwAssetBars').innerHTML = assetItems.length
+    ? assetItems.map(a=>`<div class="cat-r">
+        <div class="cat-n" title="${a.name}">${a.name}</div>
+        <div class="cat-tr"><div class="cat-fl" style="width:${Math.round(a.val/assetMax*100)}%;background:${a.col}"></div></div>
+        <div class="cat-a">${ksh(a.val)}</div>
+      </div>`).join('')
+    : '<div style="color:var(--muted);font-size:13px;padding:8px 0">Add investments to see assets</div>';
+
+  // Liability bars
+  const liabItems = loans.filter(l=>l.balance>0).sort((a,b)=>b.balance-a.balance);
+  const liabMax = Math.max(...liabItems.map(l=>l.balance),1);
+  document.getElementById('nwLiabBars').innerHTML = liabItems.length
+    ? liabItems.map(l=>`<div class="cat-r">
+        <div class="cat-n" title="${l.name}">${l.name}</div>
+        <div class="cat-tr"><div class="cat-fl" style="width:${Math.round(l.balance/liabMax*100)}%;background:var(--red)"></div></div>
+        <div class="cat-a">${ksh(l.balance)}</div>
+      </div>`).join('')
+    : '<div style="color:var(--muted);font-size:13px;padding:8px 0">No active loans</div>';
+
+  // Trend chart (last 12 months income vs expenses)
+  const months = {};
+  txs.forEach(t => {
+    const m=mk(t.date); if(!months[m]) months[m]={i:0,e:0};
+    if(t.type==='Income') months[m].i+=t.amt;
+    else if(t.type==='Expense') months[m].e+=t.amt;
+  });
+  const sorted = Object.keys(months).sort().slice(-12);
+  const mx = Math.max(...sorted.flatMap(m=>[months[m].i,months[m].e]),1);
+  document.getElementById('nwTrendChart').innerHTML = sorted.length
+    ? sorted.map(m=>{
+        const lbl=mlbl(m).split(' ')[0];
+        const ih=Math.max(3,Math.round(months[m].i/mx*92));
+        const eh=Math.max(3,Math.round(months[m].e/mx*92));
+        return `<div class="bg"><div class="bp"><div class="b gi" style="height:${ih}px" title="Income: ${ksh(months[m].i)}"></div><div class="b ge" style="height:${eh}px" title="Exp: ${ksh(months[m].e)}"></div></div><div class="bl">${lbl}</div></div>`;
+      }).join('')
+    : '<div style="color:var(--muted);font-size:13px;padding-top:30px">No data yet</div>';
+}
+
+function fillWealthMonths() {
+  const ms=[...new Set(txs.map(t=>mk(t.date)).filter(Boolean))].sort().reverse();
+  const sel=document.getElementById('wMonthSel');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">This month</option>'+ms.map(m=>`<option value="${m}">${mlbl(m)}</option>`).join('');
+  if(cur) sel.value=cur;
+}
+
+function renderWealthMonth() {
+  const cur = document.getElementById('wMonthSel').value;
+  const thisM = cur || mk(new Date().toISOString().slice(0,10));
+  const ft = txs.filter(t=>mk(t.date)===thisM);
+  const inc = ft.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amt,0);
+  const exp = ft.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amt,0);
+  const sav = ft.filter(t=>t.type==='Savings').reduce((s,t)=>s+t.amt,0);
+  const net = inc-exp;
+  document.getElementById('monthPulse').innerHTML = `
+    <div class="pulse-card"><div class="pulse-lbl">Income</div><div class="pulse-val pos">${ksh(inc)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Expenses</div><div class="pulse-val neg">${ksh(exp)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Net Flow</div><div class="pulse-val ${net>=0?'pos':'neg'}">${net<0?'-':''}${ksh(net)}</div></div>`;
+
+  // income by source
+  const incSrc={};ft.filter(t=>t.type==='Income').forEach(t=>{incSrc[t.cat]=(incSrc[t.cat]||0)+t.amt;});
+  const incArr=Object.entries(incSrc).sort((a,b)=>b[1]-a[1]);
+  const incMax=incArr[0]?.[1]||1;
+  document.getElementById('mIncomeBreak').innerHTML = incArr.length
+    ? incArr.map(([c,a])=>`<div class="cat-r"><div class="cat-n">${c}</div><div class="cat-tr"><div class="cat-fl" style="width:${Math.round(a/incMax*100)}%;background:var(--green)"></div></div><div class="cat-a">${ksh(a)}</div></div>`).join('')
+    : '<div style="color:var(--muted);font-size:13px">No income this month</div>';
+
+  // expenses by category
+  const expCat={};ft.filter(t=>t.type==='Expense').forEach(t=>{expCat[t.cat]=(expCat[t.cat]||0)+t.amt;});
+  const expArr=Object.entries(expCat).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const expMax=expArr[0]?.[1]||1;
+  document.getElementById('mExpBreak').innerHTML = expArr.length
+    ? expArr.map(([c,a])=>`<div class="cat-r"><div class="cat-n">${c}</div><div class="cat-tr"><div class="cat-fl" style="width:${Math.round(a/expMax*100)}%"></div></div><div class="cat-a">${ksh(a)}</div></div>`).join('')
+    : '<div style="color:var(--muted);font-size:13px">No expenses this month</div>';
+
+  // day by day
+  const days={};ft.forEach(t=>{const d=t.date;if(!days[d])days[d]={i:0,e:0};if(t.type==='Income')days[d].i+=t.amt;else if(t.type==='Expense')days[d].e+=t.amt;});
+  const daysSorted=Object.keys(days).sort();
+  const dayMax=Math.max(...daysSorted.flatMap(d=>[days[d].i,days[d].e]),1);
+  document.getElementById('mDayChart').innerHTML = daysSorted.length
+    ? daysSorted.map(d=>{
+        const lbl=new Date(d+'T00:00:00').getDate();
+        const ih=Math.max(3,Math.round(days[d].i/dayMax*92));
+        const eh=Math.max(3,Math.round(days[d].e/dayMax*92));
+        return `<div class="bg"><div class="bp"><div class="b gi" style="height:${ih}px"></div><div class="b ge" style="height:${eh}px"></div></div><div class="bl">${lbl}</div></div>`;
+      }).join('')
+    : '<div style="color:var(--muted);font-size:13px;padding-top:30px">No data for this month</div>';
+}
+
+function renderWealthWeek() {
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0=Sun
+  const monday = new Date(today); monday.setDate(today.getDate() - ((dayOfWeek+6)%7));
+  const days = Array.from({length:7},(_,i)=>{ const d=new Date(monday); d.setDate(monday.getDate()+i); return d.toISOString().slice(0,10); });
+  const DNAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const todayStr = today.toISOString().slice(0,10);
+
+  const weekInc = txs.filter(t=>days.includes(t.date)&&t.type==='Income').reduce((s,t)=>s+t.amt,0);
+  const weekExp = txs.filter(t=>days.includes(t.date)&&t.type==='Expense').reduce((s,t)=>s+t.amt,0);
+  const weekNet = weekInc-weekExp;
+
+  document.getElementById('weekPulse').innerHTML=`
+    <div class="pulse-card"><div class="pulse-lbl">Week Income</div><div class="pulse-val pos">${ksh(weekInc)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Week Expenses</div><div class="pulse-val neg">${ksh(weekExp)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Week Net</div><div class="pulse-val ${weekNet>=0?'pos':'neg'}">${weekNet<0?'-':''}${ksh(weekNet)}</div></div>`;
+
+  const dayTotals = days.map(d=>txs.filter(t=>t.date===d&&t.type==='Expense').reduce((s,t)=>s+t.amt,0));
+  const mx = Math.max(...dayTotals,1);
+  document.getElementById('weekDayBars').innerHTML = `
+    <div style="display:flex;gap:8px;align-items:flex-end;height:80px;margin-bottom:8px">
+      ${days.map((d,i)=>{
+        const h=Math.max(3,Math.round(dayTotals[i]/mx*72));
+        const isToday=d===todayStr;
+        return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
+          <div style="width:100%;max-width:36px;height:${h}px;background:${isToday?'var(--gold)':'var(--red)'};border-radius:4px 4px 0 0;opacity:${h<=3?'.3':'1'}" title="${DNAMES[i]}: ${ksh(dayTotals[i])}"></div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="display:flex;gap:8px">${days.map((d,i)=>{const isToday=d===todayStr;return`<div style="flex:1;text-align:center;font-size:10px;color:${isToday?'var(--gold)':'var(--muted)'};font-weight:${isToday?'700':'400'}">${DNAMES[i]}</div>`;}).join('')}</div>`;
+
+  const weekTxs = txs.filter(t=>days.includes(t.date)).sort((a,b)=>b.date.localeCompare(a.date));
+  document.getElementById('weekTxTbody').innerHTML = weekTxs.length
+    ? weekTxs.map(t=>`<tr><td style="white-space:nowrap">${fmtD(t.date)}</td><td>${t.cat}</td><td style="color:var(--muted)">${t.desc||'—'}</td><td class="${t.type==='Income'?'amt-p':'amt-n'}" style="text-align:right">${t.type==='Income'?'+':'-'} ${ksh(t.amt)}</td></tr>`).join('')
+    : `<tr><td colspan="4" class="empty-r">No transactions this week</td></tr>`;
+}
+
+function renderWealthToday() {
+  const todayStr = new Date().toISOString().slice(0,10);
+  const todayTxs = txs.filter(t=>t.date===todayStr);
+  const todayInc = todayTxs.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amt,0);
+  const todayExp = todayTxs.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amt,0);
+  const bals=runBal(); const bal=bals.length?bals[bals.length-1]:0;
+  document.getElementById('todayPulse').innerHTML=`
+    <div class="pulse-card"><div class="pulse-lbl">Today In</div><div class="pulse-val pos">${ksh(todayInc)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Today Out</div><div class="pulse-val neg">${ksh(todayExp)}</div></div>
+    <div class="pulse-card"><div class="pulse-lbl">Balance</div><div class="pulse-val gold">${ksh(bal)}</div></div>`;
+  document.getElementById('todayTxTbody').innerHTML = todayTxs.length
+    ? todayTxs.map(t=>`<tr><td><span class="badge b-${t.type.toLowerCase()}">${t.type}</span></td><td>${t.cat}</td><td style="color:var(--muted)">${t.desc||'—'}</td><td class="${t.type==='Income'?'amt-p':'amt-n'}" style="text-align:right">${t.type==='Income'?'+':'-'} ${ksh(t.amt)}</td></tr>`).join('')
+    : `<tr><td colspan="4" class="empty-r">Nothing logged today yet</td></tr>`;
+}
+
+/* ════ LOANS ════ */
+const LOAN_COLORS = {
+  'SACCO Loan':     {bg:'#e0f2fe',c:'#0369a1'},
+  'Bank Loan':      {bg:'#ede9fe',c:'#6d28d9'},
+  'Mortgage':       {bg:'#fef3c7',c:'#92400e'},
+  'Car Loan':       {bg:'#d1fae5',c:'#065f46'},
+  'Credit Card':    {bg:'#fee2e2',c:'#991b1b'},
+  'Personal Loan':  {bg:'#fce7f3',c:'#9d174d'},
+  'Family / Friend':{bg:'#f0fdf4',c:'#166534'},
+  'Other':          {bg:'#f5f3ef',c:'#78716c'},
+};
+
+function renderLoans() {
+  const totalDebt = loans.reduce((s,l)=>s+l.balance,0);
+  const totalOriginal = loans.reduce((s,l)=>s+l.original,0);
+  const totalPaid = loans.reduce((s,l)=>s+l.payments.reduce((ps,p)=>ps+p.amt,0),0);
+  document.getElementById('loanStats').innerHTML=`
+    <div class="stat"><div class="stat-lbl">Total Remaining</div><div class="stat-val neg">${ksh(totalDebt)}</div><div class="stat-sub">${loans.filter(l=>l.balance>0).length} active loans</div></div>
+    <div class="stat"><div class="stat-lbl">Total Paid</div><div class="stat-val pos">${ksh(totalPaid)}</div><div class="stat-sub">All time payments</div></div>
+    <div class="stat"><div class="stat-lbl">Original Total</div><div class="stat-val gold">${ksh(totalOriginal)}</div><div class="stat-sub">All loans combined</div></div>`;
+
+  document.getElementById('loanCards').innerHTML = loans.length
+    ? loans.map((l,i)=>{
+        const col = LOAN_COLORS[l.type] || LOAN_COLORS['Other'];
+        const pct = l.original>0 ? Math.round((1-l.balance/l.original)*100) : 0;
+        const fillClass = pct<30?'danger':pct<70?'warn':'';
+        const monthsLeft = l.monthly>0&&l.balance>0 ? Math.ceil(l.balance/l.monthly) : null;
+        const totalPaid = l.payments.reduce((s,p)=>s+p.amt,0);
+        return `<div class="loan-card">
+          <div class="loan-header">
+            <div>
+              <div class="loan-name">${l.name}</div>
+              ${l.notes?`<div style="font-size:11.5px;color:var(--muted);margin-top:2px">${l.notes}</div>`:''}
+            </div>
+            <span class="loan-type-badge" style="background:${col.bg};color:${col.c}">${l.type||'Loan'}</span>
+          </div>
+          <div class="loan-amounts">
+            <div class="loan-amt">
+              <div class="loan-amt-lbl">Remaining</div>
+              <div class="loan-amt-val neg">${ksh(l.balance)}</div>
+            </div>
+            <div class="loan-amt">
+              <div class="loan-amt-lbl">Original</div>
+              <div class="loan-amt-val">${ksh(l.original)}</div>
+            </div>
+            <div class="loan-amt">
+              <div class="loan-amt-lbl">Monthly</div>
+              <div class="loan-amt-val">${l.monthly?ksh(l.monthly):'—'}</div>
+            </div>
+          </div>
+          <div class="loan-progress"><div class="loan-progress-fill ${fillClass}" style="width:${pct}%"></div></div>
+          <div class="loan-meta">
+            <span>${pct}% paid off</span>
+            ${l.rate?`<span>${l.rate}% p.a.</span>`:''}
+            ${monthsLeft?`<span>~${monthsLeft} months left</span>`:''}
+            ${l.due?`<span>Due: ${fmtD(l.due)}</span>`:''}
+            ${totalPaid?`<span>Paid: ${ksh(totalPaid)}</span>`:''}
+          </div>
+          <div class="loan-actions">
+            <button class="btn btn-primary btn-sm" onclick="togglePayForm(${i})">+ Record Payment</button>
+            <button class="btn btn-ghost btn-sm" onclick="editLoan(${i})">Edit</button>
+            <button class="btn btn-sm" style="background:var(--red-lt);color:var(--red);border:none" onclick="deleteLoan(${i})">Delete</button>
+          </div>
+          <div class="pay-form" id="payform-${i}">
+            <div class="pay-form-row">
+              <div class="fg"><label>Payment Date</label><input type="date" id="pd-${i}" value="${new Date().toISOString().slice(0,10)}"></div>
+              <div class="fg"><label>Amount (KSh)</label><input type="number" id="pa-${i}" placeholder="0" inputmode="decimal"></div>
+              <div class="fg"><label>Note</label><input type="text" id="pn-${i}" placeholder="e.g. Monthly payment"></div>
+              <div style="display:flex;align-items:flex-end"><button class="btn btn-primary btn-sm" onclick="recordPayment(${i})">Save</button></div>
+            </div>
+          </div>
+          ${l.payments.length?`<div class="loan-payments"><div style="font-size:10.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">Payment History</div>${l.payments.slice(-5).reverse().map(p=>`<div class="pay-item"><span style="color:var(--muted)">${fmtD(p.date)} ${p.note?'— '+p.note:''}</span><span class="amt-p">${ksh(p.amt)}</span></div>`).join('')}</div>`:''}
+        </div>`;
+      }).join('')
+    : '<div class="card" style="text-align:center;padding:32px;color:var(--muted)">No loans added yet. Use the form above to add your first loan.</div>';
+}
+
+function togglePayForm(i) {
+  const f = document.getElementById('payform-'+i);
+  f.classList.toggle('open');
+}
+
+function recordPayment(i) {
+  const date = document.getElementById('pd-'+i).value;
+  const amt  = parseFloat(document.getElementById('pa-'+i).value);
+  const note = document.getElementById('pn-'+i).value.trim();
+  if(!amt){ toast('Enter payment amount','err'); return; }
+  loans[i].payments.push({date,amt,note});
+  loans[i].balance = Math.max(0, loans[i].balance - amt);
+  saveLoans(); renderLoans();
+  toast(`Payment of ${ksh(amt)} recorded ✓`);
+}
+
+function editLoan(i) {
+  const l = loans[i];
+  document.getElementById('lName').value = l.name;
+  document.getElementById('lType').value = l.type;
+  document.getElementById('lOriginal').value = l.original||'';
+  document.getElementById('lBalance').value = l.balance||'';
+  document.getElementById('lMonthly').value = l.monthly||'';
+  document.getElementById('lRate').value = l.rate||'';
+  document.getElementById('lStart').value = l.start||'';
+  document.getElementById('lDue').value = l.due||'';
+  document.getElementById('lNotes').value = l.notes||'';
+  document.getElementById('lName').dataset.editIdx = i;
+  document.getElementById('lName').scrollIntoView({behavior:'smooth',block:'center'});
+  toast('Loan loaded for editing');
+}
+
+function saveLoan() {
+  const name = document.getElementById('lName').value.trim();
+  const type = document.getElementById('lType').value;
+  const original = parseFloat(document.getElementById('lOriginal').value)||0;
+  const balance = parseFloat(document.getElementById('lBalance').value)||0;
+  if(!name){ toast('Enter a loan name','err'); return; }
+  const idx = document.getElementById('lName').dataset.editIdx;
+  const entry = {
+    id: idx!==undefined ? loans[+idx].id : 'l'+Date.now(),
+    name, type, original, balance,
+    monthly: parseFloat(document.getElementById('lMonthly').value)||0,
+    rate: parseFloat(document.getElementById('lRate').value)||0,
+    start: document.getElementById('lStart').value,
+    due: document.getElementById('lDue').value,
+    notes: document.getElementById('lNotes').value.trim(),
+    payments: idx!==undefined ? loans[+idx].payments : [],
+  };
+  if(idx!==undefined) loans[+idx]=entry; else loans.push(entry);
+  delete document.getElementById('lName').dataset.editIdx;
+  saveLoans(); clearLoanForm(); renderLoans();
+  toast('Loan saved ✓');
+}
+
+function deleteLoan(i) {
+  if(!confirm('Delete this loan?')) return;
+  loans.splice(i,1); saveLoans(); renderLoans();
+  toast('Loan deleted');
+}
+
+function clearLoanForm() {
+  ['lName','lType','lOriginal','lBalance','lMonthly','lRate','lStart','lDue','lNotes']
+    .forEach(id=>{ const e=document.getElementById(id); if(e)e.value=''; });
+  delete document.getElementById('lName').dataset.editIdx;
+}
+
+/* ════ INVESTMENTS ════ */
+const INV_COLORS = {
+  'SACCO Savings':     {bg:'#e0f2fe',c:'#0369a1'},
+  'SACCO Shares':      {bg:'#d1fae5',c:'#065f46'},
+  'Money Market Fund': {bg:'#fef3c7',c:'#92400e'},
+  'Bonds':             {bg:'#ede9fe',c:'#6d28d9'},
+  'Stocks / Shares':   {bg:'#fce7f3',c:'#9d174d'},
+  'Fixed Deposit':     {bg:'#fff7ed',c:'#c2410c'},
+  'T-Bills':           {bg:'#f0fdf4',c:'#166534'},
+  'Unit Trust':        {bg:'#fdf4ff',c:'#7e22ce'},
+  'Other':             {bg:'#f5f3ef',c:'#78716c'},
+};
+
+function renderInvest() {
+  const totalBalance = investments.reduce((s,i)=>s+i.balance,0);
+  const totalDeposited = investments.reduce((s,i)=>s+i.deposited,0);
+  const totalGrowth = totalBalance - totalDeposited;
+  document.getElementById('invStats').innerHTML=`
+    <div class="stat"><div class="stat-lbl">Total Value</div><div class="stat-val pos">${ksh(totalBalance)}</div><div class="stat-sub">${investments.length} account${investments.length!==1?'s':''}</div></div>
+    <div class="stat"><div class="stat-lbl">Total Deposited</div><div class="stat-val gold">${ksh(totalDeposited)}</div><div class="stat-sub">Principal invested</div></div>
+    <div class="stat"><div class="stat-lbl">Growth / Returns</div><div class="stat-val ${totalGrowth>=0?'pos':'neg'}">${totalGrowth<0?'-':''}${ksh(totalGrowth)}</div><div class="stat-sub">${totalDeposited>0?((totalGrowth/totalDeposited)*100).toFixed(1)+'% return':'—'}</div></div>`;
+
+  document.getElementById('invCards').innerHTML = investments.length
+    ? investments.map((inv,i)=>{
+        const col = INV_COLORS[inv.type] || INV_COLORS['Other'];
+        const growth = inv.balance - inv.deposited;
+        const growthPct = inv.deposited>0 ? ((growth/inv.deposited)*100).toFixed(1) : 0;
+        return `<div class="inv-card">
+          <div class="inv-header">
+            <div>
+              <div class="inv-name">${inv.name}</div>
+              <div class="inv-institution">${inv.institution||''} ${inv.ref?'· Ref: '+inv.ref:''}</div>
+            </div>
+            <span class="loan-type-badge" style="background:${col.bg};color:${col.c}">${inv.type}</span>
+          </div>
+          <div class="inv-amounts">
+            <div class="inv-amt">
+              <div class="inv-amt-lbl">Current Balance</div>
+              <div class="inv-amt-val pos">${ksh(inv.balance)}</div>
+            </div>
+            <div class="inv-amt">
+              <div class="inv-amt-lbl">Deposited</div>
+              <div class="inv-amt-val">${ksh(inv.deposited)}</div>
+            </div>
+            <div class="inv-amt">
+              <div class="inv-amt-lbl">Growth</div>
+              <div class="inv-amt-val ${growth>=0?'pos':'neg'}">${growth<0?'-':''}${ksh(growth)}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;font-size:11.5px;color:var(--muted);flex-wrap:wrap;margin-bottom:8px">
+            ${inv.rate?`<span>Expected: ${inv.rate}% p.a.</span>`:''}
+            ${inv.deposited>0?`<span>Return: ${growthPct}%</span>`:''}
+            ${inv.notes?`<span>${inv.notes}</span>`:''}
+          </div>
+          <div class="inv-actions">
+            <button class="btn btn-primary btn-sm" onclick="toggleDepForm(${i})">+ Log Transaction</button>
+            <button class="btn btn-ghost btn-sm" onclick="editInv(${i})">Edit</button>
+            <button class="btn btn-sm" style="background:var(--red-lt);color:var(--red);border:none" onclick="deleteInv(${i})">Delete</button>
+          </div>
+          <div class="dep-form" id="depform-${i}">
+            <div class="dep-form-row">
+              <div class="fg"><label>Date</label><input type="date" id="dd-${i}" value="${new Date().toISOString().slice(0,10)}"></div>
+              <div class="fg"><label>Type</label><select id="dt-${i}"><option value="deposit">Deposit</option><option value="withdraw">Withdrawal</option><option value="dividend">Dividend / Interest</option></select></div>
+              <div class="fg"><label>Amount (KSh)</label><input type="number" id="da-${i}" placeholder="0" inputmode="decimal"></div>
+              <div class="fg"><label>Note</label><input type="text" id="dn-${i}" placeholder="e.g. Monthly top-up"></div>
+              <div style="display:flex;align-items:flex-end"><button class="btn btn-primary btn-sm" onclick="recordInvTx(${i})">Save</button></div>
+            </div>
+          </div>
+          ${inv.logs.length?`<div class="inv-logs"><div style="font-size:10.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;margin-top:8px">Transaction Log</div>${inv.logs.slice(-5).reverse().map(l=>`<div class="inv-log-item"><span style="color:var(--muted)">${fmtD(l.date)} · <span class="badge" style="font-size:10px;background:${l.type==='deposit'?'var(--green-lt)':l.type==='withdraw'?'var(--red-lt)':'var(--gold-lt)'};color:${l.type==='deposit'?'var(--green)':l.type==='withdraw'?'var(--red)':'var(--gold-dk)'}">${l.type}</span> ${l.note?'— '+l.note:''}</span><span class="${l.type==='withdraw'?'amt-n':'amt-p'}">${l.type==='withdraw'?'-':'+'}${ksh(l.amt)}</span></div>`).join('')}</div>`:''}
+        </div>`;
+      }).join('')
+    : '<div class="card" style="text-align:center;padding:32px;color:var(--muted)">No investment accounts yet. Use the form above to add your first account.</div>';
+}
+
+function toggleDepForm(i) {
+  document.getElementById('depform-'+i).classList.toggle('open');
+}
+
+function recordInvTx(i) {
+  const date = document.getElementById('dd-'+i).value;
+  const type = document.getElementById('dt-'+i).value;
+  const amt  = parseFloat(document.getElementById('da-'+i).value);
+  const note = document.getElementById('dn-'+i).value.trim();
+  if(!amt){ toast('Enter amount','err'); return; }
+  investments[i].logs.push({date,type,amt,note});
+  if(type==='deposit') { investments[i].balance+=amt; investments[i].deposited+=amt; }
+  else if(type==='withdraw') { investments[i].balance=Math.max(0,investments[i].balance-amt); }
+  else if(type==='dividend') { investments[i].balance+=amt; }
+  saveInvests(); renderInvest();
+  toast(`${type.charAt(0).toUpperCase()+type.slice(1)} of ${ksh(amt)} recorded ✓`);
+}
+
+function editInv(i) {
+  const inv = investments[i];
+  document.getElementById('iName').value = inv.name;
+  document.getElementById('iType').value = inv.type;
+  document.getElementById('iInstitution').value = inv.institution||'';
+  document.getElementById('iBalance').value = inv.balance||'';
+  document.getElementById('iDeposited').value = inv.deposited||'';
+  document.getElementById('iRate').value = inv.rate||'';
+  document.getElementById('iRef').value = inv.ref||'';
+  document.getElementById('iNotes').value = inv.notes||'';
+  document.getElementById('iName').dataset.editIdx = i;
+  document.getElementById('iName').scrollIntoView({behavior:'smooth',block:'center'});
+  toast('Account loaded for editing');
+}
+
+function saveInv() {
+  const name = document.getElementById('iName').value.trim();
+  const type = document.getElementById('iType').value;
+  if(!name){ toast('Enter an account name','err'); return; }
+  const idx = document.getElementById('iName').dataset.editIdx;
+  const entry = {
+    id: idx!==undefined ? investments[+idx].id : 'i'+Date.now(),
+    name, type,
+    institution: document.getElementById('iInstitution').value.trim(),
+    balance: parseFloat(document.getElementById('iBalance').value)||0,
+    deposited: parseFloat(document.getElementById('iDeposited').value)||0,
+    rate: parseFloat(document.getElementById('iRate').value)||0,
+    ref: document.getElementById('iRef').value.trim(),
+    notes: document.getElementById('iNotes').value.trim(),
+    logs: idx!==undefined ? investments[+idx].logs : [],
+  };
+  if(idx!==undefined) investments[+idx]=entry; else investments.push(entry);
+  delete document.getElementById('iName').dataset.editIdx;
+  saveInvests(); clearInvForm(); renderInvest();
+  toast('Investment account saved ✓');
+}
+
+function deleteInv(i) {
+  if(!confirm('Delete this investment account?')) return;
+  investments.splice(i,1); saveInvests(); renderInvest();
+  toast('Account deleted');
+}
+
+function clearInvForm() {
+  ['iName','iType','iInstitution','iBalance','iDeposited','iRate','iRef','iNotes']
+    .forEach(id=>{ const e=document.getElementById(id); if(e)e.value=''; });
+  delete document.getElementById('iName').dataset.editIdx;
+}
 
 // ── Google Drive ─────────────────────────────────────────────────────
 // Single reusable token client — created once in initDrive so the
@@ -824,7 +1534,7 @@ async function driveSave() {
   if (!gReady) { toast('Connect Google Drive first', 'err'); return; }
   getToken(async (token) => {
     try {
-      const content = JSON.stringify({ txs, budgets, kidsData, savedAt: new Date().toISOString() }, null, 2);
+      const content = JSON.stringify({ txs, budgets, kidsData, loans, investments, savedAt: new Date().toISOString() }, null, 2);
       const boundary = 'mf_drive_boundary';
       const meta = JSON.stringify({ name: 'marilu_finance.json', mimeType: 'application/json' });
       const body = [
@@ -906,6 +1616,8 @@ async function driveLoad() {
       if (d.txs)      { txs      = d.txs;      save(); }
       if (d.budgets)  { budgets  = d.budgets;   saveBudgets(); }
       if (d.kidsData) { kidsData = d.kidsData;  saveKids(); }
+      if (d.loans)    { loans    = d.loans;      saveLoans(); }
+      if (d.investments) { investments = d.investments; saveInvests(); }
 
       document.getElementById('syncDot').className  = 'dot on';
       document.getElementById('syncLbl').textContent = 'Drive connected';
