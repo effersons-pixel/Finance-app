@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marilu Family Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f3;
+    --accent: #c8813a;
+    --accent2: #4a7c59;
+    --soft: #e8e3d9;
+    --muted: #8a8070;
+    --danger: #c84a4a;
+    --card: #ffffff;
+    --border: rgba(26,26,46,0.1);
+    --shadow: 0 2px 20px rgba(26,26,46,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* LAYOUT */
+  .app { display: flex; height: 100vh; overflow: hidden; }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px;
+    background: var(--ink);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 28px 0;
+  }
+
+  .brand {
+    padding: 0 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+  }
+  .brand-sub { color: rgba(255,255,255,0.4); font-size: 11px; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+
+  nav { margin-top: 20px; flex: 1; }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 24px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    font-size: 13.5px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
+  .nav-item.active { color: white; border-left-color: var(--accent); background: rgba(200,129,58,0.12); }
+  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+  .sidebar-footer {
+    padding: 20px 24px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+  }
+  .gdrive-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #aaa; }
+  .dot.connected { background: #4ade80; }
+
+  /* MAIN */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    padding: 18px 32px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+  .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #b5722e; }
+  .btn-secondary { background: var(--soft); color: var(--ink); }
+  .btn-secondary:hover { background: #ddd8ce; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--ink); }
+  .btn-outline:hover { background: var(--soft); }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-sm { padding: 5px 12px; font-size: 12px; }
+
+  /* CONTENT */
+  .content { padding: 28px 32px; flex: 1; }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* STATS ROW */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 26px; }
+  .stat-value.income { color: var(--accent2); }
+  .stat-value.expense { color: var(--danger); }
+  .stat-value.balance { color: var(--ink); }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* SECTION */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+
+  /* TABLE */
+  .table-wrap {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    background: var(--soft);
+    font-weight: 600;
+  }
+  td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+  tr:hover td { background: #fafafa; }
+  .type-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .type-income { background: #dcfce7; color: #166534; }
+  .type-expense { background: #fee2e2; color: #991b1b; }
+  .amount-income { color: var(--accent2); font-weight: 600; }
+  .amount-expense { color: var(--danger); font-weight: 600; }
+
+  /* FORM */
+  .form-card {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    max-width: 560px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; }
+  input, select, textarea {
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 72px; }
+
+  .ai-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff8f0, #f0f9ff);
+    border: 1.5px solid #e8d5c0;
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .ai-row .form-group { flex: 1; }
+  .ai-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .ai-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alert-info { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+  .alert-success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+  .alert-warning { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+
+  /* GDRIVE SETUP */
+  .setup-card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 32px;
+    max-width: 600px;
+    box-shadow: var(--shadow);
+  }
+  .setup-steps { counter-reset: step; }
+  .setup-step {
+    counter-increment: step;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .setup-step:last-child { border: none; margin-bottom: 0; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h4 { font-weight: 600; font-size: 14px; margin-bottom: 5px; }
+  .step-content p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .step-content code {
+    background: var(--soft);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .input-row { display: flex; gap: 8px; margin-top: 10px; }
+  .input-row input { flex: 1; }
+
+  /* CHART BARS */
+  .chart-wrap {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .chart-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 20px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 140px; }
+  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .bar-pair { display: flex; gap: 3px; align-items: flex-end; height: 120px; }
+  .bar {
+    width: 18px;
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: height 0.4s ease;
+  }
+  .bar.income { background: var(--accent2); }
+  .bar.expense { background: var(--danger); }
+  .bar-label { font-size: 10px; color: var(--muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* CATEGORY PILLS */
+  .cat-list { display: flex; flex-direction: column; gap: 8px; }
+  .cat-row { display: flex; align-items: center; gap: 10px; }
+  .cat-name { flex: 1; font-size: 13px; }
+  .cat-bar-wrap { flex: 2; background: var(--soft); border-radius: 99px; height: 7px; }
+  .cat-bar-fill { height: 100%; border-radius: 99px; background: var(--accent); }
+  .cat-amt { font-size: 13px; font-weight: 600; color: var(--muted); min-width: 70px; text-align: right; }
+
+  /* EMPTY */
+  .empty { text-align: center; padding: 48px 16px; color: var(--muted); }
+  .empty-icon { font-size: 36px; margin-bottom: 10px; }
+
+  /* MODAL */
+  .modal-bg {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 28px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .modal h3 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 16px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--ink);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    z-index: 999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { border-left: 4px solid #4ade80; }
+  .toast.error { border-left: 4px solid var(--danger); }
+
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-bar select, .filter-bar input { font-size: 13px; padding: 7px 11px; }
+
+  .month-selector { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .month-chip {
+    padding: 5px 14px;
+    border-radius: 99px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .month-chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+  .month-chip:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--soft); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">Marilu<br>Family</div>
+      <div class="brand-sub">Finance Tracker</div>
+    </div>
+    <nav>
+      <div class="nav-item active" onclick="showPanel('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="showPanel('add')"><span class="nav-icon">➕</span> Add Transaction</div>
+      <div class="nav-item" onclick="showPanel('ledger')"><span class="nav-icon">📋</span> Ledger</div>
+      <div class="nav-item" onclick="showPanel('gdrive')"><span class="nav-icon">☁️</span> Google Drive</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="gdrive-status">
+        <div class="dot" id="gdriveStatusDot"></div>
+        <span id="gdriveStatusText">Not connected</span>
+      </div>
+      <div id="gdriveFileName" style="font-size:11px;word-break:break-all;"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="page-title" id="pageTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="month-selector" id="monthSelector"></div>
+        <button class="btn btn-primary" onclick="showPanel('add')">+ Add Transaction</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Current Balance</div>
+            <div class="stat-value balance" id="statBalance">KSh 0</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Income</div>
+            <div class="stat-value income" id="statIncome">KSh 0</div>
+            <div class="stat-sub" id="statIncomePeriod">This month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Expenses</div>
+            <div class="stat-value expense" id="statExpense">KSh 0</div>
+            <div class="stat-sub" id="statExpensePeriod">This month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Net Flow</div>
+            <div class="stat-value" id="statNet" style="color:var(--ink)">KSh 0</div>
+            <div class="stat-sub">Income − Expenses</div>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:20px">
+          <div class="chart-wrap">
+            <div class="chart-title">Monthly Overview</div>
+            <div class="bar-chart" id="barChart"></div>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-title">Top Expense Categories</div>
+            <div class="cat-list" id="catChart"></div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <div class="section-title">Recent Transactions</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Amount (KSh)</th>
+            </tr></thead>
+            <tbody id="recentTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADD TRANSACTION -->
+      <div class="panel" id="panel-add">
+        <div class="alert alert-info" id="apiKeyAlert" style="display:none">
+          ⚠️ Enter your Claude API key in the field below to use AI auto-fill.
+        </div>
+
+        <div class="form-card">
+          <div class="ai-row">
+            <div class="form-group" style="flex:2">
+              <div class="ai-label">✨ AI Auto-fill</div>
+              <input type="text" id="aiPrompt" placeholder='e.g. "Paid 2500 for electricity" or "Got salary 45000"'>
+              <div class="ai-hint">Describe your transaction in plain language and Claude will fill the form.</div>
+            </div>
+            <div>
+              <button class="btn btn-primary" id="aiFillBtn" onclick="aiAutoFill()">
+                <span id="aiBtnText">Auto-fill</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="font-size:12px;color:var(--muted);text-align:center;margin:-8px 0 20px;position:relative">
+            <span style="background:white;padding:0 10px;position:relative;z-index:1">or fill manually</span>
+            <hr style="position:absolute;top:50%;left:0;right:0;border:none;border-top:1px solid var(--border)">
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Date *</label>
+              <input type="date" id="fDate">
+            </div>
+            <div class="form-group">
+              <label>Type *</label>
+              <select id="fType" onchange="updateCategories()">
+                <option value="">Select…</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="fCategory"></select>
+            </div>
+            <div class="form-group">
+              <label>Amount (KSh) *</label>
+              <input type="number" id="fAmount" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label>Tag</label>
+              <select id="fTag">
+                <option value="">None</option>
+                <option>ImpulseBuy</option>
+                <option>Unplanned</option>
+                <option>Birthday</option>
+                <option>Gift</option>
+                <option>Repair</option>
+                <option>OddJob</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" id="fDesc" placeholder="Optional note">
+            </div>
+          </div>
+
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn btn-primary" onclick="saveTransaction()">Save Transaction</button>
+            <button class="btn btn-secondary" onclick="clearForm()">Clear</button>
+          </div>
+        </div>
+
+        <div style="margin-top:24px">
+          <div class="section-header">
+            <div class="section-title" style="font-size:15px">Claude API Key</div>
+          </div>
+          <div class="form-card" style="padding:20px">
+            <div class="form-group">
+              <label>API Key (stored in browser only)</label>
+              <div style="display:flex;gap:8px">
+                <input type="password" id="apiKeyInput" placeholder="sk-ant-…" style="flex:1">
+                <button class="btn btn-outline" onclick="saveApiKey()">Save</button>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:5px">Your key is never sent anywhere except Anthropic's API.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEDGER -->
+      <div class="panel" id="panel-ledger">
+        <div class="filter-bar">
+          <select id="filterType" onchange="renderLedger()">
+            <option value="">All Types</option>
+            <option>Income</option>
+            <option>Expense</option>
+          </select>
+          <select id="filterCategory" onchange="renderLedger()">
+            <option value="">All Categories</option>
+          </select>
+          <input type="text" id="filterSearch" placeholder="Search description…" oninput="renderLedger()" style="min-width:180px">
+          <span style="margin-left:auto;font-size:12px;color:var(--muted)" id="ledgerCount"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Tag</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th><th></th>
+            </tr></thead>
+            <tbody id="ledgerTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- GDRIVE -->
+      <div class="panel" id="panel-gdrive">
+        <div class="setup-card">
+          <h3 style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Google Drive Sync</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:24px">Connect your Google Drive to save and load your finance data as a JSON file, accessible from anywhere.</p>
+
+          <div class="alert alert-warning">
+            ⚠️ Google Drive integration requires a Google API key with Drive access. Follow the steps below.
+          </div>
+
+          <div class="setup-steps" style="margin-top:20px">
+            <div class="setup-step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Create a Google Cloud Project</h4>
+                <p>Go to <a href="https://console.cloud.google.com" target="_blank" style="color:var(--accent)">console.cloud.google.com</a>, create a project, enable the <strong>Google Drive API</strong> and <strong>Google Picker API</strong>.</p>
+              </div>
+            </div>
+            <div class="setup-step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Get your API credentials</h4>
+                <p>Create an <strong>OAuth 2.0 Client ID</strong> (Web Application) and an <strong>API Key</strong>. Add <code>this page's URL</code> as an authorized JavaScript origin.</p>
+              </div>
+            </div>
+            <div class="setup-step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Enter credentials below</h4>
+                <div class="form-group" style="margin-top:10px">
+                  <label>Google API Key</label>
+                  <input type="text" id="gApiKey" placeholder="AIza…">
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label>OAuth Client ID</label>
+                  <input type="text" id="gClientId" placeholder="…apps.googleusercontent.com">
+                </div>
+                <button class="btn btn-primary" style="margin-top:12px" onclick="initGDrive()">Connect to Google Drive</button>
+              </div>
+            </div>
+            <div class="setup-step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Save & Load your data</h4>
+                <p>Once connected, use the buttons below to sync your finance data.</p>
+                <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+                  <button class="btn btn-secondary" onclick="saveToGDrive()">💾 Save to Drive</button>
+                  <button class="btn btn-secondary" onclick="loadFromGDrive()">📂 Load from Drive</button>
+                </div>
+                <div style="margin-top:10px;font-size:12px;color:var(--muted)" id="gdriveLog"></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">
+            <div style="font-weight:600;margin-bottom:10px;font-size:13px">Quick Export / Import</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-outline btn-sm" onclick="exportJSON()">⬇ Export JSON</button>
+              <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
+              <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-bg" id="deleteModal">
+  <div class="modal">
+    <h3>Delete Transaction?</h3>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">This action cannot be undone.</p>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const CATEGORIES = {
+  Income: ['Salary','Side Hustle','Gifts / Friends','Bonus'],
+  Expense: ['Rent','Bills','» Water','» Electricity (KPLC)','» Internet / WiFi','» TV Subscription','» Gym','Groceries','Personal Care','Entertainment','Transport','Fun and Vacation','Shopping','Giving / Donation','Unplanned / Impulse/','» Shopping','» Entertainment','» Dining Out','Car Maintenance','Emergency Repair','Stocks','Money Market funds','Emergency Funds','Auto Loan','Student Loan','Credit Card']
+};
+
+let transactions = JSON.parse(localStorage.getItem('mariluTx') || '[]');
+let deleteIdx = null;
+let gDriveReady = false;
+let gFileId = null;
+let selectedMonth = null;
+
+// Pre-load from the Excel data
+if (transactions.length === 0) {
+  transactions = [
+    { date:'2025-09-02', type:'Income',  category:'Salary',            tag:'', desc:'',               amount:205611 },
+    { date:'2025-09-02', type:'Expense', category:'Giving / Donation', tag:'', desc:'',               amount:20500  },
+    { date:'2025-09-02', type:'Expense', category:'Rent',              tag:'', desc:'',               amount:30000  },
+    { date:'2025-09-02', type:'Expense', category:'» Internet / WiFi', tag:'', desc:'',               amount:3000   },
+    { date:'2025-09-02', type:'Expense', category:'» Electricity (KPLC)', tag:'', desc:'',            amount:4000   },
+    { date:'2025-09-02', type:'Expense', category:'» Water',           tag:'', desc:'',               amount:800    },
+    { date:'2025-09-02', type:'Expense', category:'Bills',             tag:'', desc:'Maureen',        amount:15000  },
+    { date:'2025-09-02', type:'Expense', category:'Giving / Donation', tag:'', desc:'Glory Sanctuary',amount:1000   },
+    { date:'2025-09-02', type:'Expense', category:'Shopping',          tag:'', desc:'Weekly',         amount:10000  },
+    { date:'2025-09-02', type:'Expense', category:'» Shopping',        tag:'', desc:'Monthly',        amount:10000  },
+    { date:'2025-09-02', type:'Expense', category:'Credit Card',       tag:'', desc:'',               amount:24000  },
+  ];
+  save();
+}
+
+function save() {
+  localStorage.setItem('mariluTx', JSON.stringify(transactions));
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function fmt(n) {
+  return 'KSh ' + Math.abs(n).toLocaleString('en-KE', {maximumFractionDigits:0});
+}
+function fmtDate(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'});
+}
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.className='toast', 3000);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.textContent.toLowerCase().includes(id === 'add' ? 'add' : id === 'gdrive' ? 'google' : id)) n.classList.add('active');
+  });
+  const titles = { dashboard:'Dashboard', add:'Add Transaction', ledger:'Ledger', gdrive:'Google Drive' };
+  document.getElementById('pageTitle').textContent = titles[id] || id;
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'ledger') { renderLedger(); populateFilterCats(); }
+  if (id === 'add') {
+    const today = new Date().toISOString().slice(0,10);
+    document.getElementById('fDate').value = today;
+    updateCategories();
+    const key = localStorage.getItem('claudeApiKey');
+    document.getElementById('apiKeyAlert').style.display = key ? 'none' : 'flex';
+    if (key) document.getElementById('apiKeyInput').value = key;
+  }
+}
+
+// ============================================================
+// MONTH SELECTOR
+// ============================================================
+function buildMonthSelector() {
+  const months = {};
+  transactions.forEach(t => {
+    const m = t.date.slice(0,7);
+    months[m] = true;
+  });
+  const sorted = Object.keys(months).sort().reverse().slice(0,6);
+  const sel = document.getElementById('monthSelector');
+  sel.innerHTML = `<button class="month-chip ${!selectedMonth?'active':''}" onclick="setMonth(null)">All</button>` +
+    sorted.map(m => {
+      const [y,mo] = m.split('-');
+      const label = new Date(y, mo-1).toLocaleString('en',{month:'short'}) + ' ' + y;
+      return `<button class="month-chip ${selectedMonth===m?'active':''}" onclick="setMonth('${m}')">${label}</button>`;
+    }).join('');
+}
+function setMonth(m) {
+  selectedMonth = m;
+  buildMonthSelector();
+  renderDashboard();
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function getFiltered() {
+  if (!selectedMonth) return transactions;
+  return transactions.filter(t => t.date.startsWith(selectedMonth));
+}
+
+function renderDashboard() {
+  buildMonthSelector();
+  const filtered = getFiltered();
+  const income = filtered.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amount,0);
+  const expense = filtered.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amount,0);
+  const balance = transactions.reduce((s,t)=>t.type==='Income'?s+t.amount:s-t.amount, 0);
+  const net = income - expense;
+
+  document.getElementById('statBalance').textContent = fmt(balance);
+  document.getElementById('statIncome').textContent = fmt(income);
+  document.getElementById('statExpense').textContent = fmt(expense);
+  document.getElementById('statNet').textContent = (net >= 0 ? '' : '-') + fmt(net);
+  document.getElementById('statNet').style.color = net >= 0 ? 'var(--accent2)' : 'var(--danger)';
+
+  // Recent
+  const recent = [...transactions].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+  document.getElementById('recentTable').innerHTML = recent.map(t => `
+    <tr>
+      <td>${fmtDate(t.date)}</td>
+      <td><span class="type-badge type-${t.type.toLowerCase()}">${t.type}</span></td>
+      <td>${t.category}</td>
+      <td style="color:var(--muted)">${t.desc||'—'}</td>
+      <td class="amount-${t.type.toLowerCase()}">${t.type==='Income'?'+':'-'} ${fmt(t.amount)}</td>
+    </tr>`).join('') || '<tr><td colspan="5" class="empty">No transactions yet</td></tr>';
+
+  renderBarChart();
+  renderCatChart(filtered);
+}
+
+function renderBarChart() {
+  const months = {};
+  transactions.forEach(t => {
+    const m = t.date.slice(0,7);
+    if (!months[m]) months[m] = {income:0, expense:0};
+    if (t.type==='Income') months[m].income += t.amount;
+    else months[m].expense += t.amount;
+  });
+  const sorted = Object.keys(months).sort().slice(-5);
+  if (!sorted.length) { document.getElementById('barChart').innerHTML='<div class="empty" style="flex:1">No data</div>'; return; }
+  const max = Math.max(...sorted.map(m=>Math.max(months[m].income, months[m].expense)));
+  document.getElementById('barChart').innerHTML = sorted.map(m => {
+    const [y,mo] = m.split('-');
+    const label = new Date(y, mo-1).toLocaleString('en',{month:'short'});
+    const ih = max ? Math.round((months[m].income/max)*110) : 4;
+    const eh = max ? Math.round((months[m].expense/max)*110) : 4;
+    return `<div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar income" style="height:${ih}px" title="Income: ${fmt(months[m].income)}"></div>
+        <div class="bar expense" style="height:${eh}px" title="Expense: ${fmt(months[m].expense)}"></div>
+      </div>
+      <div class="bar-label">${label}</div>
+    </div>`;
+  }).join('') + `<div style="display:flex;flex-direction:column;gap:6px;justify-content:flex-end;padding-bottom:22px;margin-left:8px">
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><div style="width:10px;height:10px;background:var(--accent2);border-radius:2px"></div>Income</div>
+    <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)"><div style="width:10px;height:10px;background:var(--danger);border-radius:2px"></div>Expense</div>
+  </div>`;
+}
+
+function renderCatChart(filtered) {
+  const cats = {};
+  filtered.filter(t=>t.type==='Expense').forEach(t => {
+    cats[t.category] = (cats[t.category]||0) + t.amount;
+  });
+  const sorted = Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  if (!sorted.length) { document.getElementById('catChart').innerHTML='<div class="empty" style="flex:1;padding:20px 0">No expenses</div>'; return; }
+  const max = sorted[0][1];
+  document.getElementById('catChart').innerHTML = sorted.map(([cat,amt]) => `
+    <div class="cat-row">
+      <div class="cat-name">${cat}</div>
+      <div class="cat-bar-wrap"><div class="cat-bar-fill" style="width:${Math.round(amt/max*100)}%"></div></div>
+      <div class="cat-amt">${fmt(amt)}</div>
+    </div>`).join('');
+}
+
+// ============================================================
+// FORM
+// ============================================================
+function updateCategories() {
+  const type = document.getElementById('fType').value;
+  const cats = CATEGORIES[type] || [];
+  const sel = document.getElementById('fCategory');
+  sel.innerHTML = '<option value="">Select…</option>' + cats.map(c=>`<option>${c}</option>`).join('');
+}
+
+function clearForm() {
+  ['fDate','fType','fCategory','fAmount','fTag','fDesc','aiPrompt'].forEach(id=>{
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
+  updateCategories();
+}
+
+function saveTransaction() {
+  const date = document.getElementById('fDate').value;
+  const type = document.getElementById('fType').value;
+  const category = document.getElementById('fCategory').value;
+  const amount = parseFloat(document.getElementById('fAmount').value);
+  const tag = document.getElementById('fTag').value;
+  const desc = document.getElementById('fDesc').value;
+
+  if (!date || !type || !category || !amount) {
+    toast('Please fill in Date, Type, Category and Amount', 'error'); return;
+  }
+
+  transactions.unshift({ date, type, category, amount, tag, desc });
+  save();
+  toast('Transaction saved!');
+  clearForm();
+  buildMonthSelector();
+}
+
+// ============================================================
+// AI AUTO-FILL
+// ============================================================
+async function aiAutoFill() {
+  const apiKey = localStorage.getItem('claudeApiKey');
+  if (!apiKey) { toast('Please enter your Claude API key first', 'error'); return; }
+
+  const prompt = document.getElementById('aiPrompt').value.trim();
+  if (!prompt) { toast('Describe your transaction first', 'error'); return; }
+
+  const btn = document.getElementById('aiFillBtn');
+  const btnText = document.getElementById('aiBtnText');
+  btnText.innerHTML = '<span class="spinner"></span>';
+  btn.disabled = true;
+
+  const today = new Date().toISOString().slice(0,10);
+  const allCats = [...CATEGORIES.Income, ...CATEGORIES.Expense];
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: `You are a finance assistant. Parse transaction descriptions and return ONLY valid JSON, no markdown.
+Categories available: ${allCats.join(', ')}.
+Tags: ImpulseBuy, Unplanned, Birthday, Gift, Repair, OddJob, or empty.
+Return: {"date":"YYYY-MM-DD","type":"Income|Expense","category":"<from list>","amount":<number>,"tag":"","desc":"<brief note>"}
+Today's date: ${today}. Amounts in KSh. If date not mentioned, use today.`,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const cleaned = text.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(cleaned);
+
+    if (parsed.date) document.getElementById('fDate').value = parsed.date;
+    if (parsed.type) { document.getElementById('fType').value = parsed.type; updateCategories(); }
+    if (parsed.category) document.getElementById('fCategory').value = parsed.category;
+    if (parsed.amount) document.getElementById('fAmount').value = parsed.amount;
+    if (parsed.tag) document.getElementById('fTag').value = parsed.tag;
+    if (parsed.desc) document.getElementById('fDesc').value = parsed.desc;
+
+    toast('Form filled by AI ✨');
+  } catch(e) {
+    toast('AI fill failed: ' + e.message, 'error');
+  } finally {
+    btnText.textContent = 'Auto-fill';
+    btn.disabled = false;
+  }
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) { toast('Enter a valid key', 'error'); return; }
+  localStorage.setItem('claudeApiKey', key);
+  document.getElementById('apiKeyAlert').style.display = 'none';
+  toast('API key saved!');
+}
+
+// ============================================================
+// LEDGER
+// ============================================================
+function populateFilterCats() {
+  const cats = [...new Set(transactions.map(t=>t.category))].sort();
+  document.getElementById('filterCategory').innerHTML = '<option value="">All Categories</option>' + cats.map(c=>`<option>${c}</option>`).join('');
+}
+
+function renderLedger() {
+  const typeF = document.getElementById('filterType').value;
+  const catF = document.getElementById('filterCategory').value;
+  const search = document.getElementById('filterSearch').value.toLowerCase();
+
+  let filtered = [...transactions].sort((a,b)=>b.date.localeCompare(a.date));
+  if (typeF) filtered = filtered.filter(t=>t.type===typeF);
+  if (catF) filtered = filtered.filter(t=>t.category===catF);
+  if (search) filtered = filtered.filter(t=>(t.desc||'').toLowerCase().includes(search)||(t.category||'').toLowerCase().includes(search));
+
+  document.getElementById('ledgerCount').textContent = `${filtered.length} transaction${filtered.length!==1?'s':''}`;
+
+  // running balance
+  let running = transactions.reduce((s,t)=>t.type==='Income'?s+t.amount:s-t.amount,0);
+  // recompute from all sorted
+  const allSorted = [...transactions].sort((a,b)=>b.date.localeCompare(a.date));
+
+  document.getElementById('ledgerTable').innerHTML = filtered.map(t => {
+    const origIdx = transactions.indexOf(t);
+    const sign = t.type==='Income';
+    return `<tr>
+      <td>${fmtDate(t.date)}</td>
+      <td><span class="type-badge type-${t.type.toLowerCase()}">${t.type}</span></td>
+      <td>${t.category}</td>
+      <td style="color:var(--muted)">${t.desc||'—'}</td>
+      <td style="color:var(--muted);font-size:12px">${t.tag||''}</td>
+      <td style="text-align:right" class="amount-${t.type.toLowerCase()}">${sign?'+':'-'} ${fmt(t.amount)}</td>
+      <td style="text-align:right;font-weight:600">${fmt(0)}</td>
+      <td><button class="btn btn-sm" style="background:transparent;color:var(--danger);padding:4px 8px" onclick="deleteRow(${origIdx})">✕</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="empty">No transactions match filters</td></tr>';
+}
+
+function deleteRow(idx) {
+  deleteIdx = idx;
+  document.getElementById('deleteModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  deleteIdx = null;
+}
+function confirmDelete() {
+  if (deleteIdx !== null) {
+    transactions.splice(deleteIdx, 1);
+    save();
+    renderLedger();
+    closeModal();
+    toast('Transaction deleted');
+  }
+}
+
+// ============================================================
+// EXPORT / IMPORT
+// ============================================================
+function exportJSON() {
+  const blob = new Blob([JSON.stringify({transactions, exportedAt: new Date().toISOString()}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'marilu_finance.json'; a.click();
+  toast('Exported!');
+}
+
+function importJSON(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.transactions) { transactions = data.transactions; save(); toast('Imported ' + transactions.length + ' transactions!'); renderDashboard(); }
+      else throw new Error('Invalid format');
+    } catch(err) { toast('Import failed: ' + err.message, 'error'); }
+  };
+  reader.readAsText(file);
+}
+
+// ============================================================
+// GOOGLE DRIVE (stub — needs real OAuth tokens)
+// ============================================================
+function initGDrive() {
+  const apiKey = document.getElementById('gApiKey').value.trim();
+  const clientId = document.getElementById('gClientId').value.trim();
+  if (!apiKey || !clientId) { toast('Enter both API Key and Client ID', 'error'); return; }
+  localStorage.setItem('gApiKey', apiKey);
+  localStorage.setItem('gClientId', clientId);
+
+  // Load GIS + GAPI
+  const s1 = document.createElement('script'); s1.src = 'https://accounts.google.com/gsi/client'; document.head.appendChild(s1);
+  const s2 = document.createElement('script'); s2.src = 'https://apis.google.com/js/api.js'; document.head.appendChild(s2);
+
+  s2.onload = () => {
+    gapi.load('client', async () => {
+      await gapi.client.init({ apiKey, discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
+      window._gClientId = clientId;
+      toast('Google Drive SDK loaded — click Save to Drive to authenticate');
+      gDriveReady = true;
+    });
+  };
+}
+
+function getGToken(callback) {
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: window._gClientId || localStorage.getItem('gClientId'),
+    scope: 'https://www.googleapis.com/auth/drive.file',
+    callback
+  });
+  client.requestAccessToken();
+}
+
+async function saveToGDrive() {
+  if (!gDriveReady) { toast('Connect Google Drive first', 'error'); return; }
+  getGToken(async (token) => {
+    if (token.error) { toast('Auth failed', 'error'); return; }
+    const content = JSON.stringify({transactions, savedAt: new Date().toISOString()}, null, 2);
+    const boundary = 'foo_bar_baz';
+    const meta = JSON.stringify({name: 'marilu_finance.json', mimeType: 'application/json'});
+    const body = `--${boundary}\r\nContent-Type: application/json\r\n\r\n${meta}\r\n--${boundary}\r\nContent-Type: application/json\r\n\r\n${content}\r\n--${boundary}--`;
+    const url = gFileId
+      ? `https://www.googleapis.com/upload/drive/v3/files/${gFileId}?uploadType=multipart`
+      : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
+    const method = gFileId ? 'PATCH' : 'POST';
+    const res = await fetch(url, {
+      method, headers: { 'Authorization': 'Bearer '+token.access_token, 'Content-Type': `multipart/related; boundary=${boundary}` },
+      body
+    });
+    const data = await res.json();
+    if (data.id) { gFileId = data.id; document.getElementById('gdriveStatusDot').className='dot connected'; document.getElementById('gdriveStatusText').textContent='Connected'; document.getElementById('gdriveFileName').textContent='marilu_finance.json'; document.getElementById('gdriveLog').textContent='Saved at '+new Date().toLocaleTimeString(); toast('Saved to Google Drive!'); }
+    else toast('Save failed: '+JSON.stringify(data), 'error');
+  });
+}
+
+async function loadFromGDrive() {
+  if (!gDriveReady) { toast('Connect Google Drive first', 'error'); return; }
+  getGToken(async (token) => {
+    if (token.error) { toast('Auth failed', 'error'); return; }
+    const listRes = await fetch("https://www.googleapis.com/drive/v3/files?q=name='marilu_finance.json'&fields=files(id,name,modifiedTime)", {
+      headers: { 'Authorization': 'Bearer '+token.access_token }
+    });
+    const list = await listRes.json();
+    if (!list.files?.length) { toast('No file found in Drive', 'error'); return; }
+    gFileId = list.files[0].id;
+    const fileRes = await fetch(`https://www.googleapis.com/drive/v3/files/${gFileId}?alt=media`, {
+      headers: { 'Authorization': 'Bearer '+token.access_token }
+    });
+    const data = await fileRes.json();
+    if (data.transactions) {
+      transactions = data.transactions; save(); renderDashboard();
+      document.getElementById('gdriveStatusDot').className='dot connected';
+      document.getElementById('gdriveStatusText').textContent='Connected';
+      document.getElementById('gdriveFileName').textContent='marilu_finance.json';
+      document.getElementById('gdriveLog').textContent='Loaded '+transactions.length+' transactions';
+      toast('Loaded from Google Drive!');
+    }
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.onload = () => {
+  renderDashboard();
+  // Restore GDrive creds
+  const ak = localStorage.getItem('gApiKey');
+  const ck = localStorage.getItem('gClientId');
+  if (ak) document.getElementById('gApiKey').value = ak;
+  if (ck) document.getElementById('gClientId').value = ck;
+};
+</script>
+</body>
+</html>
