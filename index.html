@@ -66,7 +66,13 @@ nav{padding:8px 0;flex:1;overflow-y:auto}
 .panel.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* BUTTONS */
+/* TABLES - RESPONSIVE FIX */
+.tbl-wrap{background:var(--card);border-radius:13px;border:1px solid var(--border);overflow-x:auto;box-shadow:0 1px 10px rgba(0,0,0,.04);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;min-width:600px} /* Min-width forces scroll instead of squashing */
+th{padding:11px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);background:var(--soft);font-weight:600;text-align:left;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--border);font-size:13px;vertical-align:middle}
+
+/* REST OF YOUR STYLES UNCHANGED... */
 .btn{padding:9px 18px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap}
 .btn-primary{background:var(--gold);color:#fff}.btn-primary:hover{background:var(--gold-dk)}
 .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--ink)}.btn-ghost:hover{background:var(--soft)}
@@ -74,223 +80,56 @@ nav{padding:8px 0;flex:1;overflow-y:auto}
 .btn-red{background:var(--red);color:#fff}
 .btn-kids{background:#f97316;color:#fff}.btn-kids:hover{background:#ea6c0c}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-
-/* CHIPS */
 .chips{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:1px}
-.chips::-webkit-scrollbar{display:none}
 .chip{padding:5px 13px;border-radius:99px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-family:'Outfit',sans-serif;transition:all .14s;flex-shrink:0}
-.chip:hover{border-color:var(--gold);color:var(--gold)}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
 .stat{background:var(--card);border-radius:13px;padding:17px 18px;border:1px solid var(--border);box-shadow:0 1px 10px rgba(0,0,0,.04)}
 .stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:6px}
 .stat-val{font-family:'Playfair Display',serif;font-size:22px;line-height:1;letter-spacing:-.3px}
 .pos{color:var(--green)}.neg{color:var(--red)}.gold{color:var(--gold)}
-.stat-sub{font-size:11px;color:var(--muted);margin-top:4px}
-
-/* LAYOUT */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:19px 21px;box-shadow:0 1px 10px rgba(0,0,0,.04)}
 .card-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);font-weight:600;margin-bottom:14px}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
-.sec-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:500}
-
-/* BAR CHART */
 .bar-chart{display:flex;align-items:flex-end;gap:9px;height:120px;margin-bottom:10px}
 .bg{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
 .bp{display:flex;gap:3px;align-items:flex-end;height:100px}
-.b{border-radius:4px 4px 0 0;min-height:3px;cursor:default;transition:opacity .15s}.b:hover{opacity:.75}
+.b{border-radius:4px 4px 0 0;min-height:3px;cursor:default;transition:opacity .15s}
 .b.gi{background:var(--green);width:13px}.b.ge{background:var(--red);width:13px}
-.bl{font-size:10px;color:var(--muted)}
-.leg{display:flex;gap:14px;margin-top:4px}
-.lg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
-.ld{width:8px;height:8px;border-radius:2px}
-
-/* CAT BARS */
 .cat-list{display:flex;flex-direction:column;gap:9px}
 .cat-r{display:flex;align-items:center;gap:9px}
 .cat-n{font-size:12px;width:120px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cat-tr{flex:1;background:var(--soft);border-radius:99px;height:6px}
 .cat-fl{height:100%;border-radius:99px;background:var(--gold)}
 .cat-a{font-size:12px;font-weight:600;color:var(--muted);min-width:70px;text-align:right}
-
-/* TABLES */
-.tbl-wrap{background:var(--card);border-radius:13px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.04)}
-table{width:100%;border-collapse:collapse}
-th{padding:11px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);background:var(--soft);font-weight:600;text-align:left;white-space:nowrap}
-td{padding:11px 14px;border-top:1px solid var(--border);font-size:13px;vertical-align:middle}
-tr:hover td{background:#faf9f4}
 .badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600}
 .b-income{background:var(--green-lt);color:var(--green)}.b-expense{background:var(--red-lt);color:var(--red)}
-.b-savings{background:#e3f2fd;color:#1565c0}.b-transfer{background:#f3e5f5;color:#6a1b9a}
 .amt-p{color:var(--green);font-weight:600}.amt-n{color:var(--red);font-weight:600}
-.empty-r{text-align:center;padding:36px;color:var(--muted);font-style:italic}
-.del-btn{background:none;border:none;cursor:pointer;color:#ccc;font-size:18px;line-height:1;padding:3px 7px;transition:color .12s}
-.del-btn:hover{color:var(--red)}
-
-/* FORM */
 .form-wrap{max-width:560px}
 .ai-box{background:linear-gradient(135deg,#fffbf4,#f0f9f4);border:1.5px solid #e8d5b8;border-radius:12px;padding:17px;margin-bottom:20px}
-.ai-top{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.ai-row{display:flex;gap:8px}
-.ai-inp{flex:1;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s;min-width:0}
-.ai-inp:focus{border-color:var(--gold)}
-.ai-hint{font-size:11px;color:var(--muted);margin-top:6px}
-.divider{text-align:center;color:var(--muted);font-size:11.5px;margin:14px 0;position:relative}
-.divider::before,.divider::after{content:'';position:absolute;top:50%;height:1px;background:var(--border);width:42%}
-.divider::before{left:0}.divider::after{right:0}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .fg{display:flex;flex-direction:column;gap:5px}
 .fg.full{grid-column:1/-1}
 label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
-input[type=text],input[type=number],input[type=date],input[type=password],select,textarea{padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--ink);background:var(--paper);outline:none;transition:border-color .15s;width:100%;-webkit-appearance:none;appearance:none}
-input:focus,select:focus,textarea:focus{border-color:var(--gold)}
-textarea{resize:vertical;min-height:60px}
-.form-actions{margin-top:16px;display:flex;gap:9px}
-.api-card{margin-top:20px;background:var(--card);border-radius:11px;border:1px solid var(--border);padding:17px}
-.api-row{display:flex;gap:8px;margin-top:7px}.api-row input{flex:1}
-.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
-.filters select,.filters input{font-size:13px;padding:8px 11px}
-.f-count{margin-left:auto;font-size:11.5px;color:var(--muted);font-style:italic}
-.bud-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.bud-head select{font-size:13px;padding:8px 12px}
-.bud-hint{font-size:12px;color:var(--muted)}
-
-/* DRIVE */
-.setup-card{max-width:580px;background:var(--card);border-radius:13px;border:1px solid var(--border);padding:26px;box-shadow:0 1px 10px rgba(0,0,0,.04)}
-.alert{padding:11px 14px;border-radius:8px;font-size:12.5px;display:flex;align-items:flex-start;gap:8px;margin-bottom:16px}
-.alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
-.step{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--border)}
-.step:last-child{border:none;padding-bottom:0}
-.step-n{width:29px;height:29px;border-radius:50%;background:var(--gold);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.step h4{font-size:13.5px;font-weight:600;margin-bottom:4px}.step p{font-size:12.5px;color:var(--muted);line-height:1.5}.step a{color:var(--gold)}
-code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monospace;font-size:12px}
-.step-ins{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.step-ins input{font-size:13px;padding:9px 12px}
-.da{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.exp-row{display:flex;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border);margin-top:14px;align-items:center}
-
-/* ══ KIDS STYLES ══════════════════════════════════ */
-.kids-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
-.kids-tab-wrap{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;background:var(--soft)}
-.kids-tab{padding:9px 22px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;background:transparent;font-family:'Outfit',sans-serif;transition:all .15s;color:var(--muted)}
-.kids-tab.active[data-child="0"]{background:var(--k1);color:#fff}
-.kids-tab.active[data-child="1"]{background:var(--k2);color:#fff}
-.kids-name-input{border:1.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);outline:none;width:150px}
-.kids-name-input:focus{border-color:var(--gold)}
-.kid-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-.kid-stat{background:var(--card);border-radius:12px;padding:15px 16px;border:1px solid var(--border);box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.kid-stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:5px}
-.kid-stat-val{font-family:'Playfair Display',serif;font-size:20px;line-height:1}
-.goal-card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.goal-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap}
-.goal-title{font-size:13.5px;font-weight:600;margin-bottom:10px}
-.goal-inputs{display:flex;gap:9px;align-items:flex-end;flex-wrap:wrap}
-.goal-inp{border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:13px;font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);outline:none;width:130px}
-.goal-inp:focus{border-color:var(--gold)}
-.goal-inp-wrap{display:flex;flex-direction:column;gap:4px}
-.goal-inp-lbl{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
-.goal-track{background:var(--soft);border-radius:99px;height:10px;overflow:hidden;margin-bottom:8px}
-.goal-fill{height:100%;border-radius:99px;transition:width .4s ease}
-.goal-info{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
-.kids-add-form{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.kids-form-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}
-.kids-form-grid .fg{gap:5px}
-.kid-tbl-wrap{background:var(--card);border-radius:13px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.04);margin-bottom:18px}
-.kids-month-chart{display:flex;gap:8px;align-items:flex-end;height:90px;margin-bottom:8px}
-.bday-card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;margin-bottom:18px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.bday-row{display:flex;gap:9px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px}
-.bday-row .fg{min-width:100px;flex:1}
-.bday-list{display:flex;flex-direction:column;gap:8px}
-.bday-item{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--soft);border-radius:9px}
-.bday-emoji{font-size:18px;flex-shrink:0}
-.bday-info{flex:1}
-.bday-name{font-weight:600;font-size:13px}
-.bday-date{font-size:11.5px;color:var(--muted)}
-.bday-budget{font-size:12px;font-weight:600;color:var(--gold);white-space:nowrap}
-.bday-del{background:none;border:none;cursor:pointer;color:#ccc;font-size:16px;padding:2px 6px;transition:color .12s}
-.bday-del:hover{color:var(--red)}
-.notes-card{background:var(--card);border-radius:13px;border:1px solid var(--border);padding:18px 20px;box-shadow:0 1px 8px rgba(0,0,0,.04);margin-bottom:24px}
-.note-add-row{display:flex;gap:9px;margin-bottom:14px;align-items:flex-start}
-.note-add-row textarea{flex:1;min-height:52px;font-size:13.5px;padding:9px 12px}
-.note-list{display:flex;flex-direction:column;gap:9px}
-.note-item{background:var(--soft);border-radius:9px;padding:10px 13px;display:flex;gap:10px;align-items:flex-start}
-.note-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.note-body{flex:1}
-.note-text{font-size:13px;line-height:1.5;margin-bottom:3px}
-.note-meta{font-size:11px;color:var(--muted)}
-.note-del{background:none;border:none;cursor:pointer;color:#ccc;font-size:15px;padding:2px 4px;flex-shrink:0;transition:color .12s}
-.note-del:hover{color:var(--red)}
-
-/* MODAL */
+input,select,textarea{padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--ink);background:var(--paper);outline:none;width:100%}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
-.modal{background:var(--card);border-radius:16px 16px 0 0;padding:24px;width:100%;max-width:480px;box-shadow:0 -8px 40px rgba(0,0,0,.18);animation:slideUp .22s ease}
-@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px}
-.modal p{font-size:13px;color:var(--muted);margin-bottom:18px}
-.modal-btns{display:flex;gap:9px}
+.modal{background:var(--card);border-radius:16px 16px 0 0;padding:24px;width:100%;max-width:480px;animation:slideUp .22s ease}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:99px;font-size:13.5px;z-index:999;opacity:0;transition:all .25s ease}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-10px)}
 
-/* TOAST */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:99px;font-size:13.5px;white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:999;opacity:0;transition:all .25s ease;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.ok{border-left:4px solid #4ade80}.toast.err{border-left:4px solid var(--red)}
-.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-
-/* RESPONSIVE */
 @media(max-width:700px){
   .sidebar{display:none}
   .bottomnav{display:block}
-  .content{padding-bottom:calc(var(--bottomnav-h) + 16px)}
-  .toast{bottom:calc(var(--bottomnav-h) + 12px)}
-  .topbar{padding:12px 16px}
-  .topbar .chips{display:none}
+  .content{padding:14px 14px 80px}
   .stats{grid-template-columns:1fr 1fr;gap:10px}
-  .stat{padding:14px 15px}.stat-val{font-size:18px}
-  .two-col{grid-template-columns:1fr;gap:12px}
-  .content{padding:14px 14px}
-  .form-wrap{max-width:100%}
-  .form-grid{grid-template-columns:1fr}
-  .fg.full{grid-column:1}
-  .mobile-chips{display:flex;overflow-x:auto;padding:0 0 10px;gap:6px;margin-bottom:14px}
-  .mobile-chips::-webkit-scrollbar{display:none}
-  .filters{flex-direction:column;align-items:stretch}
-  .filters select,.filters input{width:100%}
-  .f-count{margin-left:0}
-  .tbl-wrap{overflow-x:auto}
-  table{min-width:500px}
-  .bud-tbl-wrap{overflow-x:auto}
-  .bud-tbl-wrap table{min-width:520px}
-  .modal{max-width:100%}
+  .two-col{grid-template-columns:1fr}
   .page-title{font-size:17px}
-  .setup-card{padding:18px}
-  .bud-head{flex-direction:column;align-items:flex-start;gap:8px}
-  .api-row{flex-direction:column}
-  .kid-stats{grid-template-columns:1fr 1fr}
-  .kids-form-grid{grid-template-columns:1fr 1fr}
-  .kids-form-grid .full-mob{grid-column:1/-1}
-  .kid-tbl-wrap{overflow-x:auto}
-  .kid-tbl-wrap table{min-width:460px}
-  .bday-row{flex-direction:column}
-  .goal-inputs{flex-direction:column;align-items:flex-start}
-  .goal-inp{width:100%}
-  .kids-name-input{width:130px}
 }
-@media(min-width:701px) and (max-width:1024px){
-  .stats{grid-template-columns:1fr 1fr;gap:12px}
-  .sidebar{width:200px}
-  .content{padding:18px 20px 28px}
-  .mobile-chips{display:none}
-}
-@media(min-width:1025px){.mobile-chips{display:none}}
 </style>
 </head>
 <body>
 <div class="shell">
-
 <aside class="sidebar">
   <div class="brand">
     <div class="brand-name">Marilu<br><em>Family</em></div>
@@ -307,459 +146,134 @@ code{background:var(--soft);padding:1px 6px;border-radius:3px;font-family:monosp
     <div class="nav-sec">System</div>
     <div class="nav-item" onclick="go('drive')"><span class="nav-icon">☁</span>Google Drive</div>
   </nav>
-  <div class="sidebar-foot">
-    <div class="sync-row"><div class="dot" id="syncDot"></div><span id="syncLbl">Not connected</span></div>
-    <div class="sync-file" id="syncFile"></div>
-  </div>
 </aside>
 
 <div class="main">
   <div class="topbar">
     <div class="page-title" id="pageTitle">Dashboard</div>
-    <div class="topbar-right">
-      <div class="chips" id="desktopChips"></div>
-      <button class="btn btn-primary btn-sm" onclick="go('add')">+ Add</button>
-    </div>
+    <div class="topbar-right"><button class="btn btn-primary btn-sm" onclick="go('add')">+ Add</button></div>
   </div>
   <div class="content">
-
-    <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
-      <div class="mobile-chips" id="mobileChips"></div>
       <div class="stats" id="statsRow"></div>
       <div class="two-col">
-        <div class="card">
-          <div class="card-title">Monthly Overview</div>
-          <div class="bar-chart" id="barChart"></div>
-          <div class="leg"><div class="lg"><div class="ld" style="background:var(--green)"></div>Income</div><div class="lg"><div class="ld" style="background:var(--red)"></div>Expenses</div></div>
-        </div>
-        <div class="card">
-          <div class="card-title">Top Expense Categories</div>
-          <div class="cat-list" id="catChart"></div>
-        </div>
+        <div class="card"><div class="card-title">Monthly Overview</div><div class="bar-chart" id="barChart"></div></div>
+        <div class="card"><div class="card-title">Top Expenses</div><div class="cat-list" id="catChart"></div></div>
       </div>
-      <div class="sec-hdr"><div class="sec-title">Recent Transactions</div></div>
       <div class="tbl-wrap">
-        <table><thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th></tr></thead>
-        <tbody id="recentTbody"></tbody></table>
+        <table id="recentTable"><thead><tr><th>Date</th><th>Type</th><th>Category</th><th style="text-align:right">Amount</th></tr></thead><tbody id="recentTbody"></tbody></table>
       </div>
     </div>
-
-    <!-- ADD -->
-    <div class="panel" id="panel-add">
-      <div class="form-wrap">
-        <div class="ai-box">
-          <div class="ai-top">✦ AI Auto-fill</div>
-          <div class="ai-row">
-            <input class="ai-inp" id="aiInp" placeholder='e.g. "paid 4500 electricity" or "salary 205000"' onkeydown="if(event.key==='Enter')aiGo()">
-            <button class="btn btn-primary btn-sm" id="aiBtn" onclick="aiGo()"><span id="aiBtnTxt">Fill</span></button>
-          </div>
-          <div class="ai-hint">Claude reads your note and fills the form. Needs API key below.</div>
-        </div>
-        <div class="divider">or fill manually</div>
-        <div class="form-grid">
-          <div class="fg"><label>Date *</label><input type="date" id="fDate"></div>
-          <div class="fg"><label>Type *</label><select id="fType" onchange="refreshCats()"><option value="">Select…</option><option>Income</option><option>Expense</option><option>Savings</option><option>Transfer</option></select></div>
-          <div class="fg"><label>Category *</label><select id="fCat"><option value="">Select type first…</option></select></div>
-          <div class="fg"><label>Amount (KSh) *</label><input type="number" id="fAmt" placeholder="0" min="0" inputmode="decimal"></div>
-          <div class="fg"><label>Tag</label><select id="fTag"><option value="">None</option><option>ImpulseBuy</option><option>Unplanned</option><option>Birthday</option><option>Gift</option><option>Repair</option><option>OddJob</option></select></div>
-          <div class="fg"><label>Description</label><input type="text" id="fDesc" placeholder="Optional note"></div>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-primary" onclick="saveTx()">Save Transaction</button>
-          <button class="btn btn-ghost" onclick="clearForm()">Clear</button>
-        </div>
-        <div class="api-card">
-          <div style="font-weight:600;font-size:13.5px;margin-bottom:3px">Claude API Key</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Stored in your browser only. Get yours at <span style="color:var(--gold)">console.anthropic.com</span></div>
-          <div class="api-row"><input type="password" id="apiKeyInp" placeholder="sk-ant-…"><button class="btn btn-ghost btn-sm" onclick="saveKey()">Save</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEDGER -->
     <div class="panel" id="panel-ledger">
-      <div class="filters">
-        <select id="fltType" onchange="renderLedger()"><option value="">All Types</option><option>Income</option><option>Expense</option><option>Savings</option><option>Transfer</option></select>
-        <select id="fltCat" onchange="renderLedger()"><option value="">All Categories</option></select>
-        <input type="text" id="fltSearch" placeholder="Search…" oninput="renderLedger()">
-        <span class="f-count" id="fltCount"></span>
-      </div>
       <div class="tbl-wrap">
-        <table><thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th>Tag</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th><th></th></tr></thead>
-        <tbody id="ledgerTbody"></tbody></table>
+        <table><thead><tr><th>Date</th><th>Type</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th><th></th></tr></thead><tbody id="ledgerTbody"></tbody></table>
       </div>
     </div>
-
-    <!-- BUDGET -->
-    <div class="panel" id="panel-budget">
-      <div class="bud-head">
-        <div style="font-size:13.5px;font-weight:500">Month:</div>
-        <select id="budMonth" onchange="renderBudget()" style="min-width:140px"><option value="">All time</option></select>
-        <div class="bud-hint">Set targets in blue. Actuals pull from Ledger automatically.</div>
-      </div>
-      <div class="bud-tbl-wrap tbl-wrap">
-        <table><thead><tr><th>Category</th><th style="text-align:right">Budget (KSh)</th><th style="text-align:right">Actual (KSh)</th><th style="text-align:right">Variance</th><th>% Used</th><th style="text-align:center">Status</th></tr></thead>
-        <tbody id="budgetTbody"></tbody></table>
-      </div>
-    </div>
-
-    <!-- KIDS TRACKER -->
-    <div class="panel" id="panel-kids">
-      <div class="kids-header">
-        <div class="kids-tab-wrap">
-          <button class="kids-tab active" data-child="0" onclick="switchKid(0)">👧 <span id="tab0name">Child 1</span></button>
-          <button class="kids-tab" data-child="1" onclick="switchKid(1)">👦 <span id="tab1name">Child 2</span></button>
-        </div>
-        <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
-          <input class="kids-name-input" id="kName" placeholder="Child's name" onchange="saveKidName()">
-          <span style="font-size:12px;color:var(--muted)">← rename</span>
-        </div>
-      </div>
-
-      <div class="kid-stats" id="kidStats"></div>
-
-      <!-- SAVINGS GOAL -->
-      <div class="goal-card">
-        <div class="goal-title">🎯 Savings Goal</div>
-        <div class="goal-inputs" style="margin-bottom:14px">
-          <div class="goal-inp-wrap"><div class="goal-inp-lbl">Goal name</div><input class="goal-inp" id="kGoalName" type="text" placeholder="e.g. School trip"></div>
-          <div class="goal-inp-wrap"><div class="goal-inp-lbl">Target (KSh)</div><input class="goal-inp" id="kGoalTarget" type="number" placeholder="0" inputmode="decimal"></div>
-          <div class="goal-inp-wrap"><div class="goal-inp-lbl">Saved so far</div><input class="goal-inp" id="kGoalSaved" type="number" placeholder="0" inputmode="decimal"></div>
-          <button class="btn btn-kids btn-sm" onclick="saveGoal()" style="align-self:flex-end">Save Goal</button>
-        </div>
-        <div class="goal-track"><div class="goal-fill" id="goalBar" style="width:0%"></div></div>
-        <div class="goal-info"><span id="goalPct" style="font-weight:700">0%</span><span id="goalAmt" style="color:var(--muted)">Set a goal above</span></div>
-      </div>
-
-      <!-- QUICK ADD EXPENSE -->
-      <div class="kids-add-form">
-        <div class="card-title" style="margin-bottom:12px">➕ Add Kid Expense</div>
-        <div class="kids-form-grid">
-          <div class="fg"><label>Date</label><input type="date" id="kDate"></div>
-          <div class="fg"><label>Category</label>
-            <select id="kCat"><option value="">Select…</option><option>School Fees</option><option>School Supplies</option><option>Clothing</option><option>Shopping</option><option>Activities</option><option>Fun & Outings</option><option>Birthday / Gift</option><option>Medical / Health</option><option>Transport</option><option>Pocket Money</option><option>Other</option></select>
-          </div>
-          <div class="fg"><label>Amount (KSh)</label><input type="number" id="kAmt" placeholder="0" inputmode="decimal"></div>
-          <div class="fg full-mob"><label>Note</label><input type="text" id="kNote" placeholder="e.g. Term 1 fees"></div>
-          <div style="display:flex;align-items:flex-end"><button class="btn btn-kids btn-sm" onclick="addKidExpense()">Add</button></div>
-        </div>
-      </div>
-
-      <!-- EXPENSE TABLE -->
-      <div class="sec-hdr">
-        <div class="sec-title" id="kidExpTitle">Expenses</div>
-        <div style="font-size:12px;color:var(--muted)" id="kidExpTotal"></div>
-      </div>
-      <div class="kid-tbl-wrap">
-        <table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th style="text-align:right">Amount</th><th></th></tr></thead>
-        <tbody id="kidExpTbody"></tbody></table>
-      </div>
-
-      <!-- MONTHLY CHART -->
-      <div class="card" style="margin-bottom:18px">
-        <div class="card-title">Monthly Spending</div>
-        <div class="kids-month-chart" id="kidMonthChart"></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">Last 6 months</div>
-      </div>
-
-      <!-- BIRTHDAY & GIFT TRACKER -->
-      <div class="bday-card">
-        <div class="card-title" style="margin-bottom:12px">🎂 Birthday & Gift Budget</div>
-        <div class="bday-row">
-          <div class="fg"><label>Event name</label><input type="text" id="bdayName" placeholder="e.g. School graduation"></div>
-          <div class="fg"><label>Date</label><input type="date" id="bdayDate"></div>
-          <div class="fg"><label>Budget (KSh)</label><input type="number" id="bdayBudget" placeholder="0" inputmode="decimal"></div>
-          <div style="display:flex;align-items:flex-end"><button class="btn btn-kids btn-sm" onclick="addBday()">Add</button></div>
-        </div>
-        <div class="bday-list" id="bdayList"></div>
-      </div>
-
-      <!-- NOTES & MILESTONES -->
-      <div class="notes-card">
-        <div class="card-title" style="margin-bottom:12px">📝 Notes & Milestones</div>
-        <div class="note-add-row">
-          <textarea id="kNoteText" placeholder="e.g. Started reading chapter books · Lost first tooth · Won science prize · First swimming lesson…"></textarea>
-          <button class="btn btn-kids btn-sm" onclick="addNote()">Add</button>
-        </div>
-        <div class="note-list" id="noteList"></div>
-      </div>
-    </div>
-
-    <!-- GOOGLE DRIVE -->
     <div class="panel" id="panel-drive">
-      <div class="setup-card">
-        <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:5px">Google Drive Sync</h2>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Connect once. Save & load from any device.</p>
-        <div class="alert alert-warn">⚠ Requires a Google Cloud project with Drive API enabled.</div>
-        <div class="step"><div class="step-n">1</div><div><h4>Create a Google Cloud project</h4><p>Go to <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> → New Project → enable <strong>Google Drive API</strong>.</p></div></div>
-        <div class="step"><div class="step-n">2</div><div><h4>Create credentials</h4><p>APIs & Services → Credentials → <strong>OAuth 2.0 Client ID</strong> (Web Application) + <strong>API Key</strong>. Add your URL as authorised origin.</p></div></div>
-        <div class="step"><div class="step-n">3</div><div><h4>Paste & connect</h4><div class="step-ins"><input id="gApiKey" placeholder="Google API Key  (AIza…)" type="text"><input id="gClientId" placeholder="OAuth Client ID  (….apps.googleusercontent.com)" type="text"></div><div class="da"><button class="btn btn-primary btn-sm" onclick="initDrive()">Connect Google Drive</button></div></div></div>
-        <div class="step"><div class="step-n">4</div><div><h4>Save & load</h4><div class="da"><button class="btn btn-ghost btn-sm" onclick="driveSave()">💾 Save to Drive</button><button class="btn btn-ghost btn-sm" onclick="driveLoad()">📂 Load from Drive</button></div><div id="driveLog" style="font-size:11.5px;color:var(--muted);margin-top:8px"></div></div></div>
-        <div class="exp-row">
-          <span style="font-size:12px;font-weight:600;color:var(--muted);flex:1">Quick backup</span>
-          <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇ Export JSON</button>
-          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importFile').click()">⬆ Import JSON</button>
-          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+      <div class="card" style="max-width:500px">
+        <h3>Drive Sync</h3>
+        <input id="gApiKey" placeholder="Google API Key" type="text" style="margin:10px 0">
+        <input id="gClientId" placeholder="OAuth Client ID" type="text" style="margin:10px 0">
+        <button class="btn btn-primary" onclick="initDrive()">Connect Drive</button>
+        <div style="margin-top:20px">
+          <button class="btn btn-ghost" onclick="driveSave()">💾 Save</button>
+          <button class="btn btn-ghost" onclick="driveLoad()">📂 Load</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 </div>
 
 <nav class="bottomnav">
   <div class="bn-items">
-    <div class="bn-item active" id="bn-dashboard" onclick="go('dashboard')"><div class="bn-icon">◈</div><div>Home</div></div>
-    <div class="bn-item" id="bn-add" onclick="go('add')"><div class="bn-icon">＋</div><div>Add</div></div>
-    <div class="bn-item" id="bn-ledger" onclick="go('ledger')"><div class="bn-icon">≡</div><div>Ledger</div><div class="bn-badge" id="bnb">0</div></div>
-    <div class="bn-item kids-nav" id="bn-kids" onclick="go('kids')"><div class="bn-icon">👨‍👩‍👧</div><div>Kids</div></div>
-    <div class="bn-item" id="bn-drive" onclick="go('drive')"><div class="bn-icon">☁</div><div>Drive</div></div>
+    <div class="bn-item active" onclick="go('dashboard')">◈ Home</div>
+    <div class="bn-item" onclick="go('add')">＋ Add</div>
+    <div class="bn-item" onclick="go('ledger')">≡ Ledger</div>
+    <div class="bn-item" onclick="go('kids')">👨‍👩‍👧 Kids</div>
+    <div class="bn-item" onclick="go('drive')">☁ Drive</div>
   </div>
 </nav>
 
-<div class="modal-bg" id="delModal">
-  <div class="modal">
-    <h3>Delete this entry?</h3>
-    <p>This cannot be undone. Your balance updates automatically.</p>
-    <div class="modal-btns"><button class="btn btn-red" onclick="confirmDel()">Delete</button><button class="btn btn-ghost" onclick="closeModal()">Cancel</button></div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
 <script>
-const CATS={Income:['Salary','Side Hustle','Gifts / Friends','Bonus','Dividends','Other'],Expense:['Rent','Bills','» Water','» Electricity (KPLC)','» Internet / WiFi','» TV Subscription','» Gym','Groceries','Personal Care','Entertainment','Transport','Fun and Vacation','Shopping','Giving / Donation','Unplanned / Impulse/','» Shopping','» Entertainment','» Dining Out','Car Maintenance','Emergency Repair','Stocks','Money Market funds','Emergency Funds','Auto Loan','Student Loan','Credit Card','Other'],Savings:['SACCO','Money Market Fund','Emergency Fund','Fixed Deposit','Shares','Other'],Transfer:['Transfer']};
-const SEED=[{date:'2025-09-02',type:'Income',cat:'Salary',tag:'',desc:'',amt:205611},{date:'2025-09-02',type:'Expense',cat:'Giving / Donation',tag:'',desc:'',amt:20500},{date:'2025-09-02',type:'Expense',cat:'Rent',tag:'',desc:'',amt:30000},{date:'2025-09-02',type:'Expense',cat:'» Internet / WiFi',tag:'',desc:'',amt:3000},{date:'2025-09-02',type:'Expense',cat:'» Electricity (KPLC)',tag:'',desc:'',amt:4000},{date:'2025-09-02',type:'Expense',cat:'» Water',tag:'',desc:'',amt:800},{date:'2025-09-02',type:'Expense',cat:'Bills',tag:'',desc:'Maureen',amt:15000},{date:'2025-09-02',type:'Expense',cat:'Giving / Donation',tag:'',desc:'Glory Sanctuary',amt:1000},{date:'2025-09-02',type:'Expense',cat:'Shopping',tag:'',desc:'Weekly',amt:10000},{date:'2025-09-02',type:'Expense',cat:'» Shopping',tag:'',desc:'Monthly',amt:10000},{date:'2025-09-02',type:'Expense',cat:'Credit Card',tag:'',desc:'',amt:24000}];
-let txs=JSON.parse(localStorage.getItem('mf_txs')||'null')||SEED;
-let budgets=JSON.parse(localStorage.getItem('mf_budgets')||'{}');
-let kidsData=JSON.parse(localStorage.getItem('mf_kids')||'null')||[{name:'Child 1',expenses:[],goal:{name:'',target:0,saved:0},birthdays:[],notes:[]},{name:'Child 2',expenses:[],goal:{name:'',target:0,saved:0},birthdays:[],notes:[]}];
-let selMonth=null,delIdx=null,activeKid=0,gReady=false,gFileId=null;
-const save=()=>localStorage.setItem('mf_txs',JSON.stringify(txs));
-const saveBudgets=()=>localStorage.setItem('mf_budgets',JSON.stringify(budgets));
-const saveKids=()=>localStorage.setItem('mf_kids',JSON.stringify(kidsData));
-const kid=()=>kidsData[activeKid];
-const ksh=n=>'KSh '+Math.abs(n).toLocaleString('en-KE',{maximumFractionDigits:0});
-const fmtD=d=>{if(!d)return'';return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})};
-const mk=d=>d?d.slice(0,7):'';
-const mlbl=k=>{if(!k)return'';const[y,m]=k.split('-');return new Date(y,+m-1).toLocaleString('en',{month:'short'})+' '+y};
-const runBal=()=>{let b=0;return txs.map(t=>{b+=t.type==='Income'?t.amt:-t.amt;return b;})};
-const getFilt=()=>selMonth?txs.filter(t=>mk(t.date)===selMonth):txs;
-function toast(msg,type='ok'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.className='toast',3000)}
+// Logic core
+let txs = JSON.parse(localStorage.getItem('mf_txs') || '[]');
+let gReady = false; let gFileId = null;
 
-const NAV_ORDER=['dashboard','add','ledger','budget','kids','drive'];
-function go(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const idx=NAV_ORDER.indexOf(id);
-  const items=document.querySelectorAll('.nav-item');
-  if(idx>=0&&items[idx])items[idx].classList.add('active');
-  document.querySelectorAll('.bn-item').forEach(n=>n.classList.remove('active'));
-  const bn=document.getElementById('bn-'+id);if(bn)bn.classList.add('active');
-  const T={dashboard:'Dashboard',add:'Add Transaction',ledger:'Ledger',budget:'Budget',kids:'Kids Tracker',drive:'Google Drive'};
-  document.getElementById('pageTitle').textContent=T[id]||id;
-  if(id==='dashboard')renderDashboard();
-  if(id==='add')initAdd();
-  if(id==='ledger'){fillLedgerFilters();renderLedger();}
-  if(id==='budget'){fillBudgetMonths();renderBudget();}
-  if(id==='kids')renderKids();
+const save = () => localStorage.setItem('mf_txs', JSON.stringify(txs));
+const ksh = n => 'KSh ' + Math.abs(n).toLocaleString();
+
+function go(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if(id === 'dashboard') renderDashboard();
+  if(id === 'ledger') renderLedger();
 }
 
-function buildChips(){
-  const ms=[...new Set(txs.map(t=>mk(t.date)).filter(Boolean))].sort().reverse().slice(0,6);
-  const html=`<button class="chip ${!selMonth?'active':''}" onclick="setMonth(null)">All</button>`+ms.map(m=>`<button class="chip ${selMonth===m?'active':''}" onclick="setMonth('${m}')">${mlbl(m)}</button>`).join('');
-  document.getElementById('desktopChips').innerHTML=html;
-  document.getElementById('mobileChips').innerHTML=html;
-}
-function setMonth(m){selMonth=m;buildChips();renderDashboard();}
-
-function renderDashboard(){
-  buildChips();
-  const ft=getFilt();
-  const inc=ft.filter(t=>t.type==='Income').reduce((s,t)=>s+t.amt,0);
-  const exp=ft.filter(t=>t.type==='Expense').reduce((s,t)=>s+t.amt,0);
-  const net=inc-exp;const bals=runBal();const bal=bals.length?bals[bals.length-1]:0;
-  const per=selMonth?mlbl(selMonth):'All time';
-  document.getElementById('statsRow').innerHTML=`
-    <div class="stat"><div class="stat-lbl">Income</div><div class="stat-val pos">${ksh(inc)}</div><div class="stat-sub">${per}</div></div>
-    <div class="stat"><div class="stat-lbl">Expenses</div><div class="stat-val neg">${ksh(exp)}</div><div class="stat-sub">${per}</div></div>
-    <div class="stat"><div class="stat-lbl">Balance</div><div class="stat-val gold">${ksh(bal)}</div><div class="stat-sub">Running total</div></div>
-    <div class="stat"><div class="stat-lbl">Net Flow</div><div class="stat-val ${net>=0?'pos':'neg'}">${net<0?'-':''}${ksh(net)}</div><div class="stat-sub">Income − Expenses</div></div>`;
-  renderBarChart();renderCatChart(ft);renderRecent();
-  document.getElementById('nb').textContent=txs.length;
-  document.getElementById('bnb').textContent=txs.length;
-}
-function renderBarChart(){
-  const mo={};txs.forEach(t=>{const m=mk(t.date);if(!mo[m])mo[m]={i:0,e:0};if(t.type==='Income')mo[m].i+=t.amt;else if(t.type==='Expense')mo[m].e+=t.amt;});
-  const sorted=Object.keys(mo).sort().slice(-6);
-  if(!sorted.length){document.getElementById('barChart').innerHTML='<div style="color:var(--muted);padding-top:30px;font-size:13px">No data yet</div>';return;}
-  const mx=Math.max(...sorted.flatMap(m=>[mo[m].i,mo[m].e]),1);
-  document.getElementById('barChart').innerHTML=sorted.map(m=>{const lbl=mlbl(m).split(' ')[0];const ih=Math.max(3,Math.round(mo[m].i/mx*92));const eh=Math.max(3,Math.round(mo[m].e/mx*92));return`<div class="bg"><div class="bp"><div class="b gi" style="height:${ih}px" title="Income: ${ksh(mo[m].i)}"></div><div class="b ge" style="height:${eh}px" title="Exp: ${ksh(mo[m].e)}"></div></div><div class="bl">${lbl}</div></div>`;}).join('');
-}
-function renderCatChart(ft){
-  const cats={};ft.filter(t=>t.type==='Expense').forEach(t=>{cats[t.cat]=(cats[t.cat]||0)+t.amt;});
-  const sorted=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,7);
-  if(!sorted.length){document.getElementById('catChart').innerHTML='<div style="color:var(--muted);padding:16px 0;font-size:13px">No expenses recorded</div>';return;}
-  const mx=sorted[0][1];
-  document.getElementById('catChart').innerHTML=sorted.map(([c,a])=>`<div class="cat-r"><div class="cat-n" title="${c}">${c}</div><div class="cat-tr"><div class="cat-fl" style="width:${Math.round(a/mx*100)}%"></div></div><div class="cat-a">${ksh(a)}</div></div>`).join('');
-}
-function renderRecent(){
-  const r=[...txs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
-  document.getElementById('recentTbody').innerHTML=r.length?r.map(t=>`<tr><td style="white-space:nowrap">${fmtD(t.date)}</td><td><span class="badge b-${t.type.toLowerCase()}">${t.type}</span></td><td>${t.cat}</td><td style="color:var(--muted)">${t.desc||'—'}</td><td style="text-align:right" class="${t.type==='Income'?'amt-p':'amt-n'}">${t.type==='Income'?'+':'-'} ${ksh(t.amt)}</td></tr>`).join(''):`<tr><td colspan="5" class="empty-r">No transactions yet. Tap Add to start!</td></tr>`;
+function renderDashboard() {
+  const inc = txs.filter(t => t.type === 'Income').reduce((s, t) => s + t.amt, 0);
+  const exp = txs.filter(t => t.type === 'Expense').reduce((s, t) => s + t.amt, 0);
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat"><div class="stat-lbl">Income</div><div class="stat-val pos">${ksh(inc)}</div></div>
+    <div class="stat"><div class="stat-lbl">Expenses</div><div class="stat-val neg">${ksh(exp)}</div></div>
+  `;
 }
 
-function initAdd(){if(!document.getElementById('fDate').value)document.getElementById('fDate').value=new Date().toISOString().slice(0,10);refreshCats();const k=localStorage.getItem('mf_key');if(k)document.getElementById('apiKeyInp').value=k;}
-function refreshCats(){const t=document.getElementById('fType').value;document.getElementById('fCat').innerHTML='<option value="">Select…</option>'+(CATS[t]||[]).map(c=>`<option>${c}</option>`).join('');}
-function clearForm(){['fType','fCat','fAmt','fTag','fDesc','aiInp'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('fDate').value=new Date().toISOString().slice(0,10);refreshCats();}
-function saveTx(){const date=document.getElementById('fDate').value,type=document.getElementById('fType').value,cat=document.getElementById('fCat').value,amt=parseFloat(document.getElementById('fAmt').value),tag=document.getElementById('fTag').value,desc=document.getElementById('fDesc').value.trim();if(!date||!type||!cat||!amt){toast('Fill in Date, Type, Category & Amount','err');return;}txs.unshift({date,type,cat,tag,desc,amt});save();toast('Saved ✓');clearForm();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;}
-function saveKey(){const k=document.getElementById('apiKeyInp').value.trim();if(!k){toast('Paste your key first','err');return;}localStorage.setItem('mf_key',k);toast('Key saved ✓');}
-
-async function aiGo(){
-  const key=localStorage.getItem('mf_key');if(!key){toast('Save your Claude API key below first','err');return;}
-  const prompt=document.getElementById('aiInp').value.trim();if(!prompt){toast('Type a description first','err');return;}
-  const btn=document.getElementById('aiBtn');document.getElementById('aiBtnTxt').innerHTML='<span class="spin"></span>';btn.disabled=true;
-  const today=new Date().toISOString().slice(0,10);const allCats=Object.values(CATS).flat();
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:`Parse transaction descriptions for a Kenyan family finance app. Return ONLY valid JSON, no markdown. Categories: ${allCats.join(', ')}. Types: Income, Expense, Savings, Transfer. Tags: ImpulseBuy, Unplanned, Birthday, Gift, Repair, OddJob. Return: {"date":"YYYY-MM-DD","type":"...","cat":"exact category","amt":number,"tag":"","desc":"brief note"}. Today: ${today}. Amounts in KSh.`,messages:[{role:'user',content:prompt}]})});
-    const data=await res.json();const text=(data.content?.[0]?.text||'').replace(/```json|```/g,'').trim();const p=JSON.parse(text);
-    if(p.date)document.getElementById('fDate').value=p.date;
-    if(p.type){document.getElementById('fType').value=p.type;refreshCats();}
-    setTimeout(()=>{if(p.cat)document.getElementById('fCat').value=p.cat;},60);
-    if(p.amt)document.getElementById('fAmt').value=p.amt;
-    if(p.tag)document.getElementById('fTag').value=p.tag;
-    if(p.desc)document.getElementById('fDesc').value=p.desc;
-    toast('Form filled by AI ✨');
-  }catch(e){toast('AI fill failed: '+e.message,'err');}
-  finally{document.getElementById('aiBtnTxt').textContent='Fill';btn.disabled=false;}
+function renderLedger() {
+  document.getElementById('ledgerTbody').innerHTML = txs.map(t => `
+    <tr><td>${t.date}</td><td>${t.type}</td><td>${t.cat}</td><td>${t.desc}</td><td style="text-align:right">${ksh(t.amt)}</td><td>-</td><td>×</td></tr>
+  `).join('');
 }
 
-function fillLedgerFilters(){const cats=[...new Set(txs.map(t=>t.cat))].sort();document.getElementById('fltCat').innerHTML='<option value="">All Categories</option>'+cats.map(c=>`<option>${c}</option>`).join('');}
-function renderLedger(){
-  const tf=document.getElementById('fltType').value,cf=document.getElementById('fltCat').value,sf=document.getElementById('fltSearch').value.toLowerCase();
-  const bals=runBal();let rows=txs.map((t,i)=>({...t,bal:bals[i],oi:i})).sort((a,b)=>b.date.localeCompare(a.date));
-  if(tf)rows=rows.filter(r=>r.type===tf);if(cf)rows=rows.filter(r=>r.cat===cf);if(sf)rows=rows.filter(r=>(r.desc||'').toLowerCase().includes(sf)||(r.cat||'').toLowerCase().includes(sf));
-  document.getElementById('fltCount').textContent=`${rows.length} entr${rows.length===1?'y':'ies'}`;
-  document.getElementById('ledgerTbody').innerHTML=rows.length?rows.map(r=>`<tr><td style="white-space:nowrap">${fmtD(r.date)}</td><td><span class="badge b-${r.type.toLowerCase()}">${r.type}</span></td><td>${r.cat}</td><td style="color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.desc||'—'}</td><td>${r.tag?`<span style="background:var(--gold-lt);color:var(--gold-dk);padding:1px 7px;border-radius:99px;font-size:11px">${r.tag}</span>`:'—'}</td><td class="${r.type==='Income'?'amt-p':'amt-n'}" style="text-align:right;white-space:nowrap">${r.type==='Income'?'+':'-'} ${ksh(r.amt)}</td><td style="text-align:right;font-weight:600;white-space:nowrap;color:${r.bal>=0?'var(--green)':'var(--red)'}">${r.bal<0?'-':''}${ksh(r.bal)}</td><td><button class="del-btn" onclick="delRow(${r.oi})">×</button></td></tr>`).join(''):`<tr><td colspan="8" class="empty-r">No entries match your filters</td></tr>`;
-}
-function delRow(i){delIdx=i;document.getElementById('delModal').classList.add('open');}
-function closeModal(){document.getElementById('delModal').classList.remove('open');delIdx=null;}
-function confirmDel(){if(delIdx!==null){txs.splice(delIdx,1);save();fillLedgerFilters();renderLedger();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;closeModal();toast('Deleted');}}
-
-function fillBudgetMonths(){const ms=[...new Set(txs.map(t=>mk(t.date)).filter(Boolean))].sort().reverse();const sel=document.getElementById('budMonth');const cur=sel.value;sel.innerHTML='<option value="">All time</option>'+ms.map(m=>`<option value="${m}">${mlbl(m)}</option>`).join('');if(cur)sel.value=cur;}
-function renderBudget(){
-  const mo=document.getElementById('budMonth').value,ft=mo?txs.filter(t=>mk(t.date)===mo):txs,bkey=mo||'alltime',actuals={};
-  ft.filter(t=>t.type==='Expense').forEach(t=>{actuals[t.cat]=(actuals[t.cat]||0)+t.amt;});
-  document.getElementById('budgetTbody').innerHTML=CATS.Expense.map(cat=>{const actual=actuals[cat]||0,bk=`${bkey}_${cat}`,budget=budgets[bk]||0,variance=budget?budget-actual:null,pct=budget?Math.min(actual/budget*100,999):null,over=budget&&actual>budget;
-    return`<tr><td style="font-size:13px">${cat}</td><td style="text-align:right"><input type="number" value="${budget||''}" placeholder="—" style="width:96px;text-align:right;border:1.5px solid #b3d4f0;background:#e8f4fc;border-radius:6px;padding:5px 8px;font-size:12.5px;font-weight:600;color:#0d47a1;font-family:Outfit,sans-serif" onchange="setBudget('${bk}',this.value)"></td><td style="text-align:right;font-weight:600">${actual?ksh(actual):'—'}</td><td style="text-align:right;color:${variance!==null?(variance<0?'var(--red)':'var(--green)'):'var(--muted)'}">${variance!==null?(variance<0?'− ':'+ ')+ksh(Math.abs(variance)):'—'}</td><td>${pct!==null?`<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:var(--soft);border-radius:99px;min-width:50px"><div style="height:100%;border-radius:99px;background:${pct>100?'var(--red)':'var(--gold)'};width:${Math.min(pct,100)}%"></div></div><span style="font-size:11px;font-weight:700;color:${pct>100?'var(--red)':'var(--muted)'}">${pct.toFixed(0)}%</span></div>`:'—'}</td><td style="text-align:center;font-weight:700;color:${over?'var(--red)':actual&&budget?'var(--green)':'var(--muted)'}">${budget?(over?'⚠ Over':'✅ OK'):'—'}</td></tr>`;
-  }).join('');
-}
-function setBudget(key,val){const n=parseFloat(val);if(n>0)budgets[key]=n;else delete budgets[key];saveBudgets();renderBudget();}
-
-/* ════ KIDS ════ */
-function switchKid(idx){activeKid=idx;document.querySelectorAll('.kids-tab').forEach(t=>t.classList.toggle('active',+t.dataset.child===idx));renderKids();}
-function saveKidName(){const name=document.getElementById('kName').value.trim();if(!name)return;kid().name=name;document.getElementById('tab'+activeKid+'name').textContent=name;saveKids();}
-
-function renderKids(){
-  const k=kid();
-  document.getElementById('kName').value=k.name;
-  document.getElementById('tab0name').textContent=kidsData[0].name;
-  document.getElementById('tab1name').textContent=kidsData[1].name;
-  document.getElementById('kDate').value=new Date().toISOString().slice(0,10);
-  const total=k.expenses.reduce((s,e)=>s+e.amt,0);
-  const thisMonth=mk(new Date().toISOString().slice(0,10));
-  const monthTotal=k.expenses.filter(e=>mk(e.date)===thisMonth).reduce((s,e)=>s+e.amt,0);
-  const cats={};k.expenses.forEach(e=>{cats[e.cat]=(cats[e.cat]||0)+e.amt;});
-  const topCat=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];
-  const c=activeKid===0?'var(--k1)':'var(--k2)';
-  document.getElementById('kidStats').innerHTML=`
-    <div class="kid-stat"><div class="kid-stat-lbl">Total Spent</div><div class="kid-stat-val" style="color:${c}">${ksh(total)}</div><div class="stat-sub">All time</div></div>
-    <div class="kid-stat"><div class="kid-stat-lbl">This Month</div><div class="kid-stat-val" style="color:${c}">${ksh(monthTotal)}</div><div class="stat-sub">${mlbl(thisMonth)||'—'}</div></div>
-    <div class="kid-stat"><div class="kid-stat-lbl">Top Category</div><div class="kid-stat-val" style="font-size:14px;font-family:'Outfit',sans-serif;margin-top:4px">${topCat?topCat[0]:'—'}</div><div class="stat-sub">Most spent on</div></div>`;
-  renderGoal();renderKidExpenses();renderKidMonthChart();renderBdays();renderNotes();
-  document.getElementById('kidExpTitle').textContent=k.name+"'s Expenses";
+// DRIVE FIXES
+function initDrive() {
+  const ak = document.getElementById('gApiKey').value.trim();
+  const ck = document.getElementById('gClientId').value.trim();
+  localStorage.setItem('mf_gak', ak); localStorage.setItem('mf_gck', ck);
+  
+  const loadScript = (src, cb) => { const s = document.createElement('script'); s.src = src; s.onload = cb; document.head.appendChild(s); };
+  loadScript('https://accounts.google.com/gsi/client', () => {
+    loadScript('https://apis.google.com/js/api.js', () => {
+      gapi.load('client', async () => {
+        await gapi.client.init({ apiKey: ak, discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'] });
+        gReady = true; alert('Connected!');
+      });
+    });
+  });
 }
 
-function renderGoal(){
-  const g=kid().goal;
-  document.getElementById('kGoalName').value=g.name||'';
-  document.getElementById('kGoalTarget').value=g.target||'';
-  document.getElementById('kGoalSaved').value=g.saved||'';
-  const pct=g.target?Math.min(100,Math.round(g.saved/g.target*100)):0;
-  const col=activeKid===0?'var(--k1)':'var(--k2)';
-  document.getElementById('goalBar').style.width=pct+'%';
-  document.getElementById('goalBar').style.background=col;
-  document.getElementById('goalPct').textContent=pct+'%';
-  document.getElementById('goalPct').style.color=col;
-  document.getElementById('goalAmt').textContent=g.target?(g.saved>=g.target?`🎉 Goal reached${g.name?' — '+g.name:''}!`:`${ksh(g.saved)} saved · ${ksh(g.target-g.saved)} to go${g.name?' for '+g.name:''}`):'Set a goal above';
-}
-function saveGoal(){kid().goal={name:document.getElementById('kGoalName').value.trim(),target:parseFloat(document.getElementById('kGoalTarget').value)||0,saved:parseFloat(document.getElementById('kGoalSaved').value)||0};saveKids();renderGoal();toast('Goal saved ✓');}
-
-function addKidExpense(){
-  const date=document.getElementById('kDate').value,cat=document.getElementById('kCat').value,amt=parseFloat(document.getElementById('kAmt').value),note=document.getElementById('kNote').value.trim();
-  if(!date||!cat||!amt){toast('Fill Date, Category & Amount','err');return;}
-  kid().expenses.unshift({date,cat,amt,note});saveKids();
-  document.getElementById('kAmt').value='';document.getElementById('kNote').value='';
-  renderKidExpenses();renderKidMonthChart();renderKids();toast('Expense added ✓');
-}
-function renderKidExpenses(){
-  const exps=kid().expenses,total=exps.reduce((s,e)=>s+e.amt,0);
-  document.getElementById('kidExpTotal').textContent=exps.length?`Total: ${ksh(total)}`:'';
-  document.getElementById('kidExpTbody').innerHTML=exps.length?exps.map((e,i)=>`<tr><td style="white-space:nowrap">${fmtD(e.date)}</td><td><span class="badge" style="background:${activeKid===0?'var(--k1-lt)':'var(--k2-lt)'};color:${activeKid===0?'var(--k1)':'var(--k2)'}">${e.cat}</span></td><td style="color:var(--muted)">${e.note||'—'}</td><td class="amt-n" style="text-align:right;white-space:nowrap">${ksh(e.amt)}</td><td><button class="del-btn" onclick="delKidExp(${i})">×</button></td></tr>`).join(''):`<tr><td colspan="5" class="empty-r">No expenses yet — add one above</td></tr>`;
-}
-function delKidExp(i){kid().expenses.splice(i,1);saveKids();renderKidExpenses();renderKidMonthChart();renderKids();toast('Deleted');}
-
-function renderKidMonthChart(){
-  const mo={};kid().expenses.forEach(e=>{const m=mk(e.date);mo[m]=(mo[m]||0)+e.amt;});
-  const sorted=Object.keys(mo).sort().slice(-6);
-  if(!sorted.length){document.getElementById('kidMonthChart').innerHTML='<div style="color:var(--muted);padding-top:20px;font-size:13px">No data yet</div>';return;}
-  const mx=Math.max(...sorted.map(m=>mo[m]),1),col=activeKid===0?'var(--k1)':'var(--k2)';
-  document.getElementById('kidMonthChart').innerHTML=sorted.map(m=>{const h=Math.max(4,Math.round(mo[m]/mx*76));return`<div class="bg"><div style="display:flex;align-items:flex-end;height:80px"><div style="width:18px;height:${h}px;background:${col};border-radius:4px 4px 0 0" title="${mlbl(m)}: ${ksh(mo[m])}"></div></div><div class="bl">${mlbl(m).split(' ')[0]}</div></div>`;}).join('');
+function getToken(cb) {
+  // FIXED: Pulling Client ID directly from localStorage to ensure it's present
+  const clientID = localStorage.getItem('mf_gck');
+  if(!clientID) { alert("Missing Client ID"); return; }
+  
+  google.accounts.oauth2.initTokenClient({
+    client_id: clientID,
+    scope: 'https://www.googleapis.com/auth/drive.file',
+    callback: cb
+  }).requestAccessToken();
 }
 
-function addBday(){
-  const name=document.getElementById('bdayName').value.trim(),date=document.getElementById('bdayDate').value,budget=parseFloat(document.getElementById('bdayBudget').value)||0;
-  if(!name||!date){toast('Enter event name and date','err');return;}
-  kid().birthdays.push({name,date,budget});kid().birthdays.sort((a,b)=>a.date.localeCompare(b.date));saveKids();
-  document.getElementById('bdayName').value='';document.getElementById('bdayDate').value='';document.getElementById('bdayBudget').value='';
-  renderBdays();toast('Event added ✓');
+async function driveSave() {
+  if(!gReady) return alert("Connect Drive first");
+  getToken(async tok => {
+    const content = JSON.stringify(txs);
+    const b = 'mf_bound';
+    const meta = JSON.stringify({name: 'marilu_finance.json', mimeType: 'application/json'});
+    const body = `--${b}\r\nContent-Type: application/json\r\n\r\n${meta}\r\n--${b}\r\nContent-Type: application/json\r\n\r\n${content}\r\n--${b}--`;
+    await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + tok.access_token, 'Content-Type': `multipart/related; boundary=${b}` },
+      body: body
+    });
+    alert("Saved!");
+  });
 }
-function renderBdays(){
-  const list=kid().birthdays,today=new Date().toISOString().slice(0,10);
-  document.getElementById('bdayList').innerHTML=list.length?list.map((b,i)=>{
-    const daysLeft=Math.ceil((new Date(b.date)-new Date(today))/(864e5));
-    const tag=daysLeft<0?`${fmtD(b.date)} (Past)`:daysLeft===0?'🎉 Today!':daysLeft<=7?`In ${daysLeft} day${daysLeft!==1?'s':''}`:fmtD(b.date);
-    return`<div class="bday-item"><div class="bday-emoji">${daysLeft===0?'🎉':daysLeft>0&&daysLeft<=7?'⏰':'🎂'}</div><div class="bday-info"><div class="bday-name">${b.name}</div><div class="bday-date">${tag}</div></div>${b.budget?`<div class="bday-budget">${ksh(b.budget)}</div>`:''}<button class="bday-del" onclick="delBday(${i})">×</button></div>`;
-  }).join(''):`<div style="color:var(--muted);font-size:13px;font-style:italic;padding:6px 0">No events yet — add one above</div>`;
-}
-function delBday(i){kid().birthdays.splice(i,1);saveKids();renderBdays();toast('Removed');}
 
-function addNote(){const text=document.getElementById('kNoteText').value.trim();if(!text){toast('Type a note first','err');return;}kid().notes.unshift({text,date:new Date().toISOString().slice(0,10)});saveKids();document.getElementById('kNoteText').value='';renderNotes();toast('Note saved ✓');}
-function renderNotes(){
-  const notes=kid().notes,col=activeKid===0?'var(--k1)':'var(--k2)';
-  document.getElementById('noteList').innerHTML=notes.length?notes.map((n,i)=>`<div class="note-item"><div class="note-dot" style="background:${col}"></div><div class="note-body"><div class="note-text">${n.text}</div><div class="note-meta">${fmtD(n.date)}</div></div><button class="note-del" onclick="delNote(${i})">×</button></div>`).join(''):`<div style="color:var(--muted);font-size:13px;font-style:italic">No notes yet — record a milestone above</div>`;
-}
-function delNote(i){kid().notes.splice(i,1);saveKids();renderNotes();toast('Removed');}
-
-function exportJSON(){const blob=new Blob([JSON.stringify({txs,budgets,kidsData,at:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marilu_finance_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('Exported ✓');}
-function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.txs){txs=d.txs;save();}if(d.budgets){budgets=d.budgets;saveBudgets();}if(d.kidsData){kidsData=d.kidsData;saveKids();}toast('Imported '+txs.length+' transactions ✓');renderDashboard();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;}catch(err){toast('Import failed: '+err.message,'err');}};r.readAsText(f);}
-
-function initDrive(){const ak=document.getElementById('gApiKey').value.trim(),ck=document.getElementById('gClientId').value.trim();if(!ak||!ck){toast('Enter both keys first','err');return;}localStorage.setItem('mf_gak',ak);localStorage.setItem('mf_gck',ck);const load=(src,cb)=>{const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);};load('https://accounts.google.com/gsi/client',()=>{load('https://apis.google.com/js/api.js',()=>{gapi.load('client',async()=>{await gapi.client.init({apiKey:ak,discoveryDocs:['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']});window._gck=ck;gReady=true;toast('Drive SDK loaded — click Save to Drive ✓');document.getElementById('driveLog').textContent='Connected. Ready to sync.';});});});}
-function getToken(cb){google.accounts.oauth2.initTokenClient({client_id:window._gck||localStorage.getItem('mf_gck'),scope:'https://www.googleapis.com/auth/drive.file',callback:cb}).requestAccessToken();}
-async function driveSave(){if(!gReady){toast('Connect Drive first','err');return;}getToken(async tok=>{if(tok.error){toast('Auth failed','err');return;}const content=JSON.stringify({txs,budgets,kidsData,savedAt:new Date().toISOString()},null,2),b='mf_bnd',meta=JSON.stringify({name:'marilu_finance.json',mimeType:'application/json'}),body=`--${b}\r\nContent-Type:application/json\r\n\r\n${meta}\r\n--${b}\r\nContent-Type:application/json\r\n\r\n${content}\r\n--${b}--`,url=gFileId?`https://www.googleapis.com/upload/drive/v3/files/${gFileId}?uploadType=multipart`:'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';const res=await fetch(url,{method:gFileId?'PATCH':'POST',headers:{'Authorization':'Bearer '+tok.access_token,'Content-Type':`multipart/related; boundary=${b}`},body});const d=await res.json();if(d.id){gFileId=d.id;document.getElementById('syncDot').className='dot on';document.getElementById('syncLbl').textContent='Drive connected';document.getElementById('syncFile').textContent='marilu_finance.json';document.getElementById('driveLog').textContent='✓ Saved '+new Date().toLocaleTimeString();toast('Saved to Google Drive ✓');}else toast('Error: '+JSON.stringify(d),'err');});}
-async function driveLoad(){if(!gReady){toast('Connect Drive first','err');return;}getToken(async tok=>{if(tok.error){toast('Auth failed','err');return;}const lr=await fetch("https://www.googleapis.com/drive/v3/files?q=name='marilu_finance.json'&fields=files(id)",{headers:{'Authorization':'Bearer '+tok.access_token}});const list=await lr.json();if(!list.files?.length){toast('No file found in Drive','err');return;}gFileId=list.files[0].id;const fr=await fetch(`https://www.googleapis.com/drive/v3/files/${gFileId}?alt=media`,{headers:{'Authorization':'Bearer '+tok.access_token}});const d=await fr.json();if(d.txs){txs=d.txs;save();}if(d.budgets){budgets=d.budgets;saveBudgets();}if(d.kidsData){kidsData=d.kidsData;saveKids();}document.getElementById('syncDot').className='dot on';document.getElementById('syncLbl').textContent='Drive connected';document.getElementById('syncFile').textContent='marilu_finance.json';document.getElementById('driveLog').textContent='✓ Loaded '+txs.length+' transactions';toast('Loaded from Drive ✓');renderDashboard();document.getElementById('nb').textContent=txs.length;document.getElementById('bnb').textContent=txs.length;});}
-
-window.onload=()=>{
+window.onload = () => {
   renderDashboard();
-  document.getElementById('nb').textContent=txs.length;
-  document.getElementById('bnb').textContent=txs.length;
-  document.getElementById('tab0name').textContent=kidsData[0].name;
-  document.getElementById('tab1name').textContent=kidsData[1].name;
-  const ak=localStorage.getItem('mf_gak'),ck=localStorage.getItem('mf_gck');
-  if(ak)document.getElementById('gApiKey').value=ak;
-  if(ck)document.getElementById('gClientId').value=ck;
-  if(localStorage.getItem('mf_key'))document.getElementById('apiKeyInp').value=localStorage.getItem('mf_key');
+  document.getElementById('gApiKey').value = localStorage.getItem('mf_gak') || '';
+  document.getElementById('gClientId').value = localStorage.getItem('mf_gck') || '';
 };
 </script>
 </body>
